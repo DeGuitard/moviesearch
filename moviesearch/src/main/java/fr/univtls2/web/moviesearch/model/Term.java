@@ -5,7 +5,7 @@ import java.util.List;
 public class Term {
 
 	private String word;
-	private List<Document> documents;
+	private List<SourceDoc> sourceDocs;
 
 	public String getWord() {
 		return word;
@@ -15,11 +15,11 @@ public class Term {
 		this.word = word;
 	}
 
-	public List<Document> getDocuments() {
-		return documents;
+	public List<SourceDoc> getDocuments() {
+		return sourceDocs;
 	}
 
-	public void setDocuments(List<Document> documents) {
-		this.documents = documents;
+	public void setDocuments(List<SourceDoc> sourceDocs) {
+		this.sourceDocs = sourceDocs;
 	}
 }

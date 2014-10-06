@@ -2,7 +2,7 @@ package fr.univtls2.web.moviesearch.model;
 
 import java.util.List;
 
-public class Document {
+public class SourceDoc {
 
 	private String url;
 	private int size;
