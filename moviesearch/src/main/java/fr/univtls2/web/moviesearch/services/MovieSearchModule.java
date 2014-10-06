@@ -1,6 +1,11 @@
 package fr.univtls2.web.moviesearch.services;
 
+import org.bson.types.ObjectId;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.inject.AbstractModule;
+import com.google.inject.Provides;
 import com.google.inject.multibindings.Multibinder;
 
 import fr.univtls2.web.moviesearch.services.indexation.extraction.Extractor;
@@ -13,6 +18,9 @@ import fr.univtls2.web.moviesearch.services.indexation.weighting.SimpleWeighter;
 import fr.univtls2.web.moviesearch.services.indexation.weighting.Weigher;
 import fr.univtls2.web.moviesearch.services.indexation.weighting.rules.RobertsonRule;
 import fr.univtls2.web.moviesearch.services.indexation.weighting.rules.WeightingRule;
+import fr.univtls2.web.moviesearch.services.persistence.DatabaseConnection;
+import fr.univtls2.web.moviesearch.services.persistence.DatabaseConnectionImpl;
+import fr.univtls2.web.moviesearch.services.persistence.serialization.ObjectIdTypeAdapter;
 import fr.univtls2.web.moviesearch.services.properties.PropertyService;
 import fr.univtls2.web.moviesearch.services.properties.PropertyServiceImpl;
 
@@ -25,7 +33,10 @@ public class MovieSearchModule extends AbstractModule {
 
 	@Override
 	protected void configure() {
-		// Simple bindings.
+		// Persistence binding.
+		bind(DatabaseConnection.class).to(DatabaseConnectionImpl.class);
+
+		// Indexation bindings.
 		bind(PropertyService.class).to(PropertyServiceImpl.class);
 		bind(Extractor.class).to(SimpleExtractor.class);
 		bind(Normalizer.class).to(SimpleNormalizer.class);
@@ -40,4 +51,12 @@ public class MovieSearchModule extends AbstractModule {
 		weightRuleBinder.addBinding().to(RobertsonRule.class);
 	}
 
+	/** Provides a GSON with a special type adapter for object ids. */
+	@Provides
+	Gson provideGson() {
+		GsonBuilder builder = new GsonBuilder();
+		ObjectIdTypeAdapter ObjectIdAdapter = new ObjectIdTypeAdapter();
+		builder.registerTypeAdapter(ObjectId.class, ObjectIdAdapter);
+		return builder.create();
+	}
 }
