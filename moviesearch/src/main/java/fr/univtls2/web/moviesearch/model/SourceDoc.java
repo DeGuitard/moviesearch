@@ -2,56 +2,90 @@ package fr.univtls2.web.moviesearch.model;
 
 import java.util.List;
 
-public class SourceDoc {
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
 
-	private String url;
+public class SourceDoc extends Entity {
+
+	private final String url;
 	private int size;
 	private List<Integer> positions;
-	private List<String> balises;
+	private List<String> tags;
 	private int occurrences;
 	private int df;
 	private int idf;
 
+	public SourceDoc(String url) {
+		this.url = url;
+	}
+
 	public String getUrl() {
 		return url;
 	}
-	public void setUrl(String url) {
-		this.url = url;
-	}
+
 	public int getSize() {
 		return size;
 	}
+
 	public void setSize(int size) {
 		this.size = size;
 	}
+
 	public List<Integer> getPositions() {
 		return positions;
 	}
+
 	public void setPositions(List<Integer> positions) {
 		this.positions = positions;
 	}
-	public List<String> getBalises() {
-		return balises;
+
+	public List<String> getTags() {
+		return tags;
 	}
-	public void setBalises(List<String> balises) {
-		this.balises = balises;
+
+	public void setTags(List<String> tags) {
+		this.tags = tags;
 	}
+
 	public int getOccurrences() {
 		return occurrences;
 	}
+
 	public void setOccurrences(int occurrences) {
 		this.occurrences = occurrences;
 	}
+
 	public int getDf() {
 		return df;
 	}
+
 	public void setDf(int df) {
 		this.df = df;
 	}
+
 	public int getIdf() {
 		return idf;
 	}
+
 	public void setIdf(int idf) {
 		this.idf = idf;
+	}
+
+	public void incrementOccurrences() {
+		occurrences++;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null || obj == this || obj.getClass() != getClass()) {
+			return false;
+		}
+		SourceDoc doc = (SourceDoc) obj;
+		return new EqualsBuilder().append(url, doc.url).isEquals();
+	}
+
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder().append(url).hashCode();
 	}
 }

@@ -1,6 +1,9 @@
 package fr.univtls2.web.moviesearch.model.builders;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.commons.lang.StringUtils;
 
 import fr.univtls2.web.moviesearch.model.SourceDoc;
 
@@ -8,8 +11,8 @@ public class SourceDocBuilder {
 
 	private String url;	
 	private int docSize;
-	private List<Integer> positions;
-	private List<String> balises;
+	private List<Integer> positions = new ArrayList<>();
+	private List<String> tags = new ArrayList<>();
 	private int occurrences;
 	private int df;
 	private int idf;
@@ -29,8 +32,13 @@ public class SourceDocBuilder {
 		return this;
 	}
 
-	public SourceDocBuilder balises(List<String> balises) {
-		this.balises = balises;
+	public SourceDocBuilder tags(List<String> tags) {
+		this.tags = tags;
+		return this;
+	}
+
+	public SourceDocBuilder tags(String tag) {
+		this.tags.add(tag);
 		return this;
 	}
 
@@ -49,16 +57,19 @@ public class SourceDocBuilder {
 		return this;
 	}
 
-	public SourceDocBuilder create() {
-		SourceDoc sourceDoc = new SourceDoc();
-		sourceDoc.setUrl(url);
+	public SourceDoc create() {
+		if (StringUtils.isBlank(url)) {
+			throw new IllegalArgumentException("The document doesn't have any associated url.");
+		}
+
+		SourceDoc sourceDoc = new SourceDoc(url);
 		sourceDoc.setSize(docSize);
 		sourceDoc.setPositions(positions);
-		sourceDoc.setBalises(balises);
+		sourceDoc.setTags(tags);
 		sourceDoc.setOccurrences(occurrences);
 		sourceDoc.setDf(df);
 		sourceDoc.setIdf(idf);
 		
-		return null;
+		return sourceDoc;
 	}
 }
