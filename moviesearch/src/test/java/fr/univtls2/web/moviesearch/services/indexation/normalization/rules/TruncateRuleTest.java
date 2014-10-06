@@ -6,8 +6,8 @@ import org.junit.Test;
 
 import fr.univtls2.web.moviesearch.model.Term;
 import fr.univtls2.web.moviesearch.model.builders.TermBuilder;
-import fr.univtls2.web.moviesearch.services.indexation.normalizer.rules.TransformationRule;
-import fr.univtls2.web.moviesearch.services.indexation.normalizer.rules.TruncateRule;
+import fr.univtls2.web.moviesearch.services.indexation.normalization.rules.TransformationRule;
+import fr.univtls2.web.moviesearch.services.indexation.normalization.rules.TruncateRule;
 
 /**
  * <p>Simple test for {@link TruncateRule} transformation rule.</p>

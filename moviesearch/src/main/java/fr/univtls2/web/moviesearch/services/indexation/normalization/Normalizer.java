@@ -1,4 +1,4 @@
-package fr.univtls2.web.moviesearch.services.indexation.normalizer;
+package fr.univtls2.web.moviesearch.services.indexation.normalization;
 
 import java.util.List;
 

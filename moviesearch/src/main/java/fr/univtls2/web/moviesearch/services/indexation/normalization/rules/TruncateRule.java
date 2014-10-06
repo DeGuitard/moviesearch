@@ -1,4 +1,4 @@
-package fr.univtls2.web.moviesearch.services.indexation.normalizer.rules;
+package fr.univtls2.web.moviesearch.services.indexation.normalization.rules;
 
 import fr.univtls2.web.moviesearch.model.Term;
 import fr.univtls2.web.moviesearch.model.builders.TermBuilder;

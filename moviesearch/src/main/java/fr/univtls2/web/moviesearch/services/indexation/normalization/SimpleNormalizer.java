@@ -1,4 +1,4 @@
-package fr.univtls2.web.moviesearch.services.indexation.normalizer;
+package fr.univtls2.web.moviesearch.services.indexation.normalization;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ import com.google.inject.Inject;
 
 import fr.univtls2.web.moviesearch.model.SourceDoc;
 import fr.univtls2.web.moviesearch.model.Term;
-import fr.univtls2.web.moviesearch.services.indexation.normalizer.rules.TransformationRule;
+import fr.univtls2.web.moviesearch.services.indexation.normalization.rules.TransformationRule;
 
 /**
  * <p>Simple implementation of {@link Normalizer}.</p>
