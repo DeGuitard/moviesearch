@@ -84,4 +84,16 @@
 			</plugin>
 		</plugins>
 	</build>
+	<profiles>
+		<profile>
+			<id>DEV</id>
+			<properties>
+				<database.host>localhost</database.host>
+				<database.user>dev</database.user>
+				<database.pwd></database.pwd>
+				<database.name>moviesearch</database.name>
+				<log.folder>/</log.folder>
+			</properties>
+		</profile>
+	</profiles>
 </project>
