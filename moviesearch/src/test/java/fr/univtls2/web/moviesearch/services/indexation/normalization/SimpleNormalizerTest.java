@@ -18,7 +18,7 @@ import fr.univtls2.web.moviesearch.model.Term;
 import fr.univtls2.web.moviesearch.model.builders.SourceDocBuilder;
 import fr.univtls2.web.moviesearch.model.builders.TermBuilder;
 import fr.univtls2.web.moviesearch.services.MovieSearchModule;
-import fr.univtls2.web.moviesearch.services.indexation.normalizer.SimpleNormalizer;
+import fr.univtls2.web.moviesearch.services.indexation.normalization.SimpleNormalizer;
 
 /**
  * Test class for {@link SimpleNormalizer} implementation.

@@ -14,6 +14,7 @@ public class SourceDoc extends Entity {
 	private int occurrences;
 	private int df;
 	private int idf;
+	private double weight;
 
 	public SourceDoc(String url) {
 		this.url = url;
@@ -73,6 +74,14 @@ public class SourceDoc extends Entity {
 
 	public void incrementOccurrences() {
 		occurrences++;
+	}
+
+	public double getWeight() {
+		return weight;
+	}
+
+	public void setWeight(double weight) {
+		this.weight = weight;
 	}
 
 	@Override

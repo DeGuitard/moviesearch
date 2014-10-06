@@ -16,6 +16,7 @@ public class SourceDocBuilder {
 	private int occurrences;
 	private int df;
 	private int idf;
+	private double weight;
 
 	public SourceDocBuilder url(String url) {
 		this.url = url;
@@ -57,6 +58,11 @@ public class SourceDocBuilder {
 		return this;
 	}
 
+	public SourceDocBuilder weight(double weight) {
+		this.weight = weight;
+		return this;
+	}
+
 	public SourceDoc create() {
 		if (StringUtils.isBlank(url)) {
 			throw new IllegalArgumentException("The document doesn't have any associated url.");
@@ -69,6 +75,7 @@ public class SourceDocBuilder {
 		sourceDoc.setOccurrences(occurrences);
 		sourceDoc.setDf(df);
 		sourceDoc.setIdf(idf);
+		sourceDoc.setWeight(weight);
 		
 		return sourceDoc;
 	}
