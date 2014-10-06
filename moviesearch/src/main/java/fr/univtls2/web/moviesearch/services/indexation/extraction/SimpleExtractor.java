@@ -38,6 +38,9 @@ public class SimpleExtractor implements Extractor {
 	 */
 	@Override
 	public List<Term> extract(Document doc) {
+		if (doc == null) {
+			throw new IllegalArgumentException("No document supplied.");
+		}
 		List<Term> terms = new ArrayList<Term>();
 
 		// Looks for all html nodes.
