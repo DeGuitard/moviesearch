@@ -8,6 +8,8 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.multibindings.Multibinder;
 
+import fr.univtls2.web.moviesearch.services.indexation.ImportService;
+import fr.univtls2.web.moviesearch.services.indexation.ImportServiceImpl;
 import fr.univtls2.web.moviesearch.services.indexation.extraction.Extractor;
 import fr.univtls2.web.moviesearch.services.indexation.extraction.SimpleExtractor;
 import fr.univtls2.web.moviesearch.services.indexation.normalization.Normalizer;
@@ -37,7 +39,7 @@ public class MovieSearchModule extends AbstractModule {
 		bind(DatabaseConnection.class).to(DatabaseConnectionImpl.class);
 
 		// Indexation bindings.
-		bind(PropertyService.class).to(PropertyServiceImpl.class);
+		bind(ImportService.class).to(ImportServiceImpl.class);
 		bind(Extractor.class).to(SimpleExtractor.class);
 		bind(Normalizer.class).to(SimpleNormalizer.class);
 		bind(Weigher.class).to(SimpleWeighter.class);
@@ -49,6 +51,9 @@ public class MovieSearchModule extends AbstractModule {
 		// Weight rules binding.
 		Multibinder<WeightingRule> weightRuleBinder = Multibinder.newSetBinder(binder(), WeightingRule.class);
 		weightRuleBinder.addBinding().to(RobertsonRule.class);
+
+		// Tools binding.
+		bind(PropertyService.class).to(PropertyServiceImpl.class);
 	}
 
 	/** Provides a GSON with a special type adapter for object ids. */

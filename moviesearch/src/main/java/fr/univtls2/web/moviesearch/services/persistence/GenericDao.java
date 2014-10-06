@@ -1,7 +1,9 @@
 package fr.univtls2.web.moviesearch.services.persistence;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Deque;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -169,6 +171,25 @@ public abstract class GenericDao<T extends Entity> {
 		} catch (NoSuchElementException e) {
 			throw new NoSuchElementException();
 		}
+	}
+
+	/**
+	 * <p>Searches for all entities that match one field.</p>
+	 * <p>For instance, it can look for a list of terms that matches a list of words:</p>
+	 * <pre>{@code
+	 * dao.findByField(wordList, 'word'); // will look for all terms with a word in the word list.}
+	 *
+	 * @param values : values to look for.
+	 * @param field : the field associated to the values.
+	 * @return all the matching results.
+	 */
+	protected Deque<T> findByField(Iterable<String> values, String field) {
+		Deque<T> result = new ArrayDeque<>();
+		DBCursor cursor = getCollection().find(new BasicDBObject(field, new BasicDBObject("$in", values)));
+		for (DBObject dbObj : cursor) {
+			result.add(getGson().fromJson(dbObj.toString(), type));
+		}
+		return result;
 	}
 
 	/**
