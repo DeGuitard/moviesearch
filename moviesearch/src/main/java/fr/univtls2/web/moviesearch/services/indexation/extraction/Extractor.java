@@ -31,6 +31,6 @@ public interface Extractor {
 	 * @param query : the query to parse.
 	 * @return the terms extracted from the query.
 	 */
-	Term extract(final String query);
+	List<Term> extract(final String query);
 
 }

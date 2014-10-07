@@ -22,7 +22,7 @@ public class SimpleQueryExecutorTest {
 
 	@Test
 	public void simpleQuery() {
-		String query = "omar";
+		String query = "Omar,";
 		List<SourceDoc> docs = executor.execute(query);
 		Assert.assertFalse("No result returned.", docs.isEmpty());
 		Assert.assertEquals("Incorrect result count.", 109, docs.size());

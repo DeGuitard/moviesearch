@@ -71,12 +71,27 @@ public class SimpleExtractor implements Extractor {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Term extract(String query) {
+	public List<Term> extract(String query) {
+		// Checks the supplied query.
 		if (query == null) {
 			throw new IllegalArgumentException("No document supplied.");
 		}
-		
-		return null;
+
+		List<Term> terms = new ArrayList<>();
+	
+		// Splits the query into words.
+		query = cleanText(query);
+		for (String word : query.split(" ")) {
+
+			// Makes sure this is not a word to ignore. 
+			if (isWordToIgnore(word)) {
+				continue;
+			}
+
+			Term term = new TermBuilder().word(word).create();
+			terms.add(term);
+		}
+		return terms;
 	}
 
 	/**
