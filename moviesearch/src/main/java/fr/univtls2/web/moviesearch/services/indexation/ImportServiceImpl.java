@@ -30,7 +30,7 @@ public class ImportServiceImpl implements ImportService {
 	@Inject private TermDao dao;
 
 	@Override
-	public void start(File directory) {
+	public void start(final File directory) {
 		if (!directory.isDirectory()) {
 			LOGGER.error("No directory supplied.");
 			throw new IllegalArgumentException("No directory supplied.");
