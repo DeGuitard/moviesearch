@@ -66,7 +66,8 @@ public class SimpleExtractorTest {
 	@Test
 	public void extractionTestNoFile() {
 		try {
-			extractor.extract(null);
+			Document document = null;
+			extractor.extract(document);
 			Assert.fail("No exception was thrown.");
 		} catch (IllegalArgumentException e) {
 			Assert.assertNotNull("No message associated to the exception.", e.getMessage());

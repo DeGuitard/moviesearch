@@ -8,6 +8,8 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.multibindings.Multibinder;
 
+import fr.univtls2.web.moviesearch.services.evaluator.Evaluator;
+import fr.univtls2.web.moviesearch.services.evaluator.EvaluatorImpl;
 import fr.univtls2.web.moviesearch.services.indexation.ImportService;
 import fr.univtls2.web.moviesearch.services.indexation.ImportServiceImpl;
 import fr.univtls2.web.moviesearch.services.indexation.extraction.Extractor;
@@ -25,6 +27,8 @@ import fr.univtls2.web.moviesearch.services.persistence.DatabaseConnectionImpl;
 import fr.univtls2.web.moviesearch.services.persistence.serialization.ObjectIdTypeAdapter;
 import fr.univtls2.web.moviesearch.services.properties.PropertyService;
 import fr.univtls2.web.moviesearch.services.properties.PropertyServiceImpl;
+import fr.univtls2.web.moviesearch.services.query.QueryExecutor;
+import fr.univtls2.web.moviesearch.services.query.SimpleQueryExecutor;
 
 /**
  * <p>Main guice module, that will inject implementation to main services.</p>
@@ -54,6 +58,8 @@ public class MovieSearchModule extends AbstractModule {
 
 		// Tools binding.
 		bind(PropertyService.class).to(PropertyServiceImpl.class);
+		bind(Evaluator.class).to(EvaluatorImpl.class);
+		bind(QueryExecutor.class).to(SimpleQueryExecutor.class);
 	}
 
 	/** Provides a GSON with a special type adapter for object ids. */

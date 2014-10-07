@@ -68,6 +68,18 @@ public class SimpleExtractor implements Extractor {
 	}
 
 	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Term extract(String query) {
+		if (query == null) {
+			throw new IllegalArgumentException("No document supplied.");
+		}
+		
+		return null;
+	}
+
+	/**
 	 * Updates an existing term.
 	 * @param term : the term to update.
 	 * @param tagName : the tag that contained the term.

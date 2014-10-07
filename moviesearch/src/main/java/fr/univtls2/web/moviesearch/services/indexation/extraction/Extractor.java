@@ -26,4 +26,11 @@ public interface Extractor {
 	 */
 	List<Term> extract(final Document doc);
 
+	/**
+	 * <p>Given a query, returns a list of terms.</p>
+	 * @param query : the query to parse.
+	 * @return the terms extracted from the query.
+	 */
+	Term extract(final String query);
+
 }
