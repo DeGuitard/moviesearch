@@ -4,9 +4,28 @@ import java.util.List;
 
 import fr.univtls2.web.moviesearch.model.SourceDoc;
 
+/**
+ * <p>An evaluator is used to produce two statistics :</p>
+ * <ul><li>Completeness</li>
+ * <li>Precision</li></ul>
+ *
+ * @author Vianney Dupoy de Guitard
+ */
 public interface Evaluator {
 
+	/**
+	 * <p>Completeness indicator of the results.</p>
+	 * @param query : the query to execute.
+	 * @param expectedDocs : the expected documents.
+	 * @return the completeness score.
+	 */
 	double exhaustiveScore(String query, List<SourceDoc> expectedDocs);
 
-	double precisionScore(String query);
+	/**
+	 * <p>Precision indicator of the results.</p>
+	 * @param query : the query to execute.
+	 * @param expectedDocs : the expected documents.
+	 * @return the precision score.
+	 */
+	double precisionScore(String query, List<SourceDoc> expectedDocs);
 }
