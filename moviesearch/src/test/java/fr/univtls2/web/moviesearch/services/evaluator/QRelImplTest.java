@@ -35,6 +35,7 @@ public class QRelImplTest {
 				Assert.assertEquals("The last fetched document is incorrect.", doc, "D138.html");
 				doc = docList.get(0);
 				Assert.assertEquals("Invalid weight.", doc.getWeight(), 0.5, 0);
+				Assert.assertEquals("Invalid count", 43, entry.getValue().size());
 			}
 			index++;
 		}

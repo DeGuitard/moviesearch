@@ -28,4 +28,22 @@ public interface Evaluator {
 	 * @return the precision score.
 	 */
 	double precisionScore(String query, List<SourceDoc> expectedDocs);
+
+	/**
+	 * <p>Completeness indicator of the n first results.</p>
+	 * @param query : the query to execute.
+	 * @param expectedDocs : the expected documents.
+	 * @param n : amount of docs to count
+	 * @return the completeness score.
+	 */
+	double exhaustiveScore(String query, List<SourceDoc> expectedDocs, int n);
+
+	/**
+	 * <p>Precision indicator of the n first results.</p>
+	 * @param query : the query to execute.
+	 * @param expectedDocs : the expected documents.
+	 * @param n : amount of docs to count.
+	 * @return the precision score.
+	 */
+	double precisionScore(String query, List<SourceDoc> expectedDocs, int n);
 }

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,7 +21,7 @@ public class QRelLoaderImpl implements QRelLoader {
 	@Override
 	public Map<String, List<SourceDoc>> load(final File directory) {
 		// All SourceDocs loaded
-		final Map<String, List<SourceDoc>> qrels = new HashMap<>();
+		final Map<String, List<SourceDoc>> qrels = new LinkedHashMap<>();
 
 		if (!directory.isDirectory()) {
 			LOGGER.error("No directory supplied.");

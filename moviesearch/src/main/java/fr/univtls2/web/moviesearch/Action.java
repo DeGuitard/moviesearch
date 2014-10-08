@@ -11,5 +11,8 @@ public enum Action {
 	EVALUATE,
 
 	/** Starts the indexation of a folder. */
-	INDEX;
+	INDEX,
+
+	/** Searches a term. */
+	SEARCH;
 }

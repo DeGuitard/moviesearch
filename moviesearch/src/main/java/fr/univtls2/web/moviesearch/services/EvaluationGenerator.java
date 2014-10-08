@@ -33,27 +33,33 @@ public class EvaluationGenerator {
 	 */
 	public void printStats(File directory) {
 		Map<String, List<SourceDoc>> qrels = qrelLoader.load(directory);
+		int i = 1;
 		for (Entry<String, List<SourceDoc>> qrel : qrels.entrySet()) {
 			// Get expected docs (docs with weight > 0, sorted descending).
-			LOGGER.info("QUERY: '{}'.", qrel.getKey());
+			LOGGER.info("-----------------------------------------------");
+			LOGGER.info("QUERY no. {}: '{}'.", i, qrel.getKey());
+			LOGGER.info("-----------------------------------------------");
 			List<SourceDoc> expectedDocs = getExpectedDocs(qrel.getValue());
 
 			// Global scores.
 			double completeness = evaluator.exhaustiveScore(qrel.getKey(), expectedDocs);
 			double precision = evaluator.precisionScore(qrel.getKey(), expectedDocs);
-			LOGGER.info("-> Completeness: {}.", completeness);
-			LOGGER.info("-> Precision: {}.", precision);
-		}
-	}
+			LOGGER.info("-> Completeness	: {}", String.format("%.2f", completeness));
+			LOGGER.info("-> Precision		: {}", String.format("%.2f", precision));
 
-	/**
-	 * @param list : the list to limit.
-	 * @param size : amount of items needed.
-	 * @return the first size elements of the list.
-	 */
-	private <T> List<T> getSubList(List<T> list, int size) {
-		List<T> subList = list.subList(0, Math.min(size, list.size()));
-		return subList;
+			// Top 5
+			double completeness5 = evaluator.exhaustiveScore(qrel.getKey(), expectedDocs, 5);
+			double precision5 = evaluator.precisionScore(qrel.getKey(), expectedDocs, 5);
+			LOGGER.info("-> Completeness 5	: {}", completeness5);
+			LOGGER.info("-> Precision 5		: {}", precision5);
+
+			// Top 10
+			double completeness10 = evaluator.exhaustiveScore(qrel.getKey(), expectedDocs, 10);
+			double precision10 = evaluator.precisionScore(qrel.getKey(), expectedDocs, 10);
+			LOGGER.info("-> Completeness 10	: {}", completeness10);
+			LOGGER.info("-> Precision 10	: {}", precision10);
+			i++;
+		}
 	}
 
 	/**

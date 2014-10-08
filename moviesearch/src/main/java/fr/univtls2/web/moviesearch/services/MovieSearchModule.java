@@ -18,6 +18,8 @@ import fr.univtls2.web.moviesearch.services.indexation.extraction.Extractor;
 import fr.univtls2.web.moviesearch.services.indexation.extraction.SimpleExtractor;
 import fr.univtls2.web.moviesearch.services.indexation.normalization.Normalizer;
 import fr.univtls2.web.moviesearch.services.indexation.normalization.SimpleNormalizer;
+import fr.univtls2.web.moviesearch.services.indexation.normalization.rules.NoAccentRule;
+import fr.univtls2.web.moviesearch.services.indexation.normalization.rules.StemmingRule;
 import fr.univtls2.web.moviesearch.services.indexation.normalization.rules.TransformationRule;
 import fr.univtls2.web.moviesearch.services.indexation.normalization.rules.TruncateRule;
 import fr.univtls2.web.moviesearch.services.indexation.weighting.SimpleWeighter;
@@ -53,6 +55,8 @@ public class MovieSearchModule extends AbstractModule {
 		// Transformation rules binding.
 		Multibinder<TransformationRule> trsfrmRuleBinder = Multibinder.newSetBinder(binder(), TransformationRule.class);
 		trsfrmRuleBinder.addBinding().to(TruncateRule.class);
+		trsfrmRuleBinder.addBinding().to(NoAccentRule.class);
+		trsfrmRuleBinder.addBinding().to(StemmingRule.class);
 
 		// Weight rules binding.
 		Multibinder<WeightingRule> weightRuleBinder = Multibinder.newSetBinder(binder(), WeightingRule.class);

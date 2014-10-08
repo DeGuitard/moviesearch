@@ -49,6 +49,7 @@ public class SimpleExtractor implements Extractor {
 
 			// Looks for each word of this node.
 			for (String word : text.split(" ")) {
+				word = cleanText(word);
 				if (isWordToIgnore(word)) {
 					continue;
 				}
