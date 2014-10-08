@@ -529,12 +529,15 @@ OAS_AD("Middle");
     
           <div class="une ">
         <iframe class='player'allowfullscreen' width='310' height='174' src='http://www.dailymotion.com/embed/video/x25s1xn' frameborder='0'></iframe>      <h3><span class='rouge'>Le Billet de François Morel : &quot;Valérie, j&#039;ai lu votre livre...&quot;</span></h3>
+
   <span class='infos gris'>le 12/09/14</span>  </div>
     <div class="une hide">
         <iframe class='player'allowfullscreen' width='310' height='174' src='http://www.dailymotion.com/embed/video/x25s3fz' frameborder='0'></iframe>      <h3><span class='rouge'>Michel Onfray : &quot;Aujourd&#039;hui à l&#039;école, on apprend aux enfants le tri des déchets ou la théorie...</span></h3>
+
   <span class='infos gris'>le 12/09/14</span>  </div>
     <div class="une hide">
         <iframe class='player'allowfullscreen' width='310' height='174' src='http://www.dailymotion.com/embed/video/x25s5js' frameborder='0'></iframe>      <h3><span class='rouge'>Michel Onfray : &quot;Alain Finkielkraut n&#039;est pas le diable&quot;</span></h3>
+
   <span class='infos gris'>le 12/09/14</span>  </div>
     
           
@@ -983,9 +986,13 @@ jQuery.extend(Drupal.settings, { "basePath": "/", "adresseProxy": "http://www.fr
 Drupal.behaviors.fiCommunNodeSuivantPrecedent = 
     function(){ $(document).ready(function(){
       $(".controles > a").hover( function() { // mouse in
+
         $(this).next().show();		
+
       }, function() { // mouse out
+
         $(this).next().hide();		
+
       });
     }); 
   }

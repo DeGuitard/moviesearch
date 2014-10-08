@@ -56,11 +56,15 @@ public class QRelLoaderImpl implements QRelLoader {
 					qrel.put(query, new ArrayList<SourceDoc>());
 					first = false;
 				} else {
+					try {
 					final String[] splittedLine = line.split("\\s");
 					String url = splittedLine[0];
 					double weight = new Double(splittedLine[1].replace(',', '.'));
 					SourceDoc doc = new SourceDocBuilder().url(url).weight(weight).create();
 					qrel.get(query).add(doc);
+					} catch (NumberFormatException e) {
+						LOGGER.error("Incorrect weight: '{}'.", line);
+					}
 				}
 			}
 		} catch (IOException e) {

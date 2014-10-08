@@ -4,7 +4,7 @@
 <!--[if IE 9 ]>    <html class="ie9" xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:og="http://opengraphprotocol.org/schema/"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <html class="" xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:og="http://opengraphprotocol.org/schema/"> <!--<![endif]-->
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Intouchables : le casting</title>
     <meta name="description" content="Intouchables : découvrez le casting complet du film Sur Cinefil.com retrouvez tous les avis et critiques de films des internautes ainsi que toute l actualité du cinéma, les films, les bandes-annonces et les stars du cinéma">
     <meta http-equiv="Content-Language" content="fr" />
@@ -14,8 +14,8 @@
     <meta name="geo.position" content="43.296482;5.36978" />
     <meta name="ICBM" content="43.296482, 5.36978" />
     <meta name="viewport" id="cvViewport" content="width=device-width, initial-scale=1, user-scalable=no"/><meta content="app-id=890888431" name="apple-itunes-app" />
-    <link rel="stylesheet" href="http://static.cityvox.fr/styles/cinefil/9--all2.css?v=20140731" type="text/css">
-    <link rel="stylesheet" href="http://static.cityvox.fr/styles/cinefil/9--responsive.css?v=20140731" type="text/css">
+    <link rel="stylesheet" href="http://static.cityvox.fr/styles/cinefil/9--all2.css?v=20140925" type="text/css">
+    <link rel="stylesheet" href="http://static.cityvox.fr/styles/cinefil/9--responsive.css?v=20140925" type="text/css">
     <meta property="fb:admins" content="1349164219,522257036,632727650,1382966913,15509140" />
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="cinefil">
@@ -23,7 +23,7 @@
     <meta property="og:type" content="movie" />
     <meta property="og:url" content="http://www.cinefil.com/film/intouchables" />
     <meta property="og:site_name" content="Cinefil.com" />
-    <meta property="og:image" content="http://photos1.cityvox.com/photos_moyen/91/72/411739.jpg" />
+    <meta property="og:image" content="http://photos1.cityvox.com/photos_original/79/127/556879.jpg" />
     <meta property="fb:app_id" content="304062690330" />
     <meta property="og:locale" content="fr_FR" />
     
@@ -39,17 +39,19 @@
 " />
     
     
-    <!--[if lte IE 7]><link rel="stylesheet" href="http://static.cityvox.fr/styles/cinefil/9--styleIE7.css?v=20140731" type="text/css" /><![endif]-->
-    <!--[if lte IE 8]><link rel="stylesheet" href="http://static.cityvox.fr/styles/cinefil/9--styleIE8.css?v=20140731" type="text/css" /><![endif]-->
+    <!--[if lte IE 7]><link rel="stylesheet" href="http://static.cityvox.fr/styles/cinefil/9--styleIE7.css?v=20140925" type="text/css" /><![endif]-->
+    <!--[if lte IE 8]><link rel="stylesheet" href="http://static.cityvox.fr/styles/cinefil/9--styleIE8.css?v=20140925" type="text/css" /><![endif]-->
     <!--[if gte IE 9]><style type="text/css">.gradient {filter: none;}</style><![endif]-->
     <LINK rel="shortcut icon" href="http://www.cinefil.com/images/cinefil/favicon.ico" type="image/x-icon">
 <script type="text/javascript">
+var _wt1Q = _wt1Q || [];
+
 function getWidthType() {
 
     if ("matchMedia" in window) {
-        if(window.matchMedia("screen and (max-width: 768px)").matches) {
+        if(window.matchMedia("screen and (max-width: 767px)").matches) {
         	return 'xs';
-        } else if(window.matchMedia("screen and (max-width: 992px)").matches) {
+        } else if(window.matchMedia("screen and (max-width: 991px)").matches) {
         	return 'sm';
         }
 
@@ -60,7 +62,7 @@ function getWidthType() {
 	    };
 	    var deviceW = window.screen.width;
 	    for (a in aBreakPoints) {
-	        if (deviceW <= a) {
+	        if (deviceW < a) {
 	            return aBreakPoints[a];
 	        }
 	    }
@@ -89,8 +91,14 @@ var adsBehavior = getAdsViewType();
 <!--
 var oan_siteKeywords="";
 var oan_siteContentTopic="";
-var oan_protocol=(window.location.protocol=='https:')?'https:':'http:';
-document.write('<scr'+'ipt src="'+oan_protocol+'//all.orfr.adgtw.orangeads.fr/js/cin_autres?sKW='+ encodeURI(oan_siteKeywords)+'&sCT='+encodeURI(oan_siteContentTopic)+'"><\/scr'+'ipt>');
+
+if (adsBehavior.size == "xs") {
+	var oan_protocol=(window.location.protocol=='https:')?'https:':'http:';
+	document.write('<scr'+'ipt src="'+oan_protocol+'//all.orfr.adgtw.orangeads.fr/js/cin_hp?sKW='+ encodeURI(oan_siteKeywords)+'&sCT='+encodeURI(oan_siteContentTopic)+'"><\/scr'+'ipt>');
+} else {
+	var oan_protocol=(window.location.protocol=='https:')?'https:':'http:';
+	document.write('<scr'+'ipt src="'+oan_protocol+'//all.orfr.adgtw.orangeads.fr/js/cin_autres?sKW='+ encodeURI(oan_siteKeywords)+'&sCT='+encodeURI(oan_siteContentTopic)+'"><\/scr'+'ipt>');
+}
 //-->
 </script>
 <noscript><img src="http://all.orfr.adgtw.orangeads.fr/njs/cin_autres" style="width:1px;height:1px;border:0px"></noscript><div class="RP_CIL_TOP"></div>
@@ -115,32 +123,16 @@ document.write('<scr'+'ipt src="'+oan_protocol+'//all.orfr.adgtw.orangeads.fr/js
 									</a>
 								</div>
                     </div>
-				</div><div class="mobileInterstitial">
-<script type='text/javascript'><!--//<![CDATA[
-if (adsBehavior.os == "android") {
-    var ox_u = 'http://ads.cityvox.fr/delivery/al.php?zoneid=5&layerstyle=simple&align=center&valign=middle&padding=2&closetime=5&padding=2&shifth=0&shiftv=0&closebutton=t&backcolor=FFFFFF&bordercolor=000000';
-    if (document.context) ox_u += '&context=' + escape(document.context);
-    document.write("<scr"+"ipt type='text/javascript' src='" + ox_u + "'></scr"+"ipt>");
-}
-//]]>--></script>
-</div><div class="mobileBanner">
-<script type='text/javascript'><!--//<![CDATA[
-if (adsBehavior.os == "android") {
-    var m3_u = (location.protocol=='https:'?'https://ads.cityvox.fr/delivery/ajs.php':'http://ads.cityvox.fr/delivery/ajs.php');
-    var m3_r = Math.floor(Math.random()*99999999999);
-    if (!document.MAX_used) document.MAX_used = ',';
-    document.write ("<scr"+"ipt type='text/javascript' src='"+m3_u);
-    document.write ("?zoneid=4&amp;target=_blank");
-    document.write ('&amp;cb=' + m3_r);
-    if (document.MAX_used != ',') document.write ("&amp;exclude=" + document.MAX_used);
-    document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));
-    document.write ("&amp;loc=" + escape(window.location));
-    if (document.referrer) document.write ("&amp;referer=" + escape(document.referrer));
-    if (document.context) document.write ("&context=" + escape(document.context));
-    if (document.mmm_fo) document.write ("&amp;mmm_fo=1");
-    document.write ("'><\/scr"+"ipt>");
-}
-//]]>--></script>
+				</div>
+<!----- Tag interstitiel mobile ----->
+<div id="oan_cin_1m_1x1_hp" style="width:1px; height:1px;position:absolute;top:-100px;left:-100px;">
+	<script language="javascript">
+	if (adsBehavior.size == "xs") {
+		
+_wt1Q.push(['trackEvent', {'eventType':'MobileInterstitialCall'}]);
+		oan_displayAd("cin_1m_1x1_hp");
+	}
+	</script>
 </div>
 	                <div id="navigation" >
 	                    <ul id="nav" class="ong0"><li   >
@@ -244,9 +236,9 @@ if (adsBehavior.os == "android") {
 							</li><li>
 								<a href="/reseau/cgr" title="Les séances CGR">CGR</a>
 							</li><li>
-								<a href="/reseau/mk2" title="Les séances Mk2">Mk2</a>
-							</li><li>
 								<a href="/reseau/cineville" title="Les séances Cinéville">Cinéville</a>
+							</li><li>
+								<a href="/reseau/mk2" title="Les séances Mk2">Mk2</a>
 							</li><li>
 								<a href="/reseau/kinepolis" title="Les séances Kinepolis">Kinepolis</a>
 							</li></ul></li></ul>
@@ -470,7 +462,7 @@ if (adsBehavior.os == "android") {
     						<div id="errorLabel" style="display:none;">Veuillez saisir une adresse email valide</div>
     					</form>
     				</div>
-                    <div class="bottom"><a class="next" href="/newsletterspreview/archive/03-09-2014" target="_blank"    >Voir un exemple</a></div>
+                    <div class="bottom"><a class="next" href="/newsletterspreview/archive/01-10-2014" target="_blank"    >Voir un exemple</a></div>
                 </div>
 				<div class="gouttiereH10">&nbsp;</div><div id="pubcarre"><div class="oan_ad" id="oan_cin_1_300x250_autres">
 <script type="text/javascript">
@@ -553,50 +545,50 @@ function o_changeOneUrl(sUrl, sRef){if (sUrl.substring(0, 20) == "http://r.orang
     		            LES + ATTENDUS
     		        </h2>
     		        <ul style="">    <li>
-		                    <a href="/film/sin-city-j-ai-tue-pour-elle" title="Sin City : j ai tué pour elle" class="clearfix">
+		                    <a href="/film/magic-in-the-moonlight" title="Magic in the Moonlight" class="clearfix">
                                 <div class="vignetteShadowIn">
-                                    <img class="profilPict" src="http://photos.cityvox.com/photos_gd/190/216/972990_85x115x85:115q90otop.jpg" width="85" height="115">
+                                    <img class="profilPict" src="http://photos.cityvox.com/photos_gd/198/11/986054_85x115x85:115q90otop.jpg" width="85" height="115">
                                 </div>
-		                        <img class="backgroundPict" src="http://photos1.cityvox.com/photos_gd/57/216/972857_300x140x30:14q90otop.png" width="300" height="140">
+		                        <img class="backgroundPict" src="http://photos.cityvox.com/photos_gd/124/94/810620_300x140x30:14q90otop.jpg" width="300" height="140">
                                 <div class="infosNormal">
-                                    <div class="titre">Sin City : J'ai Tué Pour Elle</div>
-                                    <div class="rebours">J-8</div>
+                                    <div class="titre">Magic In The Moonlight</div>
+                                    <div class="rebours">J-15</div>
                                 </div>
                                 <div class="infosHover">
                                     <div class="dateSortie">SORTIE LE</div>
-                                    <div class="date">17/09/2014</div>
+                                    <div class="date">22/10/2014</div>
                                     <div class="btn">VOIR LA FICHE</div>
                                 </div>
 		                    </a>
 		                  </li>    <li>
-		                    <a href="/film/un-homme-tres-recherche-2" title="Un homme très recherché" class="clearfix">
+		                    <a href="/film/interstellar-2" title="Interstellar" class="clearfix">
                                 <div class="vignetteShadowIn">
-                                    <img class="profilPict" src="http://photos1.cityvox.com/photos_gd/203/138/953035_85x115x85:115q90otop.jpg" width="85" height="115">
+                                    <img class="profilPict" src="http://photos.cityvox.com/photos_gd/242/76/1002738_85x115x85:115q90otop.jpg" width="85" height="115">
                                 </div>
-		                        <img class="backgroundPict" src="http://photos1.cityvox.com/photos_gd/203/138/953035_300x140x30:14q90otop.jpg" width="300" height="140">
+		                        <img class="backgroundPict" src="http://photos.cityvox.com/photos_gd/42/216/972842_300x140x30:14q90otop.png" width="300" height="140">
                                 <div class="infosNormal">
-                                    <div class="titre">Un Homme Très Recherché</div>
-                                    <div class="rebours">J-8</div>
-                                </div>
-                                <div class="infosHover">
-                                    <div class="dateSortie">SORTIE LE</div>
-                                    <div class="date">17/09/2014</div>
-                                    <div class="btn">VOIR LA FICHE</div>
-                                </div>
-		                    </a>
-		                  </li>    <li>
-		                    <a href="/film/gone-girl" title="Gone Girl" class="clearfix">
-                                <div class="vignetteShadowIn">
-                                    <img class="profilPict" src="http://photos.cityvox.com/photos_gd/128/226/975488_85x115x85:115q90otop.jpg" width="85" height="115">
-                                </div>
-		                        <img class="backgroundPict" src="http://photos.cityvox.com/photos_gd/52/216/972852_300x140x30:14q90otop.png" width="300" height="140">
-                                <div class="infosNormal">
-                                    <div class="titre">Gone Girl</div>
+                                    <div class="titre">Interstellar</div>
                                     <div class="rebours">J-29</div>
                                 </div>
                                 <div class="infosHover">
                                     <div class="dateSortie">SORTIE LE</div>
-                                    <div class="date">08/10/2014</div>
+                                    <div class="date">05/11/2014</div>
+                                    <div class="btn">VOIR LA FICHE</div>
+                                </div>
+		                    </a>
+		                  </li>    <li>
+		                    <a href="/film/hunger-games-la-revolte-partie-1" title="Hunger games - La révolte : Partie 1" class="clearfix">
+                                <div class="vignetteShadowIn">
+                                    <img class="profilPict" src="http://photos.cityvox.com/photos_gd/168/92/941224_85x115x85:115q90otop.jpg" width="85" height="115">
+                                </div>
+		                        <img class="backgroundPict" src="http://photos.cityvox.com/photos_gd/168/92/941224_300x140x30:14q90otop.jpg" width="300" height="140">
+                                <div class="infosNormal">
+                                    <div class="titre">Hunger Games - La Révolte : Partie 1</div>
+                                    <div class="rebours">J-43</div>
+                                </div>
+                                <div class="infosHover">
+                                    <div class="dateSortie">SORTIE LE</div>
+                                    <div class="date">19/11/2014</div>
                                     <div class="btn">VOIR LA FICHE</div>
                                 </div>
 		                    </a>
@@ -615,29 +607,46 @@ function o_changeOneUrl(sUrl, sRef){if (sUrl.substring(0, 20) == "http://r.orang
 </script>
 </div>
 <div style="height:5px;">&nbsp;</div><div class="gouttiereH10">&nbsp;</div></div><br><br clear="all"><br></div>
+<!----- Tag Banniere mobile ----->
+<div id="bottomBanner" style="width:100%;height:50px;position:fixed;left:0px;bottom:0px;border-top:1px solid #999999;background:#fff;display:none;z-index:40;">
+	<div id="oan_cin_1m_320x50_hp" style="width:320px;height:50px;margin:0 auto;">
+		<script language="javascript">
+		if (adsBehavior.size == "xs") {
+			document.getElementById("bottomBanner").style.display = "block";
+			var acceptCookieAlert = document.getElementById("acceptCookie");
+			if (acceptCookieAlert !== null) {
+				acceptCookieAlert.style.marginBottom = "50px";
+			}
+			
+_wt1Q.push(['trackEvent', {'eventType':'MobileBottomBannerCall'}]);
+			oan_displayAd("cin_1m_320x50_hp");
+		}
+		</script>
+	</div>
+</div>
             		<div class="containerFooterHaut">
                 		<div id="footerHaut">
                 			<div class="positionFooter">
             					<h3>BOX OFFICE CINÉMA</h3>
             					<ul class="topfooter">
-									<li><a href="/box-office/2014/35">Cette semaine</a></li>
-									<li><a href="/box-office/2014/34">Semaine dernière</a></li>
-									<li><a href="/box-office/2014/33">Il y a 2 semaines</a></li>
-									<li><a href="/box-office/2014/32">Il y a 3 semaines</a></li>
+									<li><a href="/box-office/2014/39">Cette semaine</a></li>
+									<li><a href="/box-office/2014/38">Semaine dernière</a></li>
+									<li><a href="/box-office/2014/37">Il y a 2 semaines</a></li>
+									<li><a href="/box-office/2014/36">Il y a 3 semaines</a></li>
 									<li><a href="/box-office">Le Box Office</a></li>
 								</ul>
             				</div>
             				<div class="positionFooter">
             					<h3>LES FILMS LES PLUS ATTENDUS</h3>
-            					<ul class="topfooter"><li><a href="/film/sin-city-j-ai-tue-pour-elle" title="Sin City : j ai tué pour elle">Sin City : j'ai tué pour elle</a></li><li><a href="/film/le-hobbit-la-bataille-des-cinq-armees" title="Le Hobbit : la bataille des cinq armées">Le Hobbit : la bataille des cinq armées</a></li><li><a href="/film/un-homme-tres-recherche-2" title="Un homme très recherché">Un homme très recherché</a></li><li><a href="/film/gone-girl" title="Gone Girl">Gone Girl</a></li><li><a href="/film/mommy-2" title="Mommy">Mommy</a></li><li><a href="/films-attendus">Les films les plus attendus</a></li></ul>
+            					<ul class="topfooter"><li><a href="/film/le-hobbit-la-bataille-des-cinq-armees" title="Le Hobbit : la bataille des cinq armées">Le Hobbit : la bataille des cinq armées</a></li><li><a href="/film/magic-in-the-moonlight" title="Magic in the Moonlight">Magic in the Moonlight</a></li><li><a href="/film/interstellar-2" title="Interstellar">Interstellar</a></li><li><a href="/film/hunger-games-la-revolte-partie-1" title="Hunger games - La révolte : Partie 1">Hunger games - La révolte : Partie 1</a></li><li><a href="/film/asterix-le-domaine-des-dieux" title="Asterix - Le Domaine des Dieux ">Asterix - Le Domaine des Dieux </a></li><li><a href="/films-attendus">Les films les plus attendus</a></li></ul>
             				</div>
             				<div class="positionFooter">
             					<h3>LES PROCHAINES SORTIES</h3>
-            					<ul class="topfooter"><li><a href="/film/l-institutrice-2" title="L institutrice">L'institutrice</a></li><li><a href="/film/mademoiselle-julie-19" title="Mademoiselle Julie">Mademoiselle Julie</a></li><li><a href="/film/near-death-experience" title="Near Death Experience">Near Death Experience</a></li><li><a href="/film/sex-tape" title="Sex Tape">Sex Tape</a></li><li><a href="/film/adn-4" title="ADN">ADN</a></li><li><a href="/prochaines-sorties-cinema">Toutes les prochaines sorties</a></li></ul>
+            					<ul class="topfooter"><li><a href="/film/mommy-2" title="Mommy">Mommy</a></li><li><a href="/film/gone-girl" title="Gone Girl">Gone Girl</a></li><li><a href="/film/le-paradis-4" title="Le Paradis">Le Paradis</a></li><li><a href="/film/lou-journal-infime" title="Lou, journal infime">Lou, journal infime</a></li><li><a href="/film/papa-was-not-a-rolling-stone" title="Papa was not a Rolling Stone">Papa was not a Rolling Stone</a></li><li><a href="/prochaines-sorties-cinema">Toutes les prochaines sorties</a></li></ul>
             				</div>
             				<div class="positionFooter">
             					<h3 class="footerTitle">LES SORTIES DE LA SEMAINE</h3>
-            						<ul class="topfooter"><li><a href="/film/hippocrate" title="Hippocrate">Hippocrate</a></li><li><a href="/film/delivre-nous-du-mal-4" title="Délivre nous du mal">Délivre nous du mal</a></li><li><a href="/film/maintenant-ou-jamais-6" title="Maintenant ou jamais">Maintenant ou jamais</a></li><li><a href="/film/metamorphoses-28" title="Métamorphoses">Métamorphoses</a></li><li><a href="/film/obvious-child" title="Obvious Child">Obvious Child</a></li><li><a href="/sorties-cinema-de-la-semaine">Toutes les sorties de la semaine</a></li></ul>
+            						<ul class="topfooter"><li><a href="/film/tu-veux-ou-tu-veux-pas" title="Tu Veux Ou Tu Veux Pas ?">Tu Veux Ou Tu Veux Pas ?</a></li><li><a href="/film/equalizer" title="Equalizer">Equalizer</a></li><li><a href="/film/dracula-untold" title="Dracula Untold">Dracula Untold</a></li><li><a href="/film/horns-2" title="Horns">Horns</a></li><li><a href="/film/bodybuilder" title="Bodybuilder">Bodybuilder</a></li><li><a href="/sorties-cinema-de-la-semaine">Toutes les sorties de la semaine</a></li></ul>
             				</div>
             				<br clear="all">
             			</div><!-- footerHaut -->
@@ -666,7 +675,7 @@ if(_PJS) _estatl("281081157429", "210010156745", "CILFRA", "---", "CIN", "E34390
 <!--
 var _gaq = _gaq || []; _gaq.push(["_setAccount", "UA-40870096-1"]); _gaq.push(["_trackPageview"]);function genId(e){if(e.length==4){var t=new Date;var n=Math.floor(Math.random()*4e6)+""+t.getTime()+"-"+e}return n} var _wt1Q = _wt1Q || []; var uid = genId("0002"); _wt1Q.push(["setSessionParam", "_Account", "YT-000001-1"]); _wt1Q.push(["setSessionParam", "_DomainName", "cinefil.com"]); _wt1Q.push(["trackPage", {"uid": uid, "charte" : "CIL", "page" : "Film", "numeve" : "343909", "numlieu" : "", "numartiste" : "", "club" : "0"}]); (function() { var yt = document.createElement("script"); yt.type = "text/javascript"; yt.async = true; yt.src = "http://prod-js.aws.y-track.com/track.min.js"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(yt, s); })();window.fmk_vars = new Array(); window.fmk_vars["club"] = false; window.fmk_vars["pagePath"] = "Film"; window.fmk_vars["reste"] = "intouchables.casting"; window.fmk_vars["numeve"] = 343909; window.fmk_vars["numlieu"] = false; window.fmk_vars["numartiste"] = false;
 //-->
-</script><SCRIPT type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></SCRIPT><SCRIPT type="text/javascript" src="http://static.cityvox.fr/js/cinefil/9--all.js?v=20140731"></script><script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAA2rynoZpg5AqP0K1F_BlmYhQ6P_ygzKZoSVM3UATvfbrl2uCR8RTox8xF2T_K3wAJOwmzHIbIpbwm0Q" type="text/javascript"></script><script src="http://static.cityvox.fr/js/common/9--gmap-tools.js?v=20140731" type="text/javascript"></script>
+</script><SCRIPT type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></SCRIPT><SCRIPT type="text/javascript" src="http://static.cityvox.fr/js/cinefil/9--all.js?v=20140925"></script><script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAA2rynoZpg5AqP0K1F_BlmYhQ6P_ygzKZoSVM3UATvfbrl2uCR8RTox8xF2T_K3wAJOwmzHIbIpbwm0Q" type="text/javascript"></script><script src="http://static.cityvox.fr/js/common/9--gmap-tools.js?v=20140925" type="text/javascript"></script>
 <script type="text/javascript">
 <!--
 window.___gcfg = {lang: 'fr'}; (function() {var po = document.createElement("script"); po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(po, s); })();window.fbAsyncInit = function() { FB.init({ appId : '304062690330', status : true, cookie : true, xfbml : true }); }; (function(d){ var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0]; if (d.getElementById(id)) {return;} js = d.createElement('script'); js.id = id; js.async = true; js.src = "//connect.facebook.net/fr_FR/all.js"; ref.parentNode.insertBefore(js, ref); }(document));;function submitForm() { var $email = $("#emailId"); $validEmail = checkMailAddress($email.val()); if($validEmail==true){ return true; }else{ $("#errorLabel").show(); $email.focus(); return false; } }(function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })();
@@ -674,7 +683,4 @@ jQuery(document).ready(function() {
 $("#searchToggle").click(function() { if ($(".searchTop").hasClass("visible")) { $(".searchTop").removeClass("visible"); } else { $(".searchTop").addClass("visible"); } }); $(".searchTop .close").click(function() { $("#searchToggle").click(); }); $("#menuToggle").click(function() { if ($("#navigation #espaceConnexion").length == 0) { $("#dropdownConnexionMenu").detach().prependTo($("#navigation")); $("#espaceConnexion").detach().prependTo($("#navigation")); } if ($("body").hasClass("slideMenuVisible")) { $("body").removeClass("slideMenuVisible"); } else { $("body").addClass("slideMenuVisible"); } });$("ul#nav > li > a").click(function() { if (isResponsiveVersionCurrentlyDisplayed()) { var that = $(this); if (that.parent().find("ul").length) { if (that.parent().hasClass("opened")) { that.parent().removeClass("opened"); } else { that.parent().addClass("opened"); } return false; } } });if ($("#backgroundProfil").height() > 1200) { $("#fonduBackgroundProfil").show(); }$("#addThis ul > li").each(function(){initShareLinks(this);}); $.ajax({ url: "/AjaxShareCount?url=http://www.cinefil.com/film/intouchables", success: function(data) { for(a in data) { $("#addThis li a." + a + " .count").html(data[a]); } }, dataType: "json" });var pushTrackGeneric = {"charte":"CIL","club":"0","theme":"cinema-CIN","city":"paris-FR75056","context":"intouchables.casting","page":"Film"}; window.applyWt1ClickScript = function(el$) { var events = $._data(el$[0], "events"); var target = el$.prop("target"); el$.bind("click", function(e) { if (events == undefined && target == "") { var href = el$.prop("href"); if (href != undefined) { if (el$.data("wt1_done") == false) { e.preventDefault(); } else { setTimeout(function(){location.href = href;},10); return; } } } if (el$.data["wt1c"] != undefined) { var clickedElement = el$; } else { var clickedElement = el$.closest("[data-wt1c]"); } var trackEvent = pushTrackGeneric; trackEvent.eventType = "click"; trackEvent.clickedElt = clickedElement.data("wt1c"); _wt1Q.push(["trackEvent", trackEvent ]); if (href != undefined) { el$.data("wt1_done", true); el$.click(); } }); }; $("[data-wt1c]").each(function() { var this$ = $(this); this$.data("wt1_done", false); var target = this$.data("wt1c-target"); if (target != undefined) { this$.find(target).each(function() { var this$ = $(this); this$.data("wt1_done", false); window.applyWt1ClickScript(this$); }); } else { this$.data("wt1_done", false); window.applyWt1ClickScript(this$); } });jQuery("#footerHaut h3 ").click(function () { jQuery(".topfooter").toggle(); });
 });
 //-->
-</script>
-<p>Source : <a href="http://www.cinefil.com/film/intouchables/casting"> http://www.cinefil.com/film/intouchables/casting</a> t�l�charg� le 09/09/2014
-    </p>
-	</body></html>
+</script></body></html>
