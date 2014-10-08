@@ -2,10 +2,11 @@ package fr.univtls2.web.moviesearch.services.evaluator;
 
 import java.io.File;
 import java.util.List;
+import java.util.Map;
 
 import fr.univtls2.web.moviesearch.model.SourceDoc;
 
-public interface Precision {
+public interface QRelLoader {
 
 	/**
 	 * Load the qrel files in a list of SourceDoc.
@@ -14,5 +15,5 @@ public interface Precision {
 	 *            where we can find the qrel files
 	 * @return the list of SourceDoc loaded with the qrel files
 	 */
-	List<SourceDoc> loading(final File directory);
+	Map<String, List<SourceDoc>> load(final File directory);
 }

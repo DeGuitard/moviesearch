@@ -42,6 +42,7 @@ public class ImportServiceImpl implements ImportService {
 		for (File file : directory.listFiles()) {
 			try {
 				Document doc = Jsoup.parse(file, "UTF-8");
+				doc.setBaseUri(file.getAbsolutePath());
 				List<Term> terms = extractor.extract(doc);
 				terms = normalizer.normalize(terms);
 				for (Term term : terms) {

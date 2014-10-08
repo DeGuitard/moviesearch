@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
-public class SourceDoc extends Entity {
+public class SourceDoc extends Entity implements Comparable<SourceDoc> {
 
 	private final String url;
 	private int size;
@@ -96,5 +96,13 @@ public class SourceDoc extends Entity {
 	@Override
 	public int hashCode() {
 		return new HashCodeBuilder().append(url).hashCode();
+	}
+
+	@Override
+	public int compareTo(SourceDoc o) {
+		if (this.weight == o.weight) {
+			return 0;
+		}
+		return this.weight > o.weight ? -1 : 1;
 	}
 }

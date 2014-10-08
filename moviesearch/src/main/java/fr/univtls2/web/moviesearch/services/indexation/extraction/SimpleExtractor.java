@@ -82,6 +82,7 @@ public class SimpleExtractor implements Extractor {
 		// Splits the query into words.
 		query = cleanText(query);
 		for (String word : query.split(" ")) {
+			word = cleanText(word);
 
 			// Makes sure this is not a word to ignore. 
 			if (isWordToIgnore(word)) {
@@ -137,7 +138,9 @@ public class SimpleExtractor implements Extractor {
 	 */
 	private SourceDoc generateSourceDoc(Document doc, String tag) {
 		int size = doc.text().length();
-		String url = doc.baseUri();
+		// Only consider the filename.
+		String[] splittedUri = doc.baseUri().split("/");
+		String url = splittedUri[splittedUri.length - 1];
 		SourceDoc sourceDoc = new SourceDocBuilder().size(size).url(url).tags(tag).occurrences(1).create();
 		return sourceDoc;
 	}

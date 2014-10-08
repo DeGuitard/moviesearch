@@ -2,7 +2,11 @@ package fr.univtls2.web.moviesearch.services.query;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.inject.Inject;
 
@@ -18,6 +22,8 @@ import fr.univtls2.web.moviesearch.services.persistence.dao.TermDao;
  * @author Vianney Dupoy de Guitard
  */
 public class SimpleQueryExecutor implements QueryExecutor {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(SimpleQueryExecutor.class);
 
 	@Inject private TermDao dao;
 	@Inject private Extractor extractor;
@@ -32,8 +38,19 @@ public class SimpleQueryExecutor implements QueryExecutor {
 	
 		Collection<Term> termsFound = dao.findByWords(termsToFind);
 		for (Term termFound : termsFound) {
-			results.addAll(termFound.getDocuments());
+			if (results.isEmpty()) {
+				results.addAll(termFound.getDocuments());
+			} else {
+				results.retainAll(termFound.getDocuments());
+				for (SourceDoc result : results) {
+					int docIndex = termFound.getDocuments().indexOf(result);
+					SourceDoc docFound = termFound.getDocuments().get(docIndex);
+					result.setWeight(result.getWeight() + docFound.getWeight());
+				}
+			}
 		}
+
+		Collections.sort(results);
 		return results;
 	}
 

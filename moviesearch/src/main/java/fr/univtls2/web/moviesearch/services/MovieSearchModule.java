@@ -10,6 +10,8 @@ import com.google.inject.multibindings.Multibinder;
 
 import fr.univtls2.web.moviesearch.services.evaluator.Evaluator;
 import fr.univtls2.web.moviesearch.services.evaluator.EvaluatorImpl;
+import fr.univtls2.web.moviesearch.services.evaluator.QRelLoader;
+import fr.univtls2.web.moviesearch.services.evaluator.QRelLoaderImpl;
 import fr.univtls2.web.moviesearch.services.indexation.ImportService;
 import fr.univtls2.web.moviesearch.services.indexation.ImportServiceImpl;
 import fr.univtls2.web.moviesearch.services.indexation.extraction.Extractor;
@@ -60,6 +62,7 @@ public class MovieSearchModule extends AbstractModule {
 		bind(PropertyService.class).to(PropertyServiceImpl.class);
 		bind(Evaluator.class).to(EvaluatorImpl.class);
 		bind(QueryExecutor.class).to(SimpleQueryExecutor.class);
+		bind(QRelLoader.class).to(QRelLoaderImpl.class);
 	}
 
 	/** Provides a GSON with a special type adapter for object ids. */

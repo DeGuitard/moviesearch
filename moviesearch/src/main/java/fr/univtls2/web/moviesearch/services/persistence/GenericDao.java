@@ -74,6 +74,10 @@ public abstract class GenericDao<T extends Entity> {
 	 * @param entities : the entities to upsert.
 	 */
 	public void saveOrUpdate(Collection<T> entities) {
+		if (entities.isEmpty()) {
+			return;
+		}
+
 		BulkWriteOperation bulk = getCollection().initializeUnorderedBulkOperation();
 
 		for (T entity : entities) {

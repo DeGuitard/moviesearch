@@ -5,7 +5,7 @@ import java.util.List;
 import fr.univtls2.web.moviesearch.model.SourceDoc;
 
 /**
- * <p>An evaluator is used to produce two statistics :</p>
+ * <p>An evaluator is used to produce two statistics:</p>
  * <ul><li>Completeness</li>
  * <li>Precision</li></ul>
  *
