@@ -17,4 +17,10 @@ public interface WeightingRule {
 	 * @return a weight.
 	 */
 	double weight(SourceDoc docToWeight, Term term);
+
+	/**
+	 * <p>Value to determine the importance of the rule.</p>
+	 * @return a ratio to dermine the importance of the rule.
+	 */
+	double ratio();
 }

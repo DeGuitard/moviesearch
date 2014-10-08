@@ -13,11 +13,14 @@ import org.slf4j.LoggerFactory;
 
 import com.google.inject.Inject;
 
+import fr.univtls2.web.moviesearch.model.GlobalStat;
 import fr.univtls2.web.moviesearch.model.SourceDoc;
 import fr.univtls2.web.moviesearch.model.Term;
+import fr.univtls2.web.moviesearch.model.builders.GlobalStatBuilder;
 import fr.univtls2.web.moviesearch.services.indexation.extraction.Extractor;
 import fr.univtls2.web.moviesearch.services.indexation.normalization.Normalizer;
 import fr.univtls2.web.moviesearch.services.indexation.weighting.Weigher;
+import fr.univtls2.web.moviesearch.services.persistence.dao.GlobalStatDao;
 import fr.univtls2.web.moviesearch.services.persistence.dao.TermDao;
 
 public class ImportServiceImpl implements ImportService {
@@ -27,7 +30,8 @@ public class ImportServiceImpl implements ImportService {
 	@Inject	private Extractor extractor;
 	@Inject private Normalizer normalizer;
 	@Inject private Weigher weighter;
-	@Inject private TermDao dao;
+	@Inject private TermDao termDao;
+	@Inject private GlobalStatDao statDao;
 
 	@Override
 	public void start(final File directory) {
@@ -36,9 +40,11 @@ public class ImportServiceImpl implements ImportService {
 			throw new IllegalArgumentException("No directory supplied.");
 		}
 
-		LOGGER.info("Full of '{}' import starting.", directory.getAbsolutePath());
+		LOGGER.info("Full import of '{}' starting.", directory.getAbsolutePath());
 		float progress = 0;
 		float filesCount = directory.listFiles().length;
+		GlobalStat filesCountStat = new GlobalStatBuilder().key(GlobalStat.KEY_ALL_DOCS_COUNT).value(filesCount).create();
+		statDao.saveOrUpdate(filesCountStat);
 		for (File file : directory.listFiles()) {
 			try {
 				Document doc = Jsoup.parse(file, "UTF-8");
@@ -51,7 +57,7 @@ public class ImportServiceImpl implements ImportService {
 					}
 				}
 				terms = mergeWithDatabase(terms);
-				dao.saveOrUpdate(terms);
+				termDao.saveOrUpdate(terms);
 			} catch (IOException e) {
 				LOGGER.error("I/O error during import.", e);
 			}
@@ -69,7 +75,7 @@ public class ImportServiceImpl implements ImportService {
 		List<Term> updatedTerms = new ArrayList<Term>();
 
 		// Looks for all the terms already in the database.
-		Deque<Term> dbTerms = dao.findByWords(terms);
+		Deque<Term> dbTerms = termDao.findByWords(terms);
 		for (Term dbTerm : dbTerms) {
 			int termIndex = terms.indexOf(dbTerm);
 			Term termToMerge = terms.get(termIndex);
@@ -82,7 +88,7 @@ public class ImportServiceImpl implements ImportService {
 
 		// Save the updated terms and remove them from the list of new terms.
 		if (updatedTerms.size() > 0) {
-			dao.saveOrUpdate(updatedTerms);
+			termDao.saveOrUpdate(updatedTerms);
 			terms.removeAll(updatedTerms);
 		}
 		return terms;

@@ -26,7 +26,7 @@ public class SimpleWeighter implements Weigher {
 	public void weight(final SourceDoc doc, final Term term) {
 		double weight = 0;
 		for (WeightingRule rule : weightRules) {
-			weight += rule.weight(doc, term);
+			weight += (rule.weight(doc, term) * rule.ratio());
 		}
 		doc.setWeight(weight);
 	}

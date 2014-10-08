@@ -8,8 +8,9 @@ public class MovieSearchTest {
 	@Test
 	public void testSearchOk() {
 		try {
-			MovieSearch.main("search", "membre, jury, Globes de Cristal, 2012");
+			MovieSearch.main("search", "lieu, naissance, Omar Sy");
 		} catch (Exception e) {
+			e.printStackTrace();
 			Assert.fail("Exception was thrown!");
 		}
 	}

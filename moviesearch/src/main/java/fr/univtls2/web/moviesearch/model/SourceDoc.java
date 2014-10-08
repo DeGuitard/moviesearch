@@ -1,5 +1,6 @@
 package fr.univtls2.web.moviesearch.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -15,6 +16,8 @@ public class SourceDoc extends Entity implements Comparable<SourceDoc> {
 	private int df;
 	private int idf;
 	private double weight;
+	private transient List<List<Integer>> positionsList = new ArrayList<>();
+	private transient List<List<String>> tagsList = new ArrayList<>();
 
 	public SourceDoc(String url) {
 		this.url = url;
@@ -82,6 +85,22 @@ public class SourceDoc extends Entity implements Comparable<SourceDoc> {
 
 	public void setWeight(double weight) {
 		this.weight = weight;
+	}
+
+	public List<List<Integer>> getPositionsList() {
+		return positionsList;
+	}
+
+	public void setPositionsList(List<List<Integer>> positionsList) {
+		this.positionsList = positionsList;
+	}
+
+	public List<List<String>> getTagsList() {
+		return tagsList;
+	}
+
+	public void setTagsList(List<List<String>> tagsList) {
+		this.tagsList = tagsList;
 	}
 
 	@Override

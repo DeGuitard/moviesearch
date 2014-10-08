@@ -37,4 +37,9 @@ public class RobertsonRule implements WeightingRule {
 		}
 		return totalSize / docCount;
 	}
+
+	@Override
+	public double ratio() {
+		return 1;
+	}
 }

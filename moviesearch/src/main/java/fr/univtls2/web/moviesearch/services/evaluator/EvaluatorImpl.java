@@ -46,7 +46,6 @@ public class EvaluatorImpl implements Evaluator {
 	@Override
 	public double exhaustiveScore(String query, List<SourceDoc> expectedDocs, int n) {
 		List<SourceDoc> results = getSubList(executor.execute(query), n);
-		expectedDocs = getSubList(expectedDocs, n);
 		double pertinentDocsFoundCount = getPertinentDocsFoundCount(expectedDocs, results);
 		return pertinentDocsFoundCount / expectedDocs.size();
 	}
@@ -57,7 +56,6 @@ public class EvaluatorImpl implements Evaluator {
 	@Override
 	public double precisionScore(String query, List<SourceDoc> expectedDocs, int n) {
 		List<SourceDoc> results = getSubList(executor.execute(query), n);
-		expectedDocs = getSubList(expectedDocs, n);
 		double pertinentDocsFoundCount = getPertinentDocsFoundCount(expectedDocs, results);
 		return pertinentDocsFoundCount / results.size();
 	}

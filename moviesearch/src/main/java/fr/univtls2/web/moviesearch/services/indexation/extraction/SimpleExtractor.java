@@ -59,9 +59,9 @@ public class SimpleExtractor implements Extractor {
 				int termIndex = terms.indexOf(term);
 				if (termIndex == -1) {
 					LOGGER.debug("New term extracted: '{}'", term.getWord());
-					addNewTerm(doc, terms, el.tagName(), term);
+					addNewTerm(doc, terms, el, term);
 				} else {
-					updateTerm(terms.get(termIndex), el.tagName());
+					updateTerm(terms.get(termIndex), el, doc);
 				}
 			}
 		}
@@ -79,7 +79,7 @@ public class SimpleExtractor implements Extractor {
 		}
 
 		List<Term> terms = new ArrayList<>();
-	
+
 		// Splits the query into words.
 		query = cleanText(query);
 		for (String word : query.split(" ")) {
@@ -99,23 +99,29 @@ public class SimpleExtractor implements Extractor {
 	/**
 	 * Updates an existing term.
 	 * @param term : the term to update.
-	 * @param tagName : the tag that contained the term.
+	 * @param element : the element containing the term.
+	 * @param doc : the document where the term comes from.
 	 */
-	private void updateTerm(Term term, String tagName) {
+	private void updateTerm(Term term, Element element, Document doc) {
 		SourceDoc srcDoc = term.getDocuments().get(0);
+		int lastPos = srcDoc.getPositions().get(srcDoc.getPositions().size() - 1);
+		int wordPos = doc.text().indexOf(element.text(), lastPos + 1);
 		srcDoc.incrementOccurrences();
-		srcDoc.getTags().add(tagName);
+		srcDoc.getTags().add(element.tagName());
+		srcDoc.getPositions().add(wordPos);
 	}
 
 	/**
 	 * Adds a new term.
 	 * @param doc : the document containing the term.
 	 * @param terms : the list of found terms.
-	 * @param tagName : the tag that contained the term.
+	 * @param element : the element that contains the term.
 	 * @param term
 	 */
-	private void addNewTerm(Document doc, List<Term> terms, String tagName, Term term) {
-		SourceDoc srcDoc = generateSourceDoc(doc, tagName);
+	private void addNewTerm(Document doc, List<Term> terms, Element element, Term term) {
+		SourceDoc srcDoc = generateSourceDoc(doc, element.tagName());
+		int index = doc.text().indexOf(element.text());
+		srcDoc.getPositions().add(index);
 		term.getDocuments().add(srcDoc);
 		terms.add(term);
 	}

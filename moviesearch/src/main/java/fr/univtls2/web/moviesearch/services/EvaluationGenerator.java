@@ -33,6 +33,9 @@ public class EvaluationGenerator {
 	 */
 	public void printStats(File directory) {
 		Map<String, List<SourceDoc>> qrels = qrelLoader.load(directory);
+		double completenessSum = 0, completenessSum5 = 0, completenessSum10 = 0, completenessSum25 = 0;
+		double precisionSum = 0, precisionSum5 = 0, precisionSum10 = 0, precisionSum25 = 0;
+
 		int i = 1;
 		for (Entry<String, List<SourceDoc>> qrel : qrels.entrySet()) {
 			// Get expected docs (docs with weight > 0, sorted descending).
@@ -51,10 +54,10 @@ public class EvaluationGenerator {
 			double completeness25 = evaluator.exhaustiveScore(qrel.getKey(), expectedDocs, 25);
 			double precision25 = evaluator.precisionScore(qrel.getKey(), expectedDocs, 25);
 			LOGGER.info("			   ∑	5	10	25");
-			LOGGER.info("-> Precision		: {}	{}	{}	{}", String.format("%.2f", precision),
-					precision5, precision10, String.format("%.2f", precision25));
-			LOGGER.info("-> Completeness	: {}	{}	{}	{}", String.format("%.2f", completeness),
-					completeness5,  completeness10, String.format("%.2f", completeness25));
+			LOGGER.info("-> Precision		: {} / {} / {} / {}", String.format("%.2f", precision),
+					String.format("%.2f", precision5), String.format("%.2f", precision10), String.format("%.2f", precision25));
+			LOGGER.info("-> Completeness	: {} / {} / {} / {}", String.format("%.2f", completeness),
+					String.format("%.2f", completeness5),  String.format("%.2f", completeness10), String.format("%.2f", completeness25));
 
 			// Missing documents.
 			List<SourceDoc> missingDocs = evaluator.getMissingDocs(qrel.getKey(), expectedDocs);
@@ -63,8 +66,26 @@ public class EvaluationGenerator {
 			// Unexpected documents.
 			List<SourceDoc> unexpectedDocs = evaluator.getUnexpectedDocs(qrel.getKey(), expectedDocs);
 			LOGGER.info("-> Unexpected docs	: {}", getDocUrls(unexpectedDocs));
+
+			// Sums for average calculation.
+			completenessSum += completeness;
+			completenessSum5 += completeness5;
+			completenessSum10 += completeness10;
+			completenessSum25 += completeness25;
+			precisionSum += precision;
+			precisionSum5 += precision5;
+			precisionSum10 += precision10;
+			precisionSum25 += precision25;
 			i++;
 		}
+		int sum = i - 1;
+		LOGGER.info("-----------------------------------------------");
+		LOGGER.info("AVERAGE OF {} REQUESTS", sum);
+		LOGGER.info("-----------------------------------------------");
+		LOGGER.info("-> Precision		: {} / {} / {} / {}", String.format("%.2f", precisionSum / sum),
+				String.format("%.2f", precisionSum5 / sum), String.format("%.2f", precisionSum10 / sum), String.format("%.2f", precisionSum25 / sum));
+		LOGGER.info("-> Completeness	: {} / {} / {} / {}", String.format("%.2f", completenessSum / sum),
+				String.format("%.2f", completenessSum5 / sum),  String.format("%.2f", completenessSum10 / sum), String.format("%.2f", completenessSum25 / sum));
 	}
 
 	/**
@@ -77,7 +98,8 @@ public class EvaluationGenerator {
 			bld.append(doc.getUrl());
 			bld.append(";");
 		}
-		return bld.substring(0, bld.length() - 1).toString();
+
+		return bld.length() > 0 ? bld.substring(0, bld.length() - 1).toString() : bld.toString();
 	}
 
 	/**

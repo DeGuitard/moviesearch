@@ -18,14 +18,15 @@ import fr.univtls2.web.moviesearch.services.indexation.extraction.Extractor;
 import fr.univtls2.web.moviesearch.services.indexation.extraction.SimpleExtractor;
 import fr.univtls2.web.moviesearch.services.indexation.normalization.Normalizer;
 import fr.univtls2.web.moviesearch.services.indexation.normalization.SimpleNormalizer;
-import fr.univtls2.web.moviesearch.services.indexation.normalization.rules.NoAccentRule;
 import fr.univtls2.web.moviesearch.services.indexation.normalization.rules.StemmingRule;
 import fr.univtls2.web.moviesearch.services.indexation.normalization.rules.TransformationRule;
 import fr.univtls2.web.moviesearch.services.indexation.normalization.rules.TruncateRule;
+import fr.univtls2.web.moviesearch.services.indexation.weighting.SearchWeigher;
 import fr.univtls2.web.moviesearch.services.indexation.weighting.SimpleWeighter;
 import fr.univtls2.web.moviesearch.services.indexation.weighting.Weigher;
 import fr.univtls2.web.moviesearch.services.indexation.weighting.rules.RobertsonRule;
 import fr.univtls2.web.moviesearch.services.indexation.weighting.rules.WeightingRule;
+import fr.univtls2.web.moviesearch.services.indexation.weighting.searchrules.PositionWeigher;
 import fr.univtls2.web.moviesearch.services.persistence.DatabaseConnection;
 import fr.univtls2.web.moviesearch.services.persistence.DatabaseConnectionImpl;
 import fr.univtls2.web.moviesearch.services.persistence.serialization.ObjectIdTypeAdapter;
@@ -55,12 +56,15 @@ public class MovieSearchModule extends AbstractModule {
 		// Transformation rules binding.
 		Multibinder<TransformationRule> trsfrmRuleBinder = Multibinder.newSetBinder(binder(), TransformationRule.class);
 		trsfrmRuleBinder.addBinding().to(TruncateRule.class);
-		trsfrmRuleBinder.addBinding().to(NoAccentRule.class);
 		trsfrmRuleBinder.addBinding().to(StemmingRule.class);
 
 		// Weight rules binding.
 		Multibinder<WeightingRule> weightRuleBinder = Multibinder.newSetBinder(binder(), WeightingRule.class);
 		weightRuleBinder.addBinding().to(RobertsonRule.class);
+
+		// Weight rules binding.
+		Multibinder<SearchWeigher> srchWeightRuleBinder = Multibinder.newSetBinder(binder(), SearchWeigher.class);
+		srchWeightRuleBinder.addBinding().to(PositionWeigher.class);
 
 		// Tools binding.
 		bind(PropertyService.class).to(PropertyServiceImpl.class);
