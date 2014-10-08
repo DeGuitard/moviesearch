@@ -48,9 +48,13 @@ public class EvaluationGenerator {
 			double precision5 = evaluator.precisionScore(qrel.getKey(), expectedDocs, 5);
 			double completeness10 = evaluator.exhaustiveScore(qrel.getKey(), expectedDocs, 10);
 			double precision10 = evaluator.precisionScore(qrel.getKey(), expectedDocs, 10);
-			LOGGER.info("			   ∑	5	10");
-			LOGGER.info("-> Precision		: {}	{}	{}", String.format("%.2f", precision), precision5, precision10);
-			LOGGER.info("-> Completeness	: {}	{}	{}", String.format("%.2f", completeness), completeness5,  completeness10);
+			double completeness25 = evaluator.exhaustiveScore(qrel.getKey(), expectedDocs, 25);
+			double precision25 = evaluator.precisionScore(qrel.getKey(), expectedDocs, 25);
+			LOGGER.info("			   ∑	5	10	25");
+			LOGGER.info("-> Precision		: {}	{}	{}	{}", String.format("%.2f", precision),
+					precision5, precision10, String.format("%.2f", precision25));
+			LOGGER.info("-> Completeness	: {}	{}	{}	{}", String.format("%.2f", completeness),
+					completeness5,  completeness10, String.format("%.2f", completeness25));
 
 			// Missing documents.
 			List<SourceDoc> missingDocs = evaluator.getMissingDocs(qrel.getKey(), expectedDocs);
