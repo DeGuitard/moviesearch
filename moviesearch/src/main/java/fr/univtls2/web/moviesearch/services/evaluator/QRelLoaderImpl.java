@@ -29,13 +29,8 @@ public class QRelLoaderImpl implements QRelLoader {
 		}
 
 		LOGGER.info("Importing QRels from '{}'.", directory.getAbsolutePath());
-		float progress = 0;
-		float filesCount = directory.listFiles().length;
-
 		for (File file : directory.listFiles()) {
 			qrels.putAll(readLines(file));
-			progress++;
-			LOGGER.info("{}% done.", (progress / filesCount) * 100f);
 		}
 
 		return qrels;

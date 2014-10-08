@@ -44,22 +44,36 @@ public class EvaluationGenerator {
 			// Global scores.
 			double completeness = evaluator.exhaustiveScore(qrel.getKey(), expectedDocs);
 			double precision = evaluator.precisionScore(qrel.getKey(), expectedDocs);
-			LOGGER.info("-> Completeness	: {}", String.format("%.2f", completeness));
-			LOGGER.info("-> Precision		: {}", String.format("%.2f", precision));
-
-			// Top 5
 			double completeness5 = evaluator.exhaustiveScore(qrel.getKey(), expectedDocs, 5);
 			double precision5 = evaluator.precisionScore(qrel.getKey(), expectedDocs, 5);
-			LOGGER.info("-> Completeness 5	: {}", completeness5);
-			LOGGER.info("-> Precision 5		: {}", precision5);
-
-			// Top 10
 			double completeness10 = evaluator.exhaustiveScore(qrel.getKey(), expectedDocs, 10);
 			double precision10 = evaluator.precisionScore(qrel.getKey(), expectedDocs, 10);
-			LOGGER.info("-> Completeness 10	: {}", completeness10);
-			LOGGER.info("-> Precision 10	: {}", precision10);
+			LOGGER.info("			   ∑	5	10");
+			LOGGER.info("-> Precision		: {}	{}	{}", String.format("%.2f", precision), precision5, precision10);
+			LOGGER.info("-> Completeness	: {}	{}	{}", String.format("%.2f", completeness), completeness5,  completeness10);
+
+			// Missing documents.
+			List<SourceDoc> missingDocs = evaluator.getMissingDocs(qrel.getKey(), expectedDocs);
+			LOGGER.info("-> Missing docs	: {}", getDocUrls(missingDocs));
+
+			// Unexpected documents.
+			List<SourceDoc> unexpectedDocs = evaluator.getUnexpectedDocs(qrel.getKey(), expectedDocs);
+			LOGGER.info("-> Unexpected docs	: {}", getDocUrls(unexpectedDocs));
 			i++;
 		}
+	}
+
+	/**
+	 * @param docs : list of documents' urls to return.
+	 * @return the list of the documents urls.
+	 */
+	private String getDocUrls(List<SourceDoc> docs) {
+		StringBuilder bld = new StringBuilder();
+		for (SourceDoc doc : docs) {
+			bld.append(doc.getUrl());
+			bld.append(";");
+		}
+		return bld.substring(0, bld.length() - 1).toString();
 	}
 
 	/**

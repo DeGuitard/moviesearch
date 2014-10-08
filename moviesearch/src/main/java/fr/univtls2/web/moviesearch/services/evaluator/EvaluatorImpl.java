@@ -1,5 +1,6 @@
 package fr.univtls2.web.moviesearch.services.evaluator;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -62,9 +63,7 @@ public class EvaluatorImpl implements Evaluator {
 	}
 
 	/**
-	 * @param list : the list to limit.
-	 * @param size : amount of items needed.
-	 * @return the first size elements of the list.
+	 * {@inheritDoc}
 	 */
 	private <T> List<T> getSubList(List<T> list, int size) {
 		if (size >= list.size()) {
@@ -74,10 +73,7 @@ public class EvaluatorImpl implements Evaluator {
 	}
 
 	/**
-	 * <p>Return the amount of pertinent documents found.</p>
-	 * @param expectedDocs : the expected documents.
-	 * @param results : the documents found in the database.
-	 * @return the amount of found documents that were expected.
+	 * {@inheritDoc}
 	 */
 	private double getPertinentDocsFoundCount(List<SourceDoc> expectedDocs, List<SourceDoc> results) {
 		double pertinentDocsFound = 0;
@@ -88,5 +84,35 @@ public class EvaluatorImpl implements Evaluator {
 		}
 		LOGGER.debug("Pertinent docs found: {}", pertinentDocsFound);
 		return pertinentDocsFound;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<SourceDoc> getMissingDocs(String query, List<SourceDoc> expectedDocs) {
+		List<SourceDoc> missingDocs = new ArrayList<>();
+		List<SourceDoc> results = executor.execute(query);
+		for (SourceDoc doc : expectedDocs) {
+			if (!results.contains(doc)) {
+				missingDocs.add(doc);
+			}
+		}
+		return missingDocs;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<SourceDoc> getUnexpectedDocs(String query, List<SourceDoc> expectedDocs) {
+		List<SourceDoc> unexpectedDocs = new ArrayList<>();
+		List<SourceDoc> results = executor.execute(query);
+		for (SourceDoc result : results) {
+			if (!expectedDocs.contains(result)) {
+				unexpectedDocs.add(result);
+			}
+		}
+		return unexpectedDocs;
 	}
 }

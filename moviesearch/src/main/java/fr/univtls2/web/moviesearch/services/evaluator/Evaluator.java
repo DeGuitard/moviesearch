@@ -46,4 +46,20 @@ public interface Evaluator {
 	 * @return the precision score.
 	 */
 	double precisionScore(String query, List<SourceDoc> expectedDocs, int n);
+
+	/**
+	 * <p>Returns the list of missing documents, based on the expected documents.</p>
+	 * @param query : the query to execute.
+	 * @param expectedDocs : the expected documents.
+	 * @return the list of missing documents.
+	 */
+	List<SourceDoc> getMissingDocs(String query, List<SourceDoc> expectedDocs);
+
+	/**
+	 * <p>Returns the list of unexpected documents, based on the expected documents.</p>
+	 * @param query : the query to execute.
+	 * @param expectedDocs : the expected documents.
+	 * @return the list of unexpected documents.
+	 */
+	List<SourceDoc> getUnexpectedDocs(String query, List<SourceDoc> expectedDocs);
 }
