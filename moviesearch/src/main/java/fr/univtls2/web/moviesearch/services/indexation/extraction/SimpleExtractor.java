@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 import org.apache.commons.lang.StringUtils;
 import org.jsoup.nodes.Document;
@@ -32,6 +33,9 @@ public class SimpleExtractor implements Extractor {
 
 	/** List of words to ignore. */
 	private static final Set<String> STOP_LIST = new HashSet<>(Arrays.asList("a","à","afin","ai","aie","aient","aient","ainsi","ais","ait","alors","as","assez","au","auquel","auquelle","aussi","aux","auxquelles","auxquels","avaient","avais","avait","avant","avec","avoir","beaucoup","ca","ça","car","ce","cela","celle","celles","celui","certain","certaine","certaines","certains","ces","cet","cette","ceux","chacun","chacune","chaque","chez","ci","comme","comment","concern","concernant","connait","connaît","conseil","contre","d","dans","de","des","desquelles","desquels","differe","different","différent","differente","différente","differentes","différentes","differents","différents","dois","doit","doivent","donc","dont","du","dû","duquel","dus","e","elle","elles","en","encore","ensuite","entre","es","est","et","etai","etaient","étaient","etais","étais","etait","était","etant","étant","etc","ete","été","etiez","étiez","etion","etions","étions","etre","être","eu","eux","evidenc","evidence","évidence","expliqu","explique","fai","faire","fais","fait","faite","faites","faits","fera","feras","fini","finie","finies","finis","finit","font","grace","grâce","ici","il","ils","intere","interessant","intéressant","interesse","intéressé","j","jamais","je","l","la","laquell","laquelle","le","lequel","les","lesquelles","lesquels","leur","leurs","lors","lorsque","lui","m","ma","mainten","maintenant","mais","mal","me","meme","même","memes","mêmes","mes","mettre","moi","moins","mon","n","ne","ni","no","non","nos","notre","nôtre","notres","nôtres","nou","nous","obtenu","obtenue","obtenues","obtenus","on","ont","or","ou","où","par","parfois","parle","pars","part","pas","permet","peu","peut","peuvent","peux","plus","pour","pourquo","pourquoi","pouvez","pouvons","prendre","pres","près","princip","principal","principaux","qu","quand","que","quel","quelle","quelles","quelques","quels","qui","quoi","sa","savoir","se","seront","ses","seul","seuls","si","soient","soit","son","sont","sous","souvent","sui","suis","sur","t","ta","te","tel","telle","telleme","tellement","telles","tels","tes","ton","toujour","toujours","tous","tout","toute","toutes","traite","tres","très","trop","tu","unv","une","unes","uns","utilise","utilisé","utilisee","utilisée","utilisées","utilisees","uilisés","utilises","va","venir","vers","veut","veux","vont","voulez","voulu","vous"));
+
+	/** Regex to clean text endings. */
+	private Pattern endingRegex = Pattern.compile(".*[\\.\\-,\n\r]$", Pattern.DOTALL);
 
 	/**
 	 * {@inheritDoc}
@@ -159,7 +163,7 @@ public class SimpleExtractor implements Extractor {
 	private String cleanText(String text) {
 		text = text.replaceAll("[\\']", " ");
 		text = text.replaceAll("[^\\p{L}\\d.,\\-\\s]", "");
-		while (text.endsWith(".") || text.endsWith(",")) {
+		while (endingRegex.matcher(text).find()) {
 			text = text.substring(0, text.length() - 1);
 		}
 		text = text.toLowerCase();
