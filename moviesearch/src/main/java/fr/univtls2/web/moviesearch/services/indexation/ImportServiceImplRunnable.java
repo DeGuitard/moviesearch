@@ -23,16 +23,21 @@ import fr.univtls2.web.moviesearch.services.persistence.dao.TermDao;
 
 public class ImportServiceImplRunnable implements Runnable {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(ImportServiceImplRunnable.class);
+	private static final Logger LOGGER = LoggerFactory
+			.getLogger(ImportServiceImplRunnable.class);
 
-	@Inject private Extractor extractor;
-	@Inject private Normalizer normalizer;
-	@Inject private Weigher weighter;
-	@Inject private TermDao termDao;
+	@Inject
+	private Extractor extractor;
+	@Inject
+	private Normalizer normalizer;
+	@Inject
+	private Weigher weighter;
+	@Inject
+	private TermDao termDao;
 
-	private List<File> fileList;
+	private final List<File> fileList;
 
-	public ImportServiceImplRunnable(List<File> fileList) {
+	public ImportServiceImplRunnable(final List<File> fileList) {
 		this.fileList = fileList;
 		MovieSearch.getInjector().injectMembers(this);
 	}
@@ -46,16 +51,23 @@ public class ImportServiceImplRunnable implements Runnable {
 
 	private void importFile(final File file) {
 		try {
-			Document doc = Jsoup.parse(file, "UTF-8");
+			// Jsoup parse the file to give a Document
+			final Document doc = Jsoup.parse(file, "UTF-8");
 			doc.setBaseUri(file.getAbsolutePath());
+
+			// We use a extractor to found the terms
 			List<Term> terms = extractor.extract(doc);
+			// We simplify the terms with some rules
 			terms = normalizer.normalize(terms);
+			// We give a weight to optimize the pertinence
 			for (Term term : terms) {
 				for (SourceDoc srcDoc : term.getDocuments()) {
 					weighter.weight(srcDoc, term);
 				}
 			}
+			//We merge the data indexed with the data in the BDD
 			terms = mergeWithDatabase(terms);
+			//We save the merging.
 			termDao.saveOrUpdate(terms);
 			LOGGER.info("File {} imported.", file.getAbsolutePath());
 		} catch (IOException e) {
@@ -64,20 +76,25 @@ public class ImportServiceImplRunnable implements Runnable {
 	}
 
 	/**
-	 * <p>Merge the collected data with the data from database.</p>
-	 * @param terms : the terms to merge with the data from database.
+	 * <p>
+	 * Merge the collected data with the data from database.
+	 * </p>
+	 * 
+	 * @param terms
+	 *            : the terms to merge with the data from database.
 	 */
 	private List<Term> mergeWithDatabase(List<Term> terms) {
 		// List of updated terms.
-		List<Term> updatedTerms = new ArrayList<Term>();
+		final List<Term> updatedTerms = new ArrayList<Term>();
 
 		// Looks for all the terms already in the database.
-		Deque<Term> dbTerms = termDao.findByWords(terms);
+		final Deque<Term> dbTerms = termDao.findByWords(terms);
 		for (Term dbTerm : dbTerms) {
 			int termIndex = terms.indexOf(dbTerm);
 			Term termToMerge = terms.get(termIndex);
 
-			// Updates the document list (remove/add to be sure there's no duplicate).
+			// Updates the document list (remove/add to be sure there's no
+			// duplicate).
 			dbTerm.getDocuments().removeAll(termToMerge.getDocuments());
 			dbTerm.getDocuments().addAll(termToMerge.getDocuments());
 			updatedTerms.add(dbTerm);

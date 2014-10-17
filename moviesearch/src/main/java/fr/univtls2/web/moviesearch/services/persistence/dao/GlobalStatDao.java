@@ -10,9 +10,9 @@ public class GlobalStatDao extends GenericDao<GlobalStat> {
 	}
 
 	public GlobalStat findByKey(String key) {
-		GlobalStat stat = new GlobalStat();
+		final GlobalStat stat = new GlobalStat();
 		stat.setKey(key);
-		GlobalStat result = findOne(stat);
+		final GlobalStat result = findOne(stat);
 		return result;
 	}
 
