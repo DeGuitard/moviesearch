@@ -16,7 +16,13 @@ public class SourceDoc extends Entity implements Comparable<SourceDoc> {
 	private int df;
 	private int idf;
 	private double weight;
+	/**
+	 * List containing lists of term positions. 
+	 */
 	private transient List<List<Integer>> positionsList = new ArrayList<>();
+	/**
+	 * List containing lists of term tags. 
+	 */
 	private transient List<List<String>> tagsList = new ArrayList<>();
 
 	public SourceDoc(String url) {
