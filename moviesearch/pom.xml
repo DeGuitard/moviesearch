@@ -53,6 +53,13 @@
 			<version>1.7.2</version>
 		</dependency>
 
+		<!-- LEMMING -->
+		<dependency>
+			<groupId>org.annolab.tt4j</groupId>
+			<artifactId>org.annolab.tt4j</artifactId>
+			<version>1.2.0</version>
+		</dependency>
+
 		<!-- PERSISTENCE -->
 		<dependency>
 			<groupId>org.mongodb</groupId>
@@ -101,7 +108,7 @@
 			<properties>
 				<database.host>localhost</database.host>
 				<database.user>dev</database.user>
-				<database.pwd></database.pwd>
+				<database.pwd>dev</database.pwd>
 				<database.name>moviesearch</database.name>
 				<log.folder>/</log.folder>
 			</properties>
