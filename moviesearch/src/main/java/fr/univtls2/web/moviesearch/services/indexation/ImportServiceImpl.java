@@ -1,39 +1,38 @@
 package fr.univtls2.web.moviesearch.services.indexation;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.inject.Inject;
 
 import fr.univtls2.web.moviesearch.model.GlobalStat;
+import fr.univtls2.web.moviesearch.model.SourceDoc;
+import fr.univtls2.web.moviesearch.model.Term;
+import fr.univtls2.web.moviesearch.model.builders.GlobalStatBuilder;
+import fr.univtls2.web.moviesearch.services.indexation.extraction.Extractor;
+import fr.univtls2.web.moviesearch.services.indexation.normalization.Normalizer;
+import fr.univtls2.web.moviesearch.services.indexation.weighting.Weigher;
 import fr.univtls2.web.moviesearch.services.persistence.dao.GlobalStatDao;
+import fr.univtls2.web.moviesearch.services.persistence.dao.TermDao;
 
-/**
- * <p>Start a multi-threaded indexation service, that will import a folder.</p>
- *
- * @author Vianney Dupoy de Guitard
- */
 public class ImportServiceImpl implements ImportService {
 
-	/** Applicative logger. */
 	private static final Logger LOGGER = LoggerFactory.getLogger(ImportServiceImpl.class);
 
-	/** Amount of threads to start. */
-	private static final int THREAD_COUNT = 4;
-
-	/** The global statistics dao. */
+	@Inject	private Extractor extractor;
+	@Inject private Normalizer normalizer;
+	@Inject private Weigher weighter;
+	@Inject private TermDao termDao;
 	@Inject private GlobalStatDao statDao;
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void start(final File directory) {
 		if (!directory.isDirectory()) {
@@ -42,51 +41,56 @@ public class ImportServiceImpl implements ImportService {
 		}
 
 		LOGGER.info("Full import of '{}' starting.", directory.getAbsolutePath());
-		int filesCount = directory.listFiles().length;
-		GlobalStat filesCountStat = statDao.findByKey(GlobalStat.KEY_ALL_DOCS_COUNT);
-		filesCountStat.setValue(filesCount);
+		float progress = 0;
+		float filesCount = directory.listFiles().length;
+		GlobalStat filesCountStat = new GlobalStatBuilder().key(GlobalStat.KEY_ALL_DOCS_COUNT).value(filesCount).create();
 		statDao.saveOrUpdate(filesCountStat);
-
-		long start = System.currentTimeMillis();
-
-		// Splits the list of files into several packs, one for each thread.
-		List<List<File>> fileListLists = split(directory.listFiles(), THREAD_COUNT);
-
-		// Start the threads.
-		ExecutorService es = Executors.newCachedThreadPool();
-		for (List<File> fileList : fileListLists) {
-			Runnable runnable = new ImportServiceImplRunnable(fileList);
-			es.execute(runnable);
+		for (File file : directory.listFiles()) {
+			try {
+				Document doc = Jsoup.parse(file, "UTF-8");
+				doc.setBaseUri(file.getAbsolutePath());
+				List<Term> terms = extractor.extract(doc);
+				terms = normalizer.normalize(terms);
+				for (Term term : terms) {
+					for (SourceDoc srcDoc : term.getDocuments()) {
+						weighter.weight(srcDoc, term);
+					}
+				}
+				terms = mergeWithDatabase(terms);
+				termDao.saveOrUpdate(terms);
+			} catch (IOException e) {
+				LOGGER.error("I/O error during import.", e);
+			}
+			progress++;
+			LOGGER.info("{}% done.", (progress / filesCount) * 100f);
 		}
-		es.shutdown();
-		try {
-			es.awaitTermination(60, TimeUnit.MINUTES);
-		} catch (InterruptedException e) {
-			LOGGER.error("Thread aborption.", e);
-		}
-		long end = System.currentTimeMillis();
-		LOGGER.info("Duration: {}s.", (end - start) / 1000);
 	}
 
 	/**
-	 * Splits a list into a subset of lists.
-	 * @param list : the list to split.
-	 * @param size : the amount of lists to return.
-	 * @return the split list.
+	 * <p>Merge the collected data with the data from database.</p>
+	 * @param terms : the terms to merge with the data from database.
 	 */
-	public <T> List<List<T>> split(T[] list, int size) {
-	    List<List<T>> result = new ArrayList<List<T>>(size);
+	private List<Term> mergeWithDatabase(List<Term> terms) {
+		// List of updated terms.
+		List<Term> updatedTerms = new ArrayList<Term>();
 
-	    for (int i = 0; i < size; i++) {
-	        result.add(new ArrayList<T>());
-	    }
+		// Looks for all the terms already in the database.
+		Deque<Term> dbTerms = termDao.findByWords(terms);
+		for (Term dbTerm : dbTerms) {
+			int termIndex = terms.indexOf(dbTerm);
+			Term termToMerge = terms.get(termIndex);
 
-	    int index = 0;
-	    for (T t : list) {
-	        result.get(index).add(t);
-	        index = (index + 1) % size;
-	    }
+			// Updates the document list (remove/add to be sure there's no duplicate).
+			dbTerm.getDocuments().removeAll(termToMerge.getDocuments());
+			dbTerm.getDocuments().addAll(termToMerge.getDocuments());
+			updatedTerms.add(dbTerm);
+		}
 
-	    return result;
+		// Save the updated terms and remove them from the list of new terms.
+		if (updatedTerms.size() > 0) {
+			termDao.saveOrUpdate(updatedTerms);
+			terms.removeAll(updatedTerms);
+		}
+		return terms;
 	}
 }

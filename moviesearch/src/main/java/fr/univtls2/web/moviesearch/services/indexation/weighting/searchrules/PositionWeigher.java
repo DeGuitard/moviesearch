@@ -21,7 +21,7 @@ public class PositionWeigher implements SearchWeigher {
 			index++;
 		}
 
-		if (min != null && min < MAX_DISTANCE) {
+		if (min < MAX_DISTANCE) {
 			doc.setWeight(doc.getWeight() + WEIGHT);
 		}
 	}

@@ -32,9 +32,6 @@ public class MovieSearch {
 	/** Applicative logger. */
 	private static final Logger LOGGER = LoggerFactory.getLogger(MovieSearch.class);
 
-	/** Guice injector. */
-	private static final Injector injector = Guice.createInjector(new MovieSearchModule());
-
 	/**
 	 * <p>Main entry point of the application. If wrong arguments are supplied, the usage message will be displayed.</p>
 	 * @param args : the supplied arguments.
@@ -63,6 +60,7 @@ public class MovieSearch {
 	 * @param query : the query to execute.
 	 */
 	private static void search(String query) {
+		Injector injector = Guice.createInjector(new MovieSearchModule());
 		QueryExecutor executor = injector.getInstance(QueryExecutor.class);
 		List<SourceDoc> docs = executor.execute(query);
 		LOGGER.info("Search resuts for '{}':", query);
@@ -76,6 +74,7 @@ public class MovieSearch {
 	 * @param directory : the directory to index.
 	 */
 	private static void index(File directory) {
+		Injector injector = Guice.createInjector(new MovieSearchModule());
 		ImportService importService = injector.getInstance(ImportService.class);
 		importService.start(directory);
 	}
@@ -85,6 +84,7 @@ public class MovieSearch {
 	 * @param directory : the directory containing the QRel files.
 	 */
 	private static void evaluate(File directory) {
+		Injector injector = Guice.createInjector(new MovieSearchModule());
 		EvaluationGenerator evaluator = injector.getInstance(EvaluationGenerator.class);
 		evaluator.printStats(directory);
 	}
@@ -100,12 +100,5 @@ public class MovieSearch {
 		} catch (NoSuchElementException e) {
 			throw new IllegalArgumentException(USAGE);
 		}
-	}
-
-	/**
-	 * @return the guice injector.
-	 */
-	public static Injector getInjector() {
-		return injector;
 	}
 }
