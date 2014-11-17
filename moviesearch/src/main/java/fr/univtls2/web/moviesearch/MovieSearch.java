@@ -17,17 +17,10 @@ import fr.univtls2.web.moviesearch.services.indexation.ImportService;
 import fr.univtls2.web.moviesearch.services.query.QueryExecutor;
 
 /**
- * <p>
- * Main entry point of the application. It takes two arguments, action and
- * directory.
- * </p>
- * <p>
- * There are two distinct actions:
- * </p>
- * <ul>
- * <li>evaluate: evaluates the indexation with a QRel list.</li>
- * <li>index: index a folder content.</li>
- * </ul>
+ * <p>Main entry point of the application. It takes two arguments, action and directory.</p>
+ * <p>There are two distinct actions:</p>
+ * <ul><li>evaluate: evaluates the indexation with a QRel list.</li>
+ * <li>index: index a folder content.</li></ul>
  *
  * @author Vianney Dupoy de Guitard
  */
@@ -37,27 +30,20 @@ public class MovieSearch {
 	private static final String USAGE = "Usage: moviesearch.jar <evaluate|index|search> <directory|term>";
 
 	/** Applicative logger. */
-	private static final Logger LOGGER = LoggerFactory
-			.getLogger(MovieSearch.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(MovieSearch.class);
 
 	/** Guice injector. */
-	private static final Injector injector = Guice
-			.createInjector(new MovieSearchModule());
+	private static final Injector injector = Guice.createInjector(new MovieSearchModule());
 
 	/**
-	 * <p>
-	 * Main entry point of the application. If wrong arguments are supplied, the
-	 * usage message will be displayed.
-	 * </p>
-	 * 
-	 * @param args
-	 *            : the supplied arguments.
+	 * <p>Main entry point of the application. If wrong arguments are supplied, the usage message will be displayed.</p>
+	 * @param args : the supplied arguments.
 	 */
-	public static void main(final String... args) {
+	public static void main(String ... args) {
 		if (args.length != 2) {
 			throw new IllegalArgumentException(USAGE);
 		}
-		final Action action = getAction(args[0]);
+		Action action = getAction(args[0]);
 
 		switch (action) {
 		case EVALUATE:
@@ -73,17 +59,12 @@ public class MovieSearch {
 	}
 
 	/**
-	 * <p>
-	 * Starts a search and prints the results.
-	 * </p>
-	 * 
-	 * @param query
-	 *            : the query to execute.
+	 * <p>Starts a search and prints the results.</p>
+	 * @param query : the query to execute.
 	 */
-	private static void search(final String query) {
-		final QueryExecutor executor = injector
-				.getInstance(QueryExecutor.class);
-		final List<SourceDoc> docs = executor.execute(query);
+	private static void search(String query) {
+		QueryExecutor executor = injector.getInstance(QueryExecutor.class);
+		List<SourceDoc> docs = executor.execute(query);
 		LOGGER.info("Search resuts for '{}':", query);
 		for (SourceDoc doc : docs) {
 			LOGGER.info("-> {}", doc.getUrl());
@@ -91,43 +72,31 @@ public class MovieSearch {
 	}
 
 	/**
-	 * <p>
-	 * Starts the indexation of a directory.
-	 * </p>
-	 * 
-	 * @param directory
-	 *            : the directory to index.
+	 * <p>Starts the indexation of a directory.</p>
+	 * @param directory : the directory to index.
 	 */
-	private static void index(final File directory) {
-		final ImportService importService = injector
-				.getInstance(ImportService.class);
+	private static void index(File directory) {
+		ImportService importService = injector.getInstance(ImportService.class);
 		importService.start(directory);
 	}
 
 	/**
-	 * <p>
-	 * Starts the evaluation of the indexation.
-	 * </p>
-	 * 
-	 * @param directory
-	 *            : the directory containing the QRel files.
+	 * <p>Starts the evaluation of the indexation.</p>
+	 * @param directory : the directory containing the QRel files.
 	 */
-	private static void evaluate(final File directory) {
-		final EvaluationGenerator evaluator = injector
-				.getInstance(EvaluationGenerator.class);
+	private static void evaluate(File directory) {
+		EvaluationGenerator evaluator = injector.getInstance(EvaluationGenerator.class);
 		evaluator.printStats(directory);
 	}
 
 	/**
-	 * Search the Enum Action corresponding to the action set in the args.
-	 * 
-	 * @param strAction
-	 *            : the string action.
+	 * @param strAction : the string action.
 	 * @return the enum action.
 	 */
-	public static Action getAction(final String strAction) {
+	public static Action getAction(String strAction) {
+		strAction = strAction.toUpperCase();
 		try {
-			return Action.valueOf(strAction.toUpperCase());
+			return Action.valueOf(strAction);
 		} catch (NoSuchElementException e) {
 			throw new IllegalArgumentException(USAGE);
 		}
