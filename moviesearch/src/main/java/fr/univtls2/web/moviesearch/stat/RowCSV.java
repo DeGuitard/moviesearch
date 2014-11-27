@@ -5,6 +5,8 @@ public class RowCSV {
 	private String name;
 	private String[] columns;
 
+	private static final String SEPARATOR = ",";
+
 	/**
 	 * It's a row to build a CSV.
 	 * @param columns one data by columns
@@ -20,7 +22,7 @@ public class RowCSV {
 		builder.append(name);
 		for (String data : columns) {
 			builder.append(data);
-			builder.append(",");
+			builder.append(SEPARATOR);
 		}
 		builder.append("\n");
 		return builder.toString();
