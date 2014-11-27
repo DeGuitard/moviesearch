@@ -15,6 +15,8 @@ import com.google.inject.Inject;
 import fr.univtls2.web.moviesearch.model.SourceDoc;
 import fr.univtls2.web.moviesearch.services.evaluator.Evaluator;
 import fr.univtls2.web.moviesearch.services.evaluator.QRelLoader;
+import fr.univtls2.web.moviesearch.stat.PrintStat;
+import fr.univtls2.web.moviesearch.stat.RowCSV;
 
 public class EvaluationGenerator {
 
@@ -22,20 +24,23 @@ public class EvaluationGenerator {
 	private static final Logger LOGGER = LoggerFactory.getLogger(EvaluationGenerator.class);
 
 	/** Evaluator to get statistics. */
-	@Inject private Evaluator evaluator;
+	@Inject
+	private Evaluator evaluator;
 
 	/** Loader of QRel files. */
-	@Inject private QRelLoader qrelLoader;
+	@Inject
+	private QRelLoader qrelLoader;
 
 	/**
 	 * <p>Print stats (completeness & precision) for a set of QRels contained in a directory.</p>
 	 * @param directory : the directory to parse.
+	 * @param statFile : write the statistic in a csv
 	 */
-	public void printStats(File directory) {
+	public void printStats(File directory, File statFile) {
 		Map<String, List<SourceDoc>> qrels = qrelLoader.load(directory);
 		double completenessSum = 0, completenessSum5 = 0, completenessSum10 = 0, completenessSum25 = 0;
 		double precisionSum = 0, precisionSum5 = 0, precisionSum10 = 0, precisionSum25 = 0;
-
+		PrintStat printStat = new PrintStat(statFile);
 		int i = 1;
 		for (Entry<String, List<SourceDoc>> qrel : qrels.entrySet()) {
 			// Get expected docs (docs with weight > 0, sorted descending).
@@ -54,10 +59,10 @@ public class EvaluationGenerator {
 			double completeness25 = evaluator.exhaustiveScore(qrel.getKey(), expectedDocs, 25);
 			double precision25 = evaluator.precisionScore(qrel.getKey(), expectedDocs, 25);
 			LOGGER.info("			   ∑	5	10	25");
-			LOGGER.info("-> Precision		: {} / {} / {} / {}", String.format("%.2f", precision),
-					String.format("%.2f", precision5), String.format("%.2f", precision10), String.format("%.2f", precision25));
-			LOGGER.info("-> Completeness	: {} / {} / {} / {}", String.format("%.2f", completeness),
-					String.format("%.2f", completeness5),  String.format("%.2f", completeness10), String.format("%.2f", completeness25));
+			LOGGER.info("-> Precision		: {} / {} / {} / {}", String.format("%.2f", precision), String.format("%.2f", precision5),
+			        String.format("%.2f", precision10), String.format("%.2f", precision25));
+			LOGGER.info("-> Completeness	: {} / {} / {} / {}", String.format("%.2f", completeness), String.format("%.2f", completeness5),
+					String.format("%.2f", completeness10), String.format("%.2f", completeness25));
 
 			// Missing documents.
 			List<SourceDoc> missingDocs = evaluator.getMissingDocs(qrel.getKey(), expectedDocs);
@@ -66,7 +71,9 @@ public class EvaluationGenerator {
 			// Unexpected documents.
 			List<SourceDoc> unexpectedDocs = evaluator.getUnexpectedDocs(qrel.getKey(), expectedDocs);
 			LOGGER.info("-> Unexpected docs	: {}", getDocUrls(unexpectedDocs));
-
+			printStat.getRowCSVs().add(
+					new RowCSV(Double.toString(i), Double.toString(precision), Double.toString(precision5), Double.toString(precision10), Double
+							.toString(precision25)));
 			// Sums for average calculation.
 			completenessSum += completeness;
 			completenessSum5 += completeness5;
@@ -82,10 +89,16 @@ public class EvaluationGenerator {
 		LOGGER.info("-----------------------------------------------");
 		LOGGER.info("AVERAGE OF {} REQUESTS", sum);
 		LOGGER.info("-----------------------------------------------");
-		LOGGER.info("-> Precision		: {} / {} / {} / {}", String.format("%.2f", precisionSum / sum),
-				String.format("%.2f", precisionSum5 / sum), String.format("%.2f", precisionSum10 / sum), String.format("%.2f", precisionSum25 / sum));
+		LOGGER.info("-> Precision		: {} / {} / {} / {}", String.format("%.2f", precisionSum / sum), String.format("%.2f", precisionSum5 / sum),
+				String.format("%.2f", precisionSum10 / sum), String.format("%.2f", precisionSum25 / sum));
 		LOGGER.info("-> Completeness	: {} / {} / {} / {}", String.format("%.2f", completenessSum / sum),
-				String.format("%.2f", completenessSum5 / sum),  String.format("%.2f", completenessSum10 / sum), String.format("%.2f", completenessSum25 / sum));
+				String.format("%.2f", completenessSum5 / sum), String.format("%.2f", completenessSum10 / sum),
+				String.format("%.2f", completenessSum25 / sum));
+		LOGGER.info("-----------------------------------------------");
+		LOGGER.info("Print stat in " + statFile.getAbsolutePath());
+		printStat.write();
+
+		LOGGER.info("-----------------------------------------------");
 	}
 
 	/**

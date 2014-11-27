@@ -17,17 +17,14 @@ import fr.univtls2.web.moviesearch.services.indexation.ImportService;
 import fr.univtls2.web.moviesearch.services.query.QueryExecutor;
 
 /**
- * <p>Main entry point of the application. It takes two arguments, action and directory.</p>
- * <p>There are two distinct actions:</p>
- * <ul><li>evaluate: evaluates the indexation with a QRel list.</li>
- * <li>index: index a folder content.</li></ul>
- *
+ * <p>Main entry point of the application. It takes two arguments, action and directory.</p> <p>There are two distinct actions:</p> <ul><li>evaluate:
+ * evaluates the indexation with a QRel list.</li> <li>index: index a folder content.</li></ul>
  * @author Vianney Dupoy de Guitard
  */
 public class MovieSearch {
 
 	/** Usage message displayed when wrong arguments are supplied. */
-	private static final String USAGE = "Usage: moviesearch.jar <evaluate|index|search> <directory|term>";
+	private static final String USAGE = "Usage: moviesearch.jar <evaluate|index|search> <directory|term> <file|statistic>";
 
 	/** Applicative logger. */
 	private static final Logger LOGGER = LoggerFactory.getLogger(MovieSearch.class);
@@ -39,15 +36,15 @@ public class MovieSearch {
 	 * <p>Main entry point of the application. If wrong arguments are supplied, the usage message will be displayed.</p>
 	 * @param args : the supplied arguments.
 	 */
-	public static void main(String ... args) {
-		if (args.length != 2) {
+	public static void main(String... args) {
+		if (args.length != 3) {
 			throw new IllegalArgumentException(USAGE);
 		}
 		Action action = getAction(args[0]);
 
 		switch (action) {
 		case EVALUATE:
-			evaluate(new File(args[1]));
+			evaluate(new File(args[1]), new File(args[2]));
 			break;
 		case INDEX:
 			index(new File(args[1]));
@@ -83,10 +80,11 @@ public class MovieSearch {
 	/**
 	 * <p>Starts the evaluation of the indexation.</p>
 	 * @param directory : the directory containing the QRel files.
+	 * @param statFile : write the statistic in a csv
 	 */
-	private static void evaluate(File directory) {
+	private static void evaluate(File directory, File statFile) {
 		EvaluationGenerator evaluator = injector.getInstance(EvaluationGenerator.class);
-		evaluator.printStats(directory);
+		evaluator.printStats(directory, statFile);
 	}
 
 	/**

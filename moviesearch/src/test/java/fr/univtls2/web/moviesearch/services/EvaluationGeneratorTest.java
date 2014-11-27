@@ -18,7 +18,8 @@ import fr.univtls2.web.moviesearch.MovieSearchTestRunner.GuiceModules;
 public class EvaluationGeneratorTest {
 
 	/** The evaluation generator to test. */
-	@Inject private EvaluationGenerator eval = new EvaluationGenerator();
+	@Inject
+	private EvaluationGenerator eval = new EvaluationGenerator();
 
 	/**
 	 * Simple test that checks that no exception is thrown during the stats generation.
@@ -28,7 +29,8 @@ public class EvaluationGeneratorTest {
 		try {
 			URL qrelDirUrl = getClass().getResource("/qrels/");
 			File directory = new File(qrelDirUrl.toURI());
-			eval.printStats(directory);
+			File statFile = new File("./stat.csv");
+			eval.printStats(directory, statFile);
 		} catch (URISyntaxException e) {
 			Assert.fail("Failed to load test data.");
 		} catch (Exception e) {
