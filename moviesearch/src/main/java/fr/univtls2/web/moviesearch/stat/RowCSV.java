@@ -2,7 +2,6 @@ package fr.univtls2.web.moviesearch.stat;
 
 public class RowCSV {
 
-	private String name;
 	private String[] columns;
 
 	private static final String SEPARATOR = ",";
@@ -19,12 +18,10 @@ public class RowCSV {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append(name);
 		for (String data : columns) {
 			builder.append(data);
 			builder.append(SEPARATOR);
 		}
-		builder.append("\n");
-		return builder.toString();
+		return builder.replace(builder.length() - 1, builder.length(), "").toString();
 	}
 }
