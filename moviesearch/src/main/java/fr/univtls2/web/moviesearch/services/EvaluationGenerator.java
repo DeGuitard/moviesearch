@@ -72,8 +72,8 @@ public class EvaluationGenerator {
 			List<SourceDoc> unexpectedDocs = evaluator.getUnexpectedDocs(qrel.getKey(), expectedDocs);
 			LOGGER.info("-> Unexpected docs	: {}", getDocUrls(unexpectedDocs));
 			printStat.getRowCSVs().add(
-					new RowCSV(Double.toString(i), Double.toString(precision), Double.toString(precision5), Double.toString(precision10), Double
-							.toString(precision25)));
+					new RowCSV("Q" + i, Double.toString(precision), Double.toString(precision5), Double.toString(precision10), Double
+			                .toString(precision25)));
 			// Sums for average calculation.
 			completenessSum += completeness;
 			completenessSum5 += completeness5;
