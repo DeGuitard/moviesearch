@@ -10,7 +10,7 @@ public class RowCSV {
 	 * It's a row to build a CSV.
 	 * @param columns one data by columns
 	 */
-	public RowCSV(String name, String... columns) {
+	public RowCSV(String... columns) {
 		super();
 		this.columns = columns;
 	}
