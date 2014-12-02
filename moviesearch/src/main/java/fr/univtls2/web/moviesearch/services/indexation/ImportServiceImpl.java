@@ -3,6 +3,7 @@ package fr.univtls2.web.moviesearch.services.indexation;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -13,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import com.google.inject.Inject;
 
 import fr.univtls2.web.moviesearch.model.GlobalStat;
+import fr.univtls2.web.moviesearch.model.builders.GlobalStatBuilder;
 import fr.univtls2.web.moviesearch.services.persistence.dao.GlobalStatDao;
 
 /**
@@ -43,7 +45,12 @@ public class ImportServiceImpl implements ImportService {
 
 		LOGGER.info("Full import of '{}' starting.", directory.getAbsolutePath());
 		int filesCount = directory.listFiles().length;
-		GlobalStat filesCountStat = statDao.findByKey(GlobalStat.KEY_ALL_DOCS_COUNT);
+		GlobalStat filesCountStat = null;
+		try {
+			filesCountStat = statDao.findByKey(GlobalStat.KEY_ALL_DOCS_COUNT);
+		} catch (NoSuchElementException e) {
+			filesCountStat = new GlobalStatBuilder().key(GlobalStat.KEY_ALL_DOCS_COUNT).create();
+		}
 		filesCountStat.setValue(filesCount);
 		statDao.saveOrUpdate(filesCountStat);
 
