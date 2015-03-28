@@ -1,10 +1,14 @@
 package fr.univtls2.web.sparql;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.Assert;
 import org.junit.Test;
+
+import fr.univtls2.web.moviesearch.model.Term;
 
 /**
  * Tests the Sparl Client.
@@ -40,7 +44,7 @@ public class SparqlClientTest {
 	@Test
 	public void testQueryQ1() {
 		SparqlClient sparqlClient = new SparqlClient("localhost:8080/space");
-		String query = "SELECT distinct ?p WHERE {{inst:Intouchables ?t1 ?o1. ?p ?t1 inst:Personne;} UNION {inst:Personne ?t1 ?o1. ?p ?t1 inst:Intouchables;}}";
+		String query = "SELECT distinct ?p WHERE {{inst:Intouchables ?t1 ?o1. ?p ?t1 inst:Personne.} UNION {inst:Personne ?t1 ?o1. ?p ?t1 inst:Intouchables.}}";
 
 		Collection<Map<String, String>> results = sparqlClient.select(query);
 		for (Map<String, String> result : results) {
@@ -49,5 +53,15 @@ public class SparqlClientTest {
 			}
 		}
 		Assert.assertEquals("Wrong results count.", 54, results.size());
+	}
+
+	@Test
+	public void testQueryMix() {
+		SparqlRequest requestGenerator = new SparqlRequest();
+		List<Term> terms = new ArrayList<Term>();
+		terms.add(new Term("Intouchables"));
+		terms.add(new Term("Personnes"));
+		Assert.assertEquals("SELECT distinct ?p WHERE {{inst:Intouchables ?t1 ?o1. ?p ?t1 inst:Personnes.} "
+				+ "UNION {inst:Personnes ?t1 ?o1. ?p ?t1 inst:Intouchables.}}", requestGenerator.generator(terms));
 	}
 }

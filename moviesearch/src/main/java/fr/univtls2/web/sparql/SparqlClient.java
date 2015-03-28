@@ -37,118 +37,118 @@ public class SparqlClient {
 
 	private static final String ONTOLOGY_PREFIX = "PREFIX inst: <http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#>";
 
-    /**
-     * URI of the remote SPARQL server
-     */
-    private String endpointUri = null;
+	/**
+	 * URI of the remote SPARQL server
+	 */
+	private String endpointUri = null;
 
-    public SparqlClient(String endpointUri) {
-        this.endpointUri = endpointUri;
-    }
+	public SparqlClient(String endpointUri) {
+		this.endpointUri = endpointUri;
+	}
 
-    public String getEndpointUri() {
-        return endpointUri;
-    }
+	public String getEndpointUri() {
+		return endpointUri;
+	}
 
-    /**
-     * run a SPARQL query (select) on the remote server
-     * @param queryString 
-     */
-    public Collection<Map<String, String>> select(String queryString) {
-    	queryString = ONTOLOGY_PREFIX + " " + queryString;
-        Document document = httpGetXmlContent(queryString);
-        List<Map<String, String>> results = new LinkedList<Map<String, String>>();
-        NodeList resultNodes = document.getElementsByTagName("result");
-        for (int i = 0; i < resultNodes.getLength(); i++) {
-            Node resultNode = resultNodes.item(i);
-            if (resultNode != null && resultNode.getNodeType() == Node.ELEMENT_NODE) {
-                Map<String, String> result = new HashMap<String, String>();
-                results.add(result);
-                NodeList bindingNodes = resultNode.getChildNodes();
-                for (int j = 0; j < bindingNodes.getLength(); j++) {
-                    Node bindingNode = bindingNodes.item(j);
-                    if (bindingNode != null && bindingNode.getNodeType() == Node.ELEMENT_NODE && bindingNode.getNodeName().equals("binding")) {
-                        String varName = bindingNode.getAttributes().getNamedItem("name").getTextContent();
-                        String value = "";
-                        NodeList bindingChildren = bindingNode.getChildNodes();
-                        for (int k = 0; k < bindingChildren.getLength(); k++) {
-                            Node bindingChild = bindingChildren.item(k);
-                            if (bindingChild != null && bindingChild.getNodeType() == Node.ELEMENT_NODE) {
-                                value = bindingChild.getTextContent();
-                                break;
-                            }
-                        }
-                        result.put(varName, value);
-                    }
-                }
-            }
-        }
+	/**
+	 * run a SPARQL query (select) on the remote server
+	 * @param queryString
+	 */
+	public Collection<Map<String, String>> select(String queryString) {
+		queryString = ONTOLOGY_PREFIX + " " + queryString;
+		Document document = httpGetXmlContent(queryString);
+		List<Map<String, String>> results = new LinkedList<Map<String, String>>();
+		NodeList resultNodes = document.getElementsByTagName("result");
+		for (int i = 0; i < resultNodes.getLength(); i++) {
+			Node resultNode = resultNodes.item(i);
+			if (resultNode != null && resultNode.getNodeType() == Node.ELEMENT_NODE) {
+				Map<String, String> result = new HashMap<String, String>();
+				results.add(result);
+				NodeList bindingNodes = resultNode.getChildNodes();
+				for (int j = 0; j < bindingNodes.getLength(); j++) {
+					Node bindingNode = bindingNodes.item(j);
+					if (bindingNode != null && bindingNode.getNodeType() == Node.ELEMENT_NODE && bindingNode.getNodeName().equals("binding")) {
+						String varName = bindingNode.getAttributes().getNamedItem("name").getTextContent();
+						String value = "";
+						NodeList bindingChildren = bindingNode.getChildNodes();
+						for (int k = 0; k < bindingChildren.getLength(); k++) {
+							Node bindingChild = bindingChildren.item(k);
+							if (bindingChild != null && bindingChild.getNodeType() == Node.ELEMENT_NODE) {
+								value = bindingChild.getTextContent();
+								break;
+							}
+						}
+						result.put(varName, value);
+					}
+				}
+			}
+		}
 
-        return results;
-    }
+		return results;
+	}
 
-    /**
-     * run a SPARQL query (ask) on the remote server
-     * @param queryString 
-     */
-    public boolean ask(String queryString) {
-        Document document = httpGetXmlContent(queryString);
-        NodeList nl = document.getElementsByTagName("boolean");
-        Node n = nl.item(0);
-        if (n != null && n.getTextContent().equals("true")) {
-            return true;
-        }
-        return false;
-    }
+	/**
+	 * run a SPARQL query (ask) on the remote server
+	 * @param queryString
+	 */
+	public boolean ask(String queryString) {
+		Document document = httpGetXmlContent(queryString);
+		NodeList nl = document.getElementsByTagName("boolean");
+		Node n = nl.item(0);
+		if (n != null && n.getTextContent().equals("true")) {
+			return true;
+		}
+		return false;
+	}
 
-    private Document httpGetXmlContent(String queryString) {
-        try {
-            URIBuilder builder = new URIBuilder();
-            builder.setScheme("http");
-            builder.setHost(this.endpointUri);
-            builder.setPath("/sparql");
-            builder.setParameter("query", queryString);
-            builder.setParameter("output", "xml");
-            URI uri = builder.build();
+	private Document httpGetXmlContent(String queryString) {
+		try {
+			URIBuilder builder = new URIBuilder();
+			builder.setScheme("http");
+			builder.setHost(this.endpointUri);
+			builder.setPath("/sparql");
+			builder.setParameter("query", queryString);
+			builder.setParameter("output", "xml");
+			URI uri = builder.build();
 
-            DocumentBuilder parser = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            return parser.parse(uri.toString());
-        } catch (SAXException ex) {
-            Logger.getLogger(SparqlClient.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(SparqlClient.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParserConfigurationException ex) {
-            Logger.getLogger(SparqlClient.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (URISyntaxException ex) {
-            Logger.getLogger(SparqlClient.class.getName()).log(Level.SEVERE, null, ex);
-        }
+			DocumentBuilder parser = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+			return parser.parse(uri.toString());
+		} catch (SAXException ex) {
+			Logger.getLogger(SparqlClient.class.getName()).log(Level.SEVERE, null, ex);
+		} catch (IOException ex) {
+			Logger.getLogger(SparqlClient.class.getName()).log(Level.SEVERE, null, ex);
+		} catch (ParserConfigurationException ex) {
+			Logger.getLogger(SparqlClient.class.getName()).log(Level.SEVERE, null, ex);
+		} catch (URISyntaxException ex) {
+			Logger.getLogger(SparqlClient.class.getName()).log(Level.SEVERE, null, ex);
+		}
 
-        return null;
-    }
+		return null;
+	}
 
-    /**
-     * run a SPARQL update on the remote server
-     * @param queryString 
-     */
-    public void update(String queryString) {
-        try {
-            DefaultHttpClient httpclient = new DefaultHttpClient();
-            HttpPost httpPost = new HttpPost("http://" + endpointUri + "/update");
-            List<NameValuePair> nvps = new ArrayList<NameValuePair>();
-            nvps.add(new BasicNameValuePair("update", queryString));
-            httpPost.setEntity(new UrlEncodedFormEntity(nvps));
-            HttpResponse response2 = httpclient.execute(httpPost);
+	/**
+	 * run a SPARQL update on the remote server
+	 * @param queryString
+	 */
+	public void update(String queryString) {
+		try {
+			DefaultHttpClient httpclient = new DefaultHttpClient();
+			HttpPost httpPost = new HttpPost("http://" + endpointUri + "/update");
+			List<NameValuePair> nvps = new ArrayList<NameValuePair>();
+			nvps.add(new BasicNameValuePair("update", queryString));
+			httpPost.setEntity(new UrlEncodedFormEntity(nvps));
+			HttpResponse response2 = httpclient.execute(httpPost);
 
-            try {
-                HttpEntity entity2 = response2.getEntity();
-                // do something useful with the response body
-                // and ensure it is fully consumed
-                EntityUtils.consume(entity2);
-            } finally {
-                httpPost.releaseConnection();
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(SparqlClient.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+			try {
+				HttpEntity entity2 = response2.getEntity();
+				// do something useful with the response body
+				// and ensure it is fully consumed
+				EntityUtils.consume(entity2);
+			} finally {
+				httpPost.releaseConnection();
+			}
+		} catch (IOException ex) {
+			Logger.getLogger(SparqlClient.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	}
 }
