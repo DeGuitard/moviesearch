@@ -9,9 +9,7 @@ import org.junit.Test;
 /**
  * Tests the Sparl Client.
  * @see {@link SparqlClient}.
- * 
  * @author Vianney Dupoy de Guitard
- *
  */
 public class SparqlClientTest {
 
@@ -20,7 +18,7 @@ public class SparqlClientTest {
 	public void testConnection() {
 		SparqlClient sparqlClient = new SparqlClient("localhost:8080/space");
 		String query = "ASK WHERE { ?s ?p ?o }";
-		boolean serverIsUp = sparqlClient.ask(query);		
+		boolean serverIsUp = sparqlClient.ask(query);
 		Assert.assertTrue("Server connection should not have failed.", serverIsUp);
 	}
 
@@ -37,5 +35,19 @@ public class SparqlClientTest {
 			}
 		}
 		Assert.assertEquals("Wrong results count.", 40, results.size());
+	}
+
+	@Test
+	public void testQueryQ1() {
+		SparqlClient sparqlClient = new SparqlClient("localhost:8080/space");
+		String query = "SELECT distinct ?p WHERE {{inst:Intouchables ?t1 ?o1. ?p ?t1 inst:Personne;} UNION {inst:Personne ?t1 ?o1. ?p ?t1 inst:Intouchables;}}";
+
+		Collection<Map<String, String>> results = sparqlClient.select(query);
+		for (Map<String, String> result : results) {
+			for (String val : result.values()) {
+				System.out.println(val);
+			}
+		}
+		Assert.assertEquals("Wrong results count.", 54, results.size());
 	}
 }
