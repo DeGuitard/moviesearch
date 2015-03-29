@@ -3,9 +3,11 @@ package fr.univtls2.web.sparql;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
+
 import fr.univtls2.web.moviesearch.model.Term;
 
-public class SparqlRequest implements RequestGenerator {
+public class SparqlRequest {
 
 	private final String SELECT = "SELECT distinct ?p";
 	private final String WHERE = " WHERE {{";
@@ -18,8 +20,22 @@ public class SparqlRequest implements RequestGenerator {
 	private final String END_UNION = ".}";
 	private final String END = "}";
 
-	@Override
-	public String generator(List<Term> terms) {
+	/**
+	 * Generate a ask request with a term.
+	 * @param term of the user
+	 * @return the request
+	 */
+	public String generatorAsk(Term term) {
+		
+		return "ASK {?s ?t inst:" + StringUtils.capitalize(term.getWord()) + ".}";
+	}
+
+	/**
+	 * Generate a select request in using all terms and doing all possible combination.
+	 * @param terms of the user
+	 * @return the request
+	 */
+	public String generatorSelect(List<Term> terms) {
 
 		final StringBuilder query = new StringBuilder();
 		query.append(SELECT);
@@ -36,7 +52,7 @@ public class SparqlRequest implements RequestGenerator {
 				for (Term st : terms) {
 					if (first) {
 						query.append(WHERE).append(INST).append(term).append(MIDDLE_WHERE).append(INST).append(st.getWord()).append(END_WHERE)
-						        .append(UNION).append(INST).append(st.getWord()).append(MIDDLE_UNION).append(INST).append(term).append(END_UNION);
+						.append(UNION).append(INST).append(st.getWord()).append(MIDDLE_UNION).append(INST).append(term).append(END_UNION);
 						first = false;
 					} else {
 						query.append(UNION).append(INST).append(st.getWord()).append(MIDDLE_UNION).append(INST).append(term).append(END_UNION);

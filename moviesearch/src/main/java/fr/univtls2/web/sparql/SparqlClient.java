@@ -92,6 +92,7 @@ public class SparqlClient {
 	 * @param queryString
 	 */
 	public boolean ask(String queryString) {
+		queryString = ONTOLOGY_PREFIX + " " + queryString;
 		Document document = httpGetXmlContent(queryString);
 		NodeList nl = document.getElementsByTagName("boolean");
 		Node n = nl.item(0);

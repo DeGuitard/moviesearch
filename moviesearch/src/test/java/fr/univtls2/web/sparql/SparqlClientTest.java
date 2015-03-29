@@ -62,6 +62,32 @@ public class SparqlClientTest {
 		terms.add(new Term("Intouchables"));
 		terms.add(new Term("Personnes"));
 		Assert.assertEquals("SELECT distinct ?p WHERE {{inst:Intouchables ?t1 ?o1. ?p ?t1 inst:Personnes.} "
-				+ "UNION {inst:Personnes ?t1 ?o1. ?p ?t1 inst:Intouchables.}}", requestGenerator.generator(terms));
+				+ "UNION {inst:Personnes ?t1 ?o1. ?p ?t1 inst:Intouchables.}}", requestGenerator.generatorSelect(terms));
+	}
+	
+	@Test
+	public void testQueryAsk() {
+		SparqlRequest requestGenerator = new SparqlRequest();
+		SparqlClient sparqlClient = new SparqlClient("localhost:8080/space");
+		Assert.assertEquals(true, sparqlClient.ask(requestGenerator.generatorAsk(new Term("Personnes"))));
+	}
+	@Test
+	public void testQueryAskNotFound() {
+		SparqlRequest requestGenerator = new SparqlRequest();
+		SparqlClient sparqlClient = new SparqlClient("localhost:8080/space");
+		Assert.assertEquals(false, sparqlClient.ask(requestGenerator.generatorAsk(new Term("Personneaze"))));
+	}
+	
+	@Test
+	public void testQueryFor() {
+		List<Term> doubles = new ArrayList<Term>();
+		doubles.add(new Term("2"));
+		doubles.add(new Term("3"));
+		List<Term> copy = new ArrayList<Term>();
+		for(Term d : doubles){
+			copy.add(d);
+		}
+		
+		System.out.println(copy.size());
 	}
 }

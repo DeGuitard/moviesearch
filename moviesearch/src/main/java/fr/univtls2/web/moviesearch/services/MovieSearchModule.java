@@ -34,6 +34,7 @@ import fr.univtls2.web.moviesearch.services.properties.PropertyService;
 import fr.univtls2.web.moviesearch.services.properties.PropertyServiceImpl;
 import fr.univtls2.web.moviesearch.services.query.QueryExecutor;
 import fr.univtls2.web.moviesearch.services.query.SimpleQueryExecutor;
+import fr.univtls2.web.moviesearch.services.query.SparqlQueryExecutor;
 
 /**
  * <p>Main guice module, that will inject implementation to main services.</p>
@@ -68,7 +69,7 @@ public class MovieSearchModule extends AbstractModule {
 		// Tools binding.
 		bind(PropertyService.class).to(PropertyServiceImpl.class);
 		bind(Evaluator.class).to(EvaluatorImpl.class);
-		bind(QueryExecutor.class).to(SimpleQueryExecutor.class);
+		bind(QueryExecutor.class).to(SparqlQueryExecutor.class);
 		bind(QRelLoader.class).to(QRelLoaderImpl.class);
 	}
 
