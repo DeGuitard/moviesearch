@@ -50,12 +50,13 @@ public class SparqlRequest {
 				iStart.remove();
 
 				for (Term st : terms) {
+					String capWord = StringUtils.capitalize(st.getWord());
 					if (first) {
-						query.append(WHERE).append(INST).append(term).append(MIDDLE_WHERE).append(INST).append(st.getWord()).append(END_WHERE)
-						.append(UNION).append(INST).append(st.getWord()).append(MIDDLE_UNION).append(INST).append(term).append(END_UNION);
+						query.append(WHERE).append(INST).append(term).append(MIDDLE_WHERE).append(INST).append(capWord).append(END_WHERE)
+						.append(UNION).append(INST).append(capWord).append(MIDDLE_UNION).append(INST).append(term).append(END_UNION);
 						first = false;
 					} else {
-						query.append(UNION).append(INST).append(st.getWord()).append(MIDDLE_UNION).append(INST).append(term).append(END_UNION);
+						query.append(UNION).append(INST).append(capWord).append(MIDDLE_UNION).append(INST).append(term).append(END_UNION);
 					}
 				}
 			}
