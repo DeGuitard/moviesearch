@@ -44,7 +44,7 @@ public class SparqlClientTest {
 	@Test
 	public void testQueryQ1() {
 		SparqlClient sparqlClient = new SparqlClient("localhost:8080/space");
-		String query = "SELECT distinct ?p WHERE {{inst:Intouchables ?t1 ?o1. ?p ?t1 inst:Personne.} UNION {inst:Personne ?t1 ?o1. ?p ?t1 inst:Intouchables.}}";
+		String query = "SELECT distinct ?label WHERE {{inst:Intouchables ?t1 ?o1. ?p ?t1 inst:Personne; rdfs:label ?label} UNION {inst:Personne ?t1 ?o1. ?p ?t1 inst:Intouchables; rdfs:label ?label}}";
 
 		Collection<Map<String, String>> results = sparqlClient.select(query);
 		for (Map<String, String> result : results) {
@@ -52,7 +52,7 @@ public class SparqlClientTest {
 				System.out.println(val);
 			}
 		}
-		Assert.assertEquals("Wrong results count.", 54, results.size());
+		Assert.assertEquals("Wrong results count.", 67, results.size());
 	}
 
 	@Test
@@ -60,9 +60,9 @@ public class SparqlClientTest {
 		SparqlRequest requestGenerator = new SparqlRequest();
 		List<Term> terms = new ArrayList<Term>();
 		terms.add(new Term("Intouchables"));
-		terms.add(new Term("Personnes"));
-		Assert.assertEquals("SELECT distinct ?p WHERE {{inst:Intouchables ?t1 ?o1. ?p ?t1 inst:Personnes.} "
-				+ "UNION {inst:Personnes ?t1 ?o1. ?p ?t1 inst:Intouchables.}}", requestGenerator.generatorSelect(terms));
+		terms.add(new Term("Personne"));
+
+		Assert.assertEquals("SELECT distinct ?label WHERE {{inst:Intouchables ?t1 ?o1. ?p ?t1 inst:Personne; rdfs:label ?label} UNION {inst:Personne ?t1 ?o1. ?p ?t1 inst:Intouchables; rdfs:label ?label}}", requestGenerator.generatorSelect(terms));
 	}
 	
 	@Test
