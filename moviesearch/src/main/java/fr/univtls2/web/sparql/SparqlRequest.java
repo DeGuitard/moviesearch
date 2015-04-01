@@ -9,15 +9,15 @@ import fr.univtls2.web.moviesearch.model.Term;
 
 public class SparqlRequest {
 
-	private final String SELECT = "SELECT distinct ?p";
+	private final String SELECT = "SELECT distinct ?label";
 	private final String WHERE = " WHERE {{";
 	private final String INST = "inst:";
 	private final String MIDDLE_WHERE = " ?t1 ?o1. ?p ?t1 ";
 	private final String MIDDLE_WHERE_ALONE = " ?t1 ?o1";
-	private final String END_WHERE = ".}";
+	private final String END_WHERE = "; rdfs:label ?label}";
 	private final String UNION = " UNION {";
 	private final String MIDDLE_UNION = " ?t1 ?o1. ?p ?t1 ";
-	private final String END_UNION = ".}";
+	private final String END_UNION = "; rdfs:label ?label}";
 	private final String END = "}";
 
 	/**

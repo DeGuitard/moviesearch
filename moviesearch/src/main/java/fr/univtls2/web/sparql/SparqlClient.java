@@ -35,7 +35,8 @@ import org.xml.sax.SAXException;
  */
 public class SparqlClient {
 
-	private static final String ONTOLOGY_PREFIX = "PREFIX inst: <http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#>";
+	private static final String ONTOLOGY_PREFIX = "PREFIX inst: <http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#>"
++" PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>";
 
 	/**
 	 * URI of the remote SPARQL server
