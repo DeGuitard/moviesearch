@@ -26,12 +26,14 @@ public class QueryBuilderImpl implements QueryBuilder {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public QueryBuilder ask() {
 		query.append("ASK {");
 		return this;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public QueryBuilder select(final String terms) {
 		query.append("SELECT ");
@@ -40,18 +42,21 @@ public class QueryBuilderImpl implements QueryBuilder {
 		return this;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public QueryBuilder where() {
 		query.append("WHERE { ");
 		return this;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String end() {
 		query.append("}");
 		return query.toString();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public QueryBuilder triple(final String subject, final String predicate, final String object) {
 		query.append(subject);
@@ -63,15 +68,31 @@ public class QueryBuilderImpl implements QueryBuilder {
 		return this;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public QueryBuilder and() {
 		query.append(". ");
 		return this;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public QueryBuilder union() {
-		query.append("} UNION {");
+		query.append("UNION ");
+		return this;
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public QueryBuilder subsetStart() {
+		query.append("{ ");
+		return this;
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public QueryBuilder subsetEnd() {
+		query.append("} ");
 		return this;
 	}
 

@@ -6,19 +6,10 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 
 import fr.univtls2.web.moviesearch.model.Term;
+import fr.univtls2.web.moviesearch.services.sparql.QueryBuilder;
+import fr.univtls2.web.moviesearch.services.sparql.QueryBuilderImpl;
 
 public class SparqlRequest {
-
-	private final String SELECT = "SELECT distinct ?label";
-	private final String WHERE = " WHERE {{";
-	private final String INST = "inst:";
-	private final String MIDDLE_WHERE = " ?t1 ?o1. ?p ?t1 ";
-	private final String MIDDLE_WHERE_ALONE = " ?t1 ?o1";
-	private final String END_WHERE = "; rdfs:label ?label}";
-	private final String UNION = " UNION {";
-	private final String MIDDLE_UNION = " ?t1 ?o1. ?p ?t1 ";
-	private final String END_UNION = "; rdfs:label ?label}";
-	private final String END = "}";
 
 	/**
 	 * Generate a ask request with a term.
@@ -26,8 +17,8 @@ public class SparqlRequest {
 	 * @return the request
 	 */
 	public String generatorAsk(Term term) {
-		
-		return "ASK {?s ?t inst:" + StringUtils.capitalize(term.getWord()) + ".}";
+		QueryBuilder qb = new QueryBuilderImpl().ask();
+		return qb.triple("?s", "?t", "inst:" + StringUtils.capitalize(term.getWord())).end();
 	}
 
 	/**
@@ -36,33 +27,36 @@ public class SparqlRequest {
 	 * @return the request
 	 */
 	public String generatorSelect(List<Term> terms) {
-
-		final StringBuilder query = new StringBuilder();
-		query.append(SELECT);
+		QueryBuilder qb = new QueryBuilderImpl();
+		qb.select("distinct ?label");
 
 		if (terms.size() == 1) {
-			query.append(WHERE).append(INST).append(terms.get(0)).append(MIDDLE_WHERE_ALONE).append(END_WHERE);
+			String inst = "inst:" + StringUtils.capitalize(terms.get(0).getWord());
+			qb.where().triple(inst, "?t", "?o").and();
+			qb.triple("?o", "rdfs:label", "?label");
 		} else if (terms.size() > 1) {
 			Iterator<Term> iStart = terms.iterator();
 			boolean first = true;
 			while (iStart.hasNext()) {
-				String term = iStart.next().getWord();
+				String instA = "inst:" + StringUtils.capitalize(iStart.next().getWord());
 				iStart.remove();
 
 				for (Term st : terms) {
-					String capWord = StringUtils.capitalize(st.getWord());
+					String instB = "inst:" + StringUtils.capitalize(st.getWord());
 					if (first) {
-						query.append(WHERE).append(INST).append(term).append(MIDDLE_WHERE).append(INST).append(capWord).append(END_WHERE)
-						.append(UNION).append(INST).append(capWord).append(MIDDLE_UNION).append(INST).append(term).append(END_UNION);
+						qb.where().subsetStart();
+						qb.triple(instA, "?t", "?o").and();
+						qb.triple("?p", "?t", "inst:" + instB).and();
+						qb.triple("?p", "rdfs:label", "?label").subsetEnd();
 						first = false;
-					} else {
-						query.append(UNION).append(INST).append(capWord).append(MIDDLE_UNION).append(INST).append(term).append(END_UNION);
 					}
+					qb.union().subsetStart();
+					qb.triple(instB, "?t", "?o").and();
+					qb.triple("?p", "?t", instA).and();
+					qb.triple("?p", "rdfs:label", "?label").subsetEnd();
 				}
 			}
 		}
-		query.append(END);
-
-		return query.toString();
+		return qb.end();
 	}
 }
