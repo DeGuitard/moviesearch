@@ -59,4 +59,37 @@ public class SparqlRequest {
 		}
 		return qb.end();
 	}
+	
+	/*
+	 * PREFIX fn: <http://www.w3.org/2005/xpath-functions#>
+
+SELECT distinct ?property WHERE {
+?subject ?property ?value.
+?property rdfs:label ?label.
+FILTER (regex(?label, "lieu|naissance" ,"i"))
+}
+	 */
+	public String generatorFilterLink(List<Term> terms) {
+		QueryBuilder qb = new QueryBuilderImpl();
+		qb.select("distinct ?property");
+		qb.where();
+		qb.triple("?subject", "?property", "?value").and();
+		qb.triple("?property", "rdfs:label", "?label").and();
+		qb.filter().bracketStart();
+		qb.regex().bracketStart();
+		
+		StringBuilder regex = new StringBuilder();
+		regex.append("\"");
+		for(Term term : terms){
+			regex.append(term.getWord()).append("|");
+		}
+		regex.replace(regex.length()-1, regex.length(), "");
+		regex.append("\"");
+		
+		qb.tripleComma("?label", regex.toString(), "\"i\"").bracketEnd().bracketEnd();
+		
+	return qb.end();
+	}
+	
+	
 }

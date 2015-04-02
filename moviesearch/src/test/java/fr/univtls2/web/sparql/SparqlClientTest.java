@@ -79,15 +79,14 @@ public class SparqlClientTest {
 	}
 	
 	@Test
-	public void testQueryFor() {
-		List<Term> doubles = new ArrayList<Term>();
-		doubles.add(new Term("2"));
-		doubles.add(new Term("3"));
-		List<Term> copy = new ArrayList<Term>();
-		for(Term d : doubles){
-			copy.add(d);
-		}
+	public void testQueryFilter() {
+		List<Term> terms = new ArrayList<Term>();
+		terms.add(new Term("lieu"));
+		terms.add(new Term("naissance"));
+
+		SparqlRequest requestGenerator = new SparqlRequest();
+		SparqlClient sparqlClient = new SparqlClient("localhost:8080/space");
 		
-		System.out.println(copy.size());
+		Assert.assertEquals("Wrong results count.", 2, sparqlClient.select(requestGenerator.generatorFilterLink(terms)).size());
 	}
 }

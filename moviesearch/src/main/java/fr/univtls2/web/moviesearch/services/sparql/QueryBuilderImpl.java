@@ -67,6 +67,19 @@ public class QueryBuilderImpl implements QueryBuilder {
 		query.append(" ");
 		return this;
 	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public QueryBuilder tripleComma(final String subject, final String predicate, final String object) {
+		query.append(subject);
+		query.append(", ");
+		query.append(predicate);
+		query.append(", ");
+		query.append(object);
+		query.append(" ");
+		return this;
+	}
+
 
 	/** {@inheritDoc} */
 	@Override
@@ -96,4 +109,31 @@ public class QueryBuilderImpl implements QueryBuilder {
 		return this;
 	}
 
+	/** {@inheritDoc} */
+	@Override
+	public QueryBuilder filter() {
+		query.append("FILTER ");
+		return this;
+	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public QueryBuilder regex() {
+		query.append("REGEX ");
+		return this;
+	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public QueryBuilder bracketStart() {
+		query.append("( ");
+		return this;
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public QueryBuilder bracketEnd() {
+		query.append(") ");
+		return this;
+	}
 }

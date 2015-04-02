@@ -49,7 +49,11 @@ public interface QueryBuilder {
 	 * @return the current instance to chain calls.
 	 */
 	QueryBuilder triple(String subject, String predicate, String object);
-
+	/**
+	 * Appends a triple using a comma to separate the data.
+	 * @return the current instance to chain calls.
+	 */
+	QueryBuilder tripleComma(String subject, String predicate, String object);
 	/**
 	 * Appends the AND ('.') directive.
 	 * @return the current instance to chain calls.
@@ -61,4 +65,28 @@ public interface QueryBuilder {
 	 * @return the current instance to chain calls.
 	 */
 	QueryBuilder union();
+
+	/**
+	 * Appends the FILTER directive (without the braces).
+	 * @return the current instance to chain calls.
+	 */
+	QueryBuilder filter();
+
+	/**
+	 * Starts a bracket, which is contained between two curly bracket '(' and ')'.
+	 * @return the current instance to chain calls.
+	 */
+	QueryBuilder bracketStart();
+	
+	/**
+	 * Ends a bracket, which is contained between two bracket '(' and ')'.
+	 * @return the current instance to chain calls.
+	 */
+	QueryBuilder bracketEnd();
+	/**
+	 * Appends the REGEX directive (without the braces).
+	 * @return the current instance to chain calls.
+	 */
+	QueryBuilder regex();
+
 }
