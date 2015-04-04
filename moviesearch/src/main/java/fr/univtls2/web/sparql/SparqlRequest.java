@@ -1,5 +1,6 @@
 package fr.univtls2.web.sparql;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -26,7 +27,8 @@ public class SparqlRequest {
 	 * @param terms of the user
 	 * @return the request
 	 */
-	public String generatorSelect(List<Term> terms) {
+	public String generatorSelect(List<Term> pTerms) {
+		List<Term> terms = new ArrayList<Term>(pTerms);
 		QueryBuilder qb = new QueryBuilderImpl();
 		qb.select("distinct ?label");
 
@@ -64,7 +66,8 @@ public class SparqlRequest {
 	 * SELECT distinct ?label WHERE { { inst:OmarSy inst:aPourLieuNaissance ?o . ?o rdfs:label ?label } UNION { inst:Personnes inst:aPourLieuNaissance
 	 * ?o . ?o rdfs:label ?label } }
 	 */
-	public String generatorSelectLink(List<Term> terms, List<Term> termsLink) {
+	public String generatorSelectLink(List<Term> terms, List<Term> pTermsLink) {
+		List<Term> termsLink = new ArrayList<Term>(pTermsLink);
 		QueryBuilder qb = new QueryBuilderImpl();
 		qb.select("distinct ?label");
 		qb.where().subsetStart();
@@ -114,6 +117,23 @@ public class SparqlRequest {
 	}
 
 	/**
+	 * Generate a request to found a link.
+	 * @param terms users input
+	 * @return the request
+	 */
+	public String generatorContainsLink(Term term1,Term term2) {
+		QueryBuilder qb = new QueryBuilderImpl();
+		qb.select("distinct ?property");
+		qb.where();
+		qb.triple("?subject", "?property", "?value").and();
+		qb.triple("?property", "rdfs:label", "?label").and();
+		
+		qb.filter().contains().bracketStart().duo("?label", "\""+term1.getWord().toLowerCase()+"\"").bracketEnd();
+		qb.filter().contains().bracketStart().duo("?label", "\""+term2.getWord().toLowerCase()+"\"").bracketEnd();	
+
+		return qb.end();
+	}
+	/**
 	 * Generate request to filter on label.
 	 * @param terms
 	 * @return
@@ -127,7 +147,7 @@ public class SparqlRequest {
 		QueryBuilder qb = new QueryBuilderImpl();
 		qb.select("distinct ?value");
 		qb.where();
-	//	qb.triple("?subject", "rdfs:subClassOf", "?value").and();
+		qb.triple("?subject", "rdfs:subClassOf", "?value").and();
 		qb.triple("?value", "rdfs:label", "?label").and();
 		qb.filter().bracketStart();
 		qb.regex().bracketStart();

@@ -54,6 +54,12 @@ public interface QueryBuilder {
 	 * @return the current instance to chain calls.
 	 */
 	QueryBuilder tripleComma(String subject, String predicate, String object);
+	
+	/**
+	 * Appends a duo.
+	 * @return the current instance to chain calls.
+	 */
+	QueryBuilder duo(String label, String value);
 	/**
 	 * Appends the AND ('.') directive.
 	 * @return the current instance to chain calls.
@@ -88,5 +94,10 @@ public interface QueryBuilder {
 	 * @return the current instance to chain calls.
 	 */
 	QueryBuilder regex();
+	/**
+	 * Appends the CONTAINS directive (without the braces).
+	 * @return the current instance to chain calls.
+	 */
+	QueryBuilder contains();
 
 }

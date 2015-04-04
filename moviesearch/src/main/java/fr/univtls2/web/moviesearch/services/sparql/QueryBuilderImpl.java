@@ -70,6 +70,17 @@ public class QueryBuilderImpl implements QueryBuilder {
 	
 	/** {@inheritDoc} */
 	@Override
+	public QueryBuilder duo(final String subject, final String value) {
+		query.append(subject);
+		query.append(", ");
+		query.append(value);
+		query.append(" ");
+		return this;
+	}
+	
+	
+	/** {@inheritDoc} */
+	@Override
 	public QueryBuilder tripleComma(final String subject, final String predicate, final String object) {
 		query.append(subject);
 		query.append(", ");
@@ -120,6 +131,13 @@ public class QueryBuilderImpl implements QueryBuilder {
 	@Override
 	public QueryBuilder regex() {
 		query.append("REGEX ");
+		return this;
+	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public QueryBuilder contains() {
+		query.append("CONTAINS ");
 		return this;
 	}
 	

@@ -3,10 +3,12 @@ package fr.univtls2.web.moviesearch.services.query;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -62,16 +64,13 @@ public class SparqlQueryExecutor implements QueryExecutor {
 			}
 		}
 		mayBeLink.addAll(termsInstance);
+		
 		if (!mayBeLink.isEmpty()) {
-			// the reste of the term not used are may be a link
-			Collection<Map<String, String>> resultLinks = sparqlClient.select(sparqlRequest.generatorFilterLink(mayBeLink));
-			if (resultLinks != null) {
-				for (Map<String, String> map : resultLinks) {
-					for (String v : map.values()) {
-						isLink.add(new Term(v.substring(v.indexOf("#")+1)));
-					}
-				}
-			} else {
+			// the rest of the term not used are may be a link
+
+			isLink = searchLink(sparqlClient, mayBeLink, sparqlRequest);
+			if(isLink.isEmpty()){
+			
 				// we haven't identify the term
 				termsOther.addAll(termsOther);
 			}
@@ -87,7 +86,8 @@ public class SparqlQueryExecutor implements QueryExecutor {
 					newQuery.append(v).append(" ");
 				}
 			}
-		}else if(!termsInstance.isEmpty() && !isLink.isEmpty()){
+		}
+		if(!termsInstance.isEmpty() && !isLink.isEmpty()){
 			String q = sparqlRequest.generatorSelectLink(termsInstance, isLink);
 			System.err.println(q);
 			Collection<Map<String, String>> resultSparql = sparqlClient.select(q);
@@ -123,8 +123,8 @@ public class SparqlQueryExecutor implements QueryExecutor {
 		return results;
 	}
 
-	private Term searchInstance(SparqlClient sparqlClient, Term term, SparqlRequest requestGenerator) {
-		Collection<Map<String, String>> resultSparql = sparqlClient.select(requestGenerator.generatorSelectInstance(term));
+	private Term searchInstance(SparqlClient sparqlClient, Term term, SparqlRequest sparqlRequest) {
+		Collection<Map<String, String>> resultSparql = sparqlClient.select(sparqlRequest.generatorSelectInstance(term));
 		Term instance = null;
 		for (Map<String, String> map : resultSparql) {
 			for (String word : map.values()) {
@@ -134,6 +134,36 @@ public class SparqlQueryExecutor implements QueryExecutor {
 		return instance;
 	}
 
+	private List<Term> searchLink(SparqlClient sparqlClient, List<Term> terms, SparqlRequest sparqlRequest) {
+		List<Term> resultat = new ArrayList<Term>();
+		Iterator<Term> iStart = terms.iterator();
+
+		while (iStart.hasNext()) {
+			Term term1 = iStart.next();
+			iStart.remove();
+
+			for (Term term2 : terms) {
+				String q = sparqlRequest.generatorContainsLink(term1, term2);
+				System.out.println(q);
+				Collection<Map<String, String>> resultSparql = sparqlClient.select(q);
+				for (Map<String, String> map : resultSparql) {
+					for (String word : map.values()) {
+						resultat.add( new Term(word.substring(word.indexOf("#")+1)));
+					}
+				}
+			}
+		}
+		
+		return resultat;
+	}			
+	/*Collection<Map<String, String>> resultLinks = sparqlClient.select(sparqlRequest.generatorContainsLink(mayBeLink));
+	if (resultLinks != null) {
+	for (Map<String, String> map : resultLinks) {
+		for (String v : map.values()) {
+			isLink.add(new Term(v.substring(v.indexOf("#")+1)));
+		}
+	}*/
+	
 	private List<SourceDoc> search(String pQuery) {
 		List<Term> termsToFind = extractor.extract(pQuery);
 		termsToFind = normalizer.normalize(termsToFind);
