@@ -89,7 +89,7 @@ public class SparqlQueryExecutor implements QueryExecutor {
 		}
 		if(!termsInstance.isEmpty() && !isLink.isEmpty()){
 			String q = sparqlRequest.generatorSelectLink(termsInstance, isLink);
-			System.err.println(q);
+//			System.err.println(q);
 			Collection<Map<String, String>> resultSparql = sparqlClient.select(q);
 
 			//we add the resultat of the link request in the query for ours BDD
@@ -129,6 +129,16 @@ public class SparqlQueryExecutor implements QueryExecutor {
 		for (Map<String, String> map : resultSparql) {
 			for (String word : map.values()) {
 				instance = new Term(word.substring(word.indexOf("#")+1));
+				break;
+			}
+		}
+		if(instance==null){
+			resultSparql = sparqlClient.select(sparqlRequest.generatorSelectInstanceOther(term));
+			for (Map<String, String> map : resultSparql) {
+				for (String word : map.values()) {
+					instance = new Term(word.substring(word.indexOf("#")+1));
+					break;
+				}
 			}
 		}
 		return instance;
@@ -144,7 +154,7 @@ public class SparqlQueryExecutor implements QueryExecutor {
 
 			for (Term term2 : terms) {
 				String q = sparqlRequest.generatorContainsLink(term1, term2);
-				System.out.println(q);
+				//System.out.println(q);
 				Collection<Map<String, String>> resultSparql = sparqlClient.select(q);
 				for (Map<String, String> map : resultSparql) {
 					for (String word : map.values()) {

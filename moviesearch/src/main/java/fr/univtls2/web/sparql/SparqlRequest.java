@@ -156,5 +156,23 @@ public class SparqlRequest {
 
 		return qb.end();
 	}
+	/**
+	 * Generate request to filter on label.
+	 * @param terms
+	 * @return
+	 */
+	public String generatorSelectInstanceOther(Term term) {
+	
+		QueryBuilder qb = new QueryBuilderImpl();
+		qb.select("distinct ?value");
+		qb.where();
+	//	qb.triple("?subject", "rdfs:subClassOf", "?value").and();
+		qb.triple("?value", "rdfs:label", "?label").and();
+		qb.filter().bracketStart();
+		qb.regex().bracketStart();
 
+		qb.tripleComma("?label", "\"" + term.getWord() + "\"", "\"i\"").bracketEnd().bracketEnd();
+
+		return qb.end();
+	}
 }
