@@ -56,13 +56,26 @@ public class SparqlClientTest {
 	}
 
 	@Test
+	public void testQueryMixLink() {
+		SparqlRequest requestGenerator = new SparqlRequest();
+		List<Term> terms = new ArrayList<Term>();
+		terms.add(new Term("OmarSy"));
+		List<Term> termsLink = new ArrayList<Term>();
+		termsLink.add(new Term("aPourLieuNaissance"));
+		String query = requestGenerator.generatorSelectLink(terms, termsLink);
+		System.out.println(query);
+		Assert.assertEquals("SELECT distinct ?label WHERE { { inst:OmarSy inst:aPourLieuNaissance ?o . ?o rdfs:label ?label } UNION { inst:Personnes inst:aPourLieuNaissance ?o . ?o rdfs:label ?label } }",query );
+	}
+	
+	@Test
 	public void testQueryMix() {
 		SparqlRequest requestGenerator = new SparqlRequest();
 		List<Term> terms = new ArrayList<Term>();
 		terms.add(new Term("Intouchables"));
 		terms.add(new Term("Personne"));
+		String query = requestGenerator.generatorSelect(terms);
 
-		Assert.assertEquals("SELECT distinct ?label WHERE {{inst:Intouchables ?t1 ?o1. ?p ?t1 inst:Personne; rdfs:label ?label} UNION {inst:Personne ?t1 ?o1. ?p ?t1 inst:Intouchables; rdfs:label ?label}}", requestGenerator.generatorSelect(terms));
+		Assert.assertEquals("SELECT distinct ?label WHERE {{inst:Intouchables ?t1 ?o1. ?p ?t1 inst:Personne; rdfs:label ?label} UNION {inst:Personne ?t1 ?o1. ?p ?t1 inst:Intouchables; rdfs:label ?label}}",query );
 	}
 	
 	@Test
@@ -125,4 +138,29 @@ public class SparqlClientTest {
 		
 		Assert.assertNotNull(instance);
 	}
+	
+	@Test
+	public void testQueryMixLinkFuseki() {
+		SparqlRequest requestGenerator = new SparqlRequest();
+		SparqlClient sparqlClient = new SparqlClient("localhost:8080/space");
+
+		List<Term> terms = new ArrayList<Term>();
+		terms.add(new Term("OmarSy"));
+		List<Term> termsLink = new ArrayList<Term>();
+		termsLink.add(new Term("aPourLieuNaissance"));
+		String query = requestGenerator.generatorSelectLink(terms, termsLink);
+		System.out.println(query);
+		Collection<Map<String, String>> resultSparql = sparqlClient.select(query);
+		Term instance = null;
+		String found="";
+		for (Map<String, String> map : resultSparql) {
+			for (String word : map.values()) {
+			found = word;
+			break;
+			}
+		}
+		Assert.assertEquals("Trappes", found);
+
+	}
+	
 }

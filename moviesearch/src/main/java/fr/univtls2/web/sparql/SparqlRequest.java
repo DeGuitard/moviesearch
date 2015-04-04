@@ -59,16 +59,37 @@ public class SparqlRequest {
 		}
 		return qb.end();
 	}
-	
-	/*
-	 *
-	 *PREFIX fn: <http://www.w3.org/2005/xpath-functions#>
 
-SELECT distinct ?property WHERE {
-?subject ?property ?value.
-?property rdfs:label ?label.
-FILTER (regex(?label, "lieu|naissance" ,"i"))
-}
+	/*
+	 * SELECT distinct ?label WHERE { { inst:OmarSy inst:aPourLieuNaissance ?o . ?o rdfs:label ?label } UNION { inst:Personnes inst:aPourLieuNaissance
+	 * ?o . ?o rdfs:label ?label } }
+	 */
+	public String generatorSelectLink(List<Term> terms, List<Term> termsLink) {
+		QueryBuilder qb = new QueryBuilderImpl();
+		qb.select("distinct ?label");
+		qb.where().subsetStart();
+		boolean first = true;
+		for (Term term : terms) {
+			for (Term link : termsLink) {
+				if (first) {
+					qb.triple("inst:"+term.getWord(), "inst:"+link.getWord(), "?o").and();
+					qb.triple("?o", "rdfs:label", "?label").subsetEnd();
+					first = false;
+				}else{
+					qb.union().subsetStart();
+					qb.triple("inst:"+term.getWord(), "inst:"+link.getWord(), "?o").and();
+					qb.triple("?o", "rdfs:label", "?label").subsetEnd();
+				}
+
+			}
+		}
+		return qb.end();
+	}
+
+	/**
+	 * Generate a request to found a link.
+	 * @param terms users input
+	 * @return the request
 	 */
 	public String generatorFilterLink(List<Term> terms) {
 		QueryBuilder qb = new QueryBuilderImpl();
@@ -78,43 +99,42 @@ FILTER (regex(?label, "lieu|naissance" ,"i"))
 		qb.triple("?property", "rdfs:label", "?label").and();
 		qb.filter().bracketStart();
 		qb.regex().bracketStart();
-		
+
 		StringBuilder regex = new StringBuilder();
 		regex.append("\"");
-		for(Term term : terms){
+		for (Term term : terms) {
 			regex.append(term.getWord()).append("|");
 		}
-		regex.replace(regex.length()-1, regex.length(), "");
+		regex.replace(regex.length() - 1, regex.length(), "");
 		regex.append("\"");
-		
+
 		qb.tripleComma("?label", regex.toString(), "\"i\"").bracketEnd().bracketEnd();
-		
-	return qb.end();
+
+		return qb.end();
 	}
-	
+
 	/**
 	 * Generate request to filter on label.
 	 * @param terms
 	 * @return
 	 */
 	public String generatorSelectInstance(Term term) {
-		//SELECT distinct ?value WHERE { 
-		//?subject rdfs:subClassOf ?value . 
-	//			?value rdfs:label ?label . 
-//				FILTER ( REGEX ( ?label, "personnes", "i" ) )
-	//			}
+		// SELECT distinct ?value WHERE {
+		// ?subject rdfs:subClassOf ?value .
+		// ?value rdfs:label ?label .
+		// FILTER ( REGEX ( ?label, "personnes", "i" ) )
+		// }
 		QueryBuilder qb = new QueryBuilderImpl();
-		qb.select("distinct ?label");
+		qb.select("distinct ?value");
 		qb.where();
-		qb.triple("?subject", "rdfs:subClassOf", "?value").and();
+	//	qb.triple("?subject", "rdfs:subClassOf", "?value").and();
 		qb.triple("?value", "rdfs:label", "?label").and();
 		qb.filter().bracketStart();
 		qb.regex().bracketStart();
 
-		qb.tripleComma("?label","\""+term.getWord()+"\"", "\"i\"").bracketEnd().bracketEnd();
-		
-	return qb.end();
+		qb.tripleComma("?label", "\"" + term.getWord() + "\"", "\"i\"").bracketEnd().bracketEnd();
+
+		return qb.end();
 	}
-	
-	
+
 }

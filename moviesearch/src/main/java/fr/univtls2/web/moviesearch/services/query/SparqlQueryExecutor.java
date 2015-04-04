@@ -7,12 +7,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.junit.Assert;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.inject.Inject;
 
 import fr.univtls2.web.moviesearch.model.SourceDoc;
 import fr.univtls2.web.moviesearch.model.Term;
+import fr.univtls2.web.moviesearch.services.evaluator.QRelLoaderImpl;
 import fr.univtls2.web.moviesearch.services.indexation.extraction.Extractor;
 import fr.univtls2.web.moviesearch.services.indexation.normalization.Normalizer;
 import fr.univtls2.web.moviesearch.services.indexation.weighting.SearchWeigher;
@@ -21,6 +23,7 @@ import fr.univtls2.web.sparql.SparqlClient;
 import fr.univtls2.web.sparql.SparqlRequest;
 
 public class SparqlQueryExecutor implements QueryExecutor {
+	private static final Logger LOGGER = LoggerFactory.getLogger(QRelLoaderImpl.class);
 
 	@Inject
 	private TermDao dao;
@@ -40,40 +43,73 @@ public class SparqlQueryExecutor implements QueryExecutor {
 		List<Term> termsUser = extractor.extract(pQuery);
 		List<Term> termsInstance = new ArrayList<Term>();
 		List<Term> termsOther = new ArrayList<Term>();
-
+		List<Term> mayBeLink = new ArrayList<Term>();
+		List<Term> isLink = new ArrayList<Term>();
+		
 		// We test the term to know if a instance of the term exist
 		// if the term exist then we put it in other list to use later in a select
-		// TODO bug when we add in termsInstance the term
 		for (Term term : termsUser) {
-		
-			Term instance = searchInstance(sparqlClient, term,sparqlRequest);
+			// search the instance of the word input by the user
+			Term instance = searchInstance(sparqlClient, term, sparqlRequest);
 			if (instance != null) {
 				termsInstance.add(instance);
-			} else if(sparqlClient.ask(sparqlRequest.generatorAsk(term))) {
-				termsInstance.add(term);	
-			}else {
-				termsOther.add(term);
+			} else
+				if (sparqlClient.ask(sparqlRequest.generatorAsk(term))) {
+				// else we test if the term is a instance
+				termsInstance.add(term);
+			} else {
+				mayBeLink.add(term);
 			}
 		}
-
-		if (!termsInstance.isEmpty() && termsOther.isEmpty()) {
+		mayBeLink.addAll(termsInstance);
+		if (!mayBeLink.isEmpty()) {
+			// the reste of the term not used are may be a link
+			String q = sparqlRequest.generatorFilterLink(mayBeLink);
+			System.err.println(q);
+			Collection<Map<String, String>> resultLinks = sparqlClient.select(q);
+			if (resultLinks != null) {
+				for (Map<String, String> map : resultLinks) {
+					for (String v : map.values()) {
+						isLink.add(new Term(v.substring(v.indexOf("#")+1)));
+					}
+				}
+			} else {
+				// we haven't identify the term
+				termsOther.addAll(termsOther);
+			}
+		}
+		// We build build a query to search in ours BDD
+		StringBuilder newQuery = new StringBuilder();
+		if (!termsInstance.isEmpty()) {
+			// We build a new sparql query to found all data link we the instance and the links identify
 			Collection<Map<String, String>> resultSparql = sparqlClient.select(sparqlRequest.generatorSelect(termsInstance));
-		
-			StringBuilder newQuery = new StringBuilder();
+
 			for (Map<String, String> map : resultSparql) {
 				for (String v : map.values()) {
 					newQuery.append(v).append(" ");
 				}
 			}
-			results = search(newQuery.toString());
-		} else {
-			Collection<Map<String, String>> resultLinks = sparqlClient.select(sparqlRequest.generatorFilterLink(termsOther));
-			for (Map<String, String> map : resultLinks) {
+		}else if(!termsInstance.isEmpty() && !isLink.isEmpty()){
+			String q = sparqlRequest.generatorSelectLink(termsInstance, isLink);
+			System.err.println(q);
+			Collection<Map<String, String>> resultSparql = sparqlClient.select(q);
+
+			//we add the resultat of the link request in the query for ours BDD
+			for (Map<String, String> map : resultSparql) {
 				for (String v : map.values()) {
-					System.out.println(v);
+					newQuery.append(v).append(" ");
 				}
 			}
 		}
+
+		//and finally the terms not used 
+		if (!termsOther.isEmpty()) {
+			for (Term term : termsOther) {
+				newQuery.append(term.getWord()).append(" ");
+			}
+		}
+		LOGGER.info("Query generate : "+newQuery);
+		results = search(newQuery.toString());
 		// instances = rechercherInstances(req)
 		// liens = rechercherLiens(req)
 		// composerTriplets(instances, liens)
@@ -87,15 +123,15 @@ public class SparqlQueryExecutor implements QueryExecutor {
 	}
 
 	private Term searchInstance(SparqlClient sparqlClient, Term term, SparqlRequest requestGenerator) {
-	    Collection<Map<String, String>> resultSparql = sparqlClient.select(requestGenerator.generatorSelectInstance(term));
-	    Term instance = null;
-	    for (Map<String, String> map : resultSparql) {
-	    	for (String word : map.values()) {
-	    	instance = new Term(word);
-	    	}
-	    }
-	    return instance;
-    }
+		Collection<Map<String, String>> resultSparql = sparqlClient.select(requestGenerator.generatorSelectInstance(term));
+		Term instance = null;
+		for (Map<String, String> map : resultSparql) {
+			for (String word : map.values()) {
+				instance = new Term(word.substring(word.indexOf("#")+1));
+			}
+		}
+		return instance;
+	}
 
 	private List<SourceDoc> search(String pQuery) {
 		List<Term> termsToFind = extractor.extract(pQuery);
@@ -131,7 +167,7 @@ public class SparqlQueryExecutor implements QueryExecutor {
 		Collections.sort(results);
 		return results;
 	}
-	
+
 	/**
 	 * Merge two documents.
 	 * @param termFound : the term with its list of document.

@@ -35,6 +35,9 @@ import org.xml.sax.SAXException;
  */
 public class SparqlClient {
 
+	private static final String ONTOLOGY_PREFIX = "PREFIX inst: <http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#>"
++"\n PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>";
+
 	/**
 	 * URI of the remote SPARQL server
 	 */
@@ -53,6 +56,7 @@ public class SparqlClient {
 	 * @param queryString
 	 */
 	public Collection<Map<String, String>> select(String queryString) {
+		queryString = ONTOLOGY_PREFIX + " " + queryString;
 		Document document = httpGetXmlContent(queryString);
 		List<Map<String, String>> results = new LinkedList<Map<String, String>>();
 		NodeList resultNodes = document.getElementsByTagName("result");
@@ -89,6 +93,7 @@ public class SparqlClient {
 	 * @param queryString
 	 */
 	public boolean ask(String queryString) {
+		queryString = ONTOLOGY_PREFIX + " " + queryString;
 		Document document = httpGetXmlContent(queryString);
 		NodeList nl = document.getElementsByTagName("boolean");
 		Node n = nl.item(0);
