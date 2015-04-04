@@ -64,9 +64,7 @@ public class SparqlQueryExecutor implements QueryExecutor {
 		mayBeLink.addAll(termsInstance);
 		if (!mayBeLink.isEmpty()) {
 			// the reste of the term not used are may be a link
-			String q = sparqlRequest.generatorFilterLink(mayBeLink);
-			System.err.println(q);
-			Collection<Map<String, String>> resultLinks = sparqlClient.select(q);
+			Collection<Map<String, String>> resultLinks = sparqlClient.select(sparqlRequest.generatorFilterLink(mayBeLink));
 			if (resultLinks != null) {
 				for (Map<String, String> map : resultLinks) {
 					for (String v : map.values()) {
@@ -101,14 +99,17 @@ public class SparqlQueryExecutor implements QueryExecutor {
 				}
 			}
 		}
-
+		if(newQuery.length()==0){
+			LOGGER.error("No query generate with sparql then we use the old system");
+			termsOther = termsUser;
+		}
 		//and finally the terms not used 
 		if (!termsOther.isEmpty()) {
+			
 			for (Term term : termsOther) {
 				newQuery.append(term.getWord()).append(" ");
 			}
 		}
-		LOGGER.info("Query generate : "+newQuery);
 		results = search(newQuery.toString());
 		// instances = rechercherInstances(req)
 		// liens = rechercherLiens(req)
