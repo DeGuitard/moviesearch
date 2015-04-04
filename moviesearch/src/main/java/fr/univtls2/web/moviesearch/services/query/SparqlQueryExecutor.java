@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.junit.Assert;
+
 import com.google.inject.Inject;
 
 import fr.univtls2.web.moviesearch.model.SourceDoc;
@@ -43,16 +45,20 @@ public class SparqlQueryExecutor implements QueryExecutor {
 		// if the term exist then we put it in other list to use later in a select
 		// TODO bug when we add in termsInstance the term
 		for (Term term : termsUser) {
-			if (sparqlClient.ask(sparqlRequest.generatorAsk(term))) {
-				termsInstance.add(term);
-			} else {
+		
+			Term instance = searchInstance(sparqlClient, term,sparqlRequest);
+			if (instance != null) {
+				termsInstance.add(instance);
+			} else if(sparqlClient.ask(sparqlRequest.generatorAsk(term))) {
+				termsInstance.add(term);	
+			}else {
 				termsOther.add(term);
 			}
 		}
 
 		if (!termsInstance.isEmpty() && termsOther.isEmpty()) {
 			Collection<Map<String, String>> resultSparql = sparqlClient.select(sparqlRequest.generatorSelect(termsInstance));
-			// TODO Just to see replace by a the old treatment did on the user term.
+		
 			StringBuilder newQuery = new StringBuilder();
 			for (Map<String, String> map : resultSparql) {
 				for (String v : map.values()) {
@@ -79,6 +85,17 @@ public class SparqlQueryExecutor implements QueryExecutor {
 		// TODO Guillaume Ruscassie
 		return results;
 	}
+
+	private Term searchInstance(SparqlClient sparqlClient, Term term, SparqlRequest requestGenerator) {
+	    Collection<Map<String, String>> resultSparql = sparqlClient.select(requestGenerator.generatorSelectInstance(term));
+	    Term instance = null;
+	    for (Map<String, String> map : resultSparql) {
+	    	for (String word : map.values()) {
+	    	instance = new Term(word);
+	    	}
+	    }
+	    return instance;
+    }
 
 	private List<SourceDoc> search(String pQuery) {
 		List<Term> termsToFind = extractor.extract(pQuery);

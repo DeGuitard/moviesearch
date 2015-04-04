@@ -61,7 +61,8 @@ public class SparqlRequest {
 	}
 	
 	/*
-	 * PREFIX fn: <http://www.w3.org/2005/xpath-functions#>
+	 *
+	 *PREFIX fn: <http://www.w3.org/2005/xpath-functions#>
 
 SELECT distinct ?property WHERE {
 ?subject ?property ?value.
@@ -87,6 +88,30 @@ FILTER (regex(?label, "lieu|naissance" ,"i"))
 		regex.append("\"");
 		
 		qb.tripleComma("?label", regex.toString(), "\"i\"").bracketEnd().bracketEnd();
+		
+	return qb.end();
+	}
+	
+	/**
+	 * Generate request to filter on label.
+	 * @param terms
+	 * @return
+	 */
+	public String generatorSelectInstance(Term term) {
+		//SELECT distinct ?value WHERE { 
+		//?subject rdfs:subClassOf ?value . 
+	//			?value rdfs:label ?label . 
+//				FILTER ( REGEX ( ?label, "personnes", "i" ) )
+	//			}
+		QueryBuilder qb = new QueryBuilderImpl();
+		qb.select("distinct ?label");
+		qb.where();
+		qb.triple("?subject", "rdfs:subClassOf", "?value").and();
+		qb.triple("?value", "rdfs:label", "?label").and();
+		qb.filter().bracketStart();
+		qb.regex().bracketStart();
+
+		qb.tripleComma("?label","\""+term.getWord()+"\"", "\"i\"").bracketEnd().bracketEnd();
 		
 	return qb.end();
 	}

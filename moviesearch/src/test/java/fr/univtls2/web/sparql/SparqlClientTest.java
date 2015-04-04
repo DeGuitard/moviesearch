@@ -89,4 +89,40 @@ public class SparqlClientTest {
 		
 		Assert.assertEquals("Wrong results count.", 2, sparqlClient.select(requestGenerator.generatorFilterLink(terms)).size());
 	}
+	@Test
+	public void testQueryAskFilter() {
+		SparqlRequest requestGenerator = new SparqlRequest();
+		SparqlClient sparqlClient = new SparqlClient("localhost:8080/space");
+		List<Term> terms = new ArrayList<Term>();
+		terms.add(new Term("Personnes"));
+		 
+		Collection<Map<String, String>> resultSparql = sparqlClient.select(requestGenerator.generatorFilterLink(terms));
+		// TODO Just to see replace by a the old treatment did on the user term.
+		StringBuilder newQuery = new StringBuilder();
+		for (Map<String, String> map : resultSparql) {
+			for (String v : map.values()) {
+			System.out.println(v);
+			}
+		}
+		Assert.assertEquals(true, sparqlClient.select(requestGenerator.generatorFilterLink(terms)));
+	}
+	
+	@Test
+	public void testQuerySelectInstance() {
+		SparqlRequest requestGenerator = new SparqlRequest();
+		SparqlClient sparqlClient = new SparqlClient("localhost:8080/space");
+		Term term = new Term("Personnes");
+		 
+		String query = requestGenerator.generatorSelectInstance(term);
+
+		Collection<Map<String, String>> resultSparql = sparqlClient.select(query);
+		Term instance = null;
+		for (Map<String, String> map : resultSparql) {
+			for (String word : map.values()) {
+			instance = new Term(word);
+			}
+		}
+		
+		Assert.assertNotNull(instance);
+	}
 }
