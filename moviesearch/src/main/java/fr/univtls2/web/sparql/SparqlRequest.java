@@ -46,7 +46,7 @@ public class SparqlRequest {
 					if (first) {
 						qb.where().subsetStart();
 						qb.triple(instA, "?t", "?o").and();
-						qb.triple("?p", "?t", "inst:" + instB).and();
+						qb.triple("?p", "?t", instB).and();
 						qb.triple("?p", "rdfs:label", "?label").subsetEnd();
 						first = false;
 					}
