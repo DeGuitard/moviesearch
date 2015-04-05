@@ -46,9 +46,8 @@ public class SparqlQueryExecutor implements QueryExecutor {
 
 		// We test the term to know if a instance of the term exist
 		// if the term exist then we put it in other list to use later in a select
-
+		List<Term> links = searchLink(sparqlClient, termsUser, sparqlRequest,termsUser);
 		List<Term> instances = searchAllInstance(sparqlClient, sparqlRequest, termsUser);
-		List<Term> links = searchLink(sparqlClient, termsUser, sparqlRequest);
 		List<Term> others = searchOtherTerms(termsUser, instances, links);
 		
 		// We build build a query to search in ours BDD
@@ -81,6 +80,9 @@ public class SparqlQueryExecutor implements QueryExecutor {
 		if (!instances.isEmpty() && !links.isEmpty()) {
 			Collection<Map<String, String>> resultSparql = sparqlClient.select(sparqlRequest.generatorSelectLink(instances, links));
 
+			if(resultSparql.isEmpty()){
+				resultSparql = sparqlClient.select(sparqlRequest.generatorSelectLink(links));
+			}
 			// we add the resultat of the link request in the query for ours BDD
 			for (Map<String, String> map : resultSparql) {
 				for (String v : map.values()) {
@@ -180,9 +182,10 @@ public class SparqlQueryExecutor implements QueryExecutor {
 	 * @param sparqlClient
 	 * @param term
 	 * @param sparqlRequest
+	 * @param instances 
 	 * @return
 	 */
-	private List<Term> searchLink(SparqlClient sparqlClient, List<Term> pTerms, SparqlRequest sparqlRequest) {
+	private List<Term> searchLink(SparqlClient sparqlClient, List<Term> pTerms, SparqlRequest sparqlRequest, List<Term> instances) {
 		List<Term> resultat = new ArrayList<Term>();
 		List<Term> terms = new ArrayList<Term>(pTerms);
 		Iterator<Term> iStart = terms.iterator();
@@ -198,6 +201,9 @@ public class SparqlQueryExecutor implements QueryExecutor {
 				Collection<Map<String, String>> resultSparql = sparqlClient.select(q);
 				for (Map<String, String> map : resultSparql) {
 					for (String word : map.values()) {
+						removeList(instances,term2);
+						removeList(instances,term1);
+						
 						resultat.add(new Term(word.substring(word.indexOf("#") + 1)));
 					}
 				}
@@ -205,6 +211,20 @@ public class SparqlQueryExecutor implements QueryExecutor {
 		}
 
 		return resultat;
+	}
+	
+	private void removeList(List<Term> terms, Term term){
+		Integer removeId = null;
+		
+		for(int id=0;id<terms.size();id++){
+			if(terms.get(id).getWord().equals(term.getWord())){
+				removeId=id;
+				break;
+			}
+		}
+		if(removeId !=null){
+			terms.remove(removeId.intValue());
+		}
 	}
 
 	/**
@@ -259,7 +279,7 @@ public class SparqlQueryExecutor implements QueryExecutor {
 	}
 
 	/**
-	 * The others terms aren't a instance or a link. 
+	 * The others terms aren't a instance or a link  
 	 * @param usersTerms
 	 * @param instances
 	 * @param links

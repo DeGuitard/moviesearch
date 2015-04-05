@@ -88,6 +88,29 @@ public class SparqlRequest {
 		}
 		return qb.end();
 	}
+	/*
+	 * SELECT distinct ?label WHERE {  ?a inst:recompensePersonne ?o . ?o rdfs:label ?label } 
+	 */
+	public String generatorSelectLink( List<Term> pTermsLink) {
+		List<Term> termsLink = new ArrayList<Term>(pTermsLink);
+		QueryBuilder qb = new QueryBuilderImpl();
+		qb.select("distinct ?label");
+		qb.where().subsetStart();
+		boolean first = true;
+		for (Term link : termsLink) {
+			if (first) {
+				qb.triple("?a", "inst:"+link.getWord(), "?o").and();
+				qb.triple("?o", "rdfs:label", "?label").subsetEnd();
+				first = false;
+			}else{
+				qb.union().subsetStart();
+				qb.triple("?b", "inst:"+link.getWord(), "?o").and();
+				qb.triple("?o", "rdfs:label", "?label").subsetEnd();
+			}
+
+		}
+		return qb.end();
+	}
 
 	/**
 	 * Generate a request to found a link.
