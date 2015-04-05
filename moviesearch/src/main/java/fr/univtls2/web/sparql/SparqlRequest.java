@@ -175,4 +175,19 @@ public class SparqlRequest {
 
 		return qb.end();
 	}
+	
+	/**
+	 * Generate request to filter on label.
+	 * @param terms
+	 * @return
+	 */
+	public String generatorSelectInstanceType(Term term) {
+	
+		QueryBuilder qb = new QueryBuilderImpl();
+		qb.select("distinct ?value");
+		qb.where();
+		qb.triple("\""+term.getWord()+"\"", "rdf:type", "?type").and();
+		
+		return qb.end();
+	}
 }
