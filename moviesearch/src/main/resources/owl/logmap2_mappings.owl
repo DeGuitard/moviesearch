@@ -1,0 +1,905 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.cs.ox.ac.uk/isg/projects/LogMap/mappings.owl#"
+     xml:base="http://www.cs.ox.ac.uk/isg/projects/LogMap/mappings.owl"
+     xmlns:mappings="http://www.cs.ox.ac.uk/isg/projects/LogMap/mappings.owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="http://www.cs.ox.ac.uk/isg/projects/LogMap/mappings.owl"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.cs.ox.ac.uk/isg/projects/LogMap/mappings.owl#entity1 -->
+
+    <owl:AnnotationProperty rdf:about="http://www.cs.ox.ac.uk/isg/projects/LogMap/mappings.owl#entity1"/>
+    
+
+
+    <!-- http://www.cs.ox.ac.uk/isg/projects/LogMap/mappings.owl#entity2 -->
+
+    <owl:AnnotationProperty rdf:about="http://www.cs.ox.ac.uk/isg/projects/LogMap/mappings.owl#entity2"/>
+    
+
+
+    <!-- http://www.cs.ox.ac.uk/isg/projects/LogMap/mappings.owl#measure -->
+
+    <owl:AnnotationProperty rdf:about="http://www.cs.ox.ac.uk/isg/projects/LogMap/mappings.owl#measure"/>
+    
+
+
+    <!-- http://www.cs.ox.ac.uk/isg/projects/LogMap/mappings.owl#relation -->
+
+    <owl:AnnotationProperty rdf:about="http://www.cs.ox.ac.uk/isg/projects/LogMap/mappings.owl#relation"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://dbpedia.org/ontology/title -->
+
+    <owl:DatatypeProperty rdf:about="http://dbpedia.org/ontology/title">
+        <owl:equivalentProperty rdf:resource="http://purl.org/dc/terms/title"/>
+    </owl:DatatypeProperty>
+    <owl:Axiom>
+        <measure rdf:datatype="http://www.w3.org/2001/XMLSchema#double">1.0</measure>
+        <relation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</relation>
+        <entity2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://dbpedia.org/ontology/title</entity2>
+        <entity1 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://purl.org/dc/terms/title</entity1>
+        <owl:annotatedSource rdf:resource="http://dbpedia.org/ontology/title"/>
+        <owl:annotatedTarget rdf:resource="http://purl.org/dc/terms/title"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2002/07/owl#equivalentProperty"/>
+    </owl:Axiom>
+    
+
+
+    <!-- http://purl.org/dc/terms/title -->
+
+    <owl:DatatypeProperty rdf:about="http://purl.org/dc/terms/title"/>
+    <owl:Axiom>
+        <measure rdf:datatype="http://www.w3.org/2001/XMLSchema#double">1.0</measure>
+        <relation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</relation>
+        <entity2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://dbpedia.org/ontology/title</entity2>
+        <entity1 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://purl.org/dc/terms/title</entity1>
+        <owl:annotatedSource rdf:resource="http://dbpedia.org/ontology/title"/>
+        <owl:annotatedTarget rdf:resource="http://purl.org/dc/terms/title"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2002/07/owl#equivalentProperty"/>
+    </owl:Axiom>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://dbpedia.org/ontology/Artist -->
+
+    <owl:Class rdf:about="http://dbpedia.org/ontology/Artist">
+        <owl:equivalentClass rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Artiste"/>
+    </owl:Class>
+    <owl:Axiom>
+        <measure rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.7210000000000001</measure>
+        <relation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</relation>
+        <entity2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://dbpedia.org/ontology/Artist</entity2>
+        <entity1 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Artiste</entity1>
+        <owl:annotatedSource rdf:resource="http://dbpedia.org/ontology/Artist"/>
+        <owl:annotatedTarget rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Artiste"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2002/07/owl#equivalentClass"/>
+    </owl:Axiom>
+    
+
+
+    <!-- http://dbpedia.org/ontology/Award -->
+
+    <owl:Class rdf:about="http://dbpedia.org/ontology/Award">
+        <owl:equivalentClass rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#PrixDecerne"/>
+    </owl:Class>
+    <owl:Axiom>
+        <measure rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.509</measure>
+        <relation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</relation>
+        <entity2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://dbpedia.org/ontology/Award</entity2>
+        <entity1 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#PrixDecerne</entity1>
+        <owl:annotatedSource rdf:resource="http://dbpedia.org/ontology/Award"/>
+        <owl:annotatedTarget rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#PrixDecerne"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2002/07/owl#equivalentClass"/>
+    </owl:Axiom>
+    
+
+
+    <!-- http://dbpedia.org/ontology/Camera -->
+
+    <owl:Class rdf:about="http://dbpedia.org/ontology/Camera">
+        <owl:equivalentClass rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#CameraOr"/>
+    </owl:Class>
+    <owl:Axiom>
+        <measure rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.45714285714285713</measure>
+        <relation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</relation>
+        <entity2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://dbpedia.org/ontology/Camera</entity2>
+        <entity1 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#CameraOr</entity1>
+        <owl:annotatedSource rdf:resource="http://dbpedia.org/ontology/Camera"/>
+        <owl:annotatedTarget rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#CameraOr"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2002/07/owl#equivalentClass"/>
+    </owl:Axiom>
+    
+
+
+    <!-- http://dbpedia.org/ontology/Cartoon -->
+
+    <owl:Class rdf:about="http://dbpedia.org/ontology/Cartoon">
+        <owl:equivalentClass rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#DessinAnime"/>
+    </owl:Class>
+    <owl:Axiom>
+        <measure rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.53</measure>
+        <relation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</relation>
+        <entity2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://dbpedia.org/ontology/Cartoon</entity2>
+        <entity1 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#DessinAnime</entity1>
+        <owl:annotatedSource rdf:resource="http://dbpedia.org/ontology/Cartoon"/>
+        <owl:annotatedTarget rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#DessinAnime"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2002/07/owl#equivalentClass"/>
+    </owl:Axiom>
+    
+
+
+    <!-- http://dbpedia.org/ontology/Competition -->
+
+    <owl:Class rdf:about="http://dbpedia.org/ontology/Competition">
+        <owl:equivalentClass rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Competition"/>
+    </owl:Class>
+    <owl:Axiom>
+        <measure rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.5</measure>
+        <relation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</relation>
+        <entity2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://dbpedia.org/ontology/Competition</entity2>
+        <entity1 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Competition</entity1>
+        <owl:annotatedSource rdf:resource="http://dbpedia.org/ontology/Competition"/>
+        <owl:annotatedTarget rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Competition"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2002/07/owl#equivalentClass"/>
+    </owl:Axiom>
+    
+
+
+    <!-- http://dbpedia.org/ontology/Continent -->
+
+    <owl:Class rdf:about="http://dbpedia.org/ontology/Continent">
+        <owl:equivalentClass rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Continent"/>
+    </owl:Class>
+    <owl:Axiom>
+        <measure rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.8320000000000001</measure>
+        <relation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</relation>
+        <entity2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://dbpedia.org/ontology/Continent</entity2>
+        <entity1 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Continent</entity1>
+        <owl:annotatedSource rdf:resource="http://dbpedia.org/ontology/Continent"/>
+        <owl:annotatedTarget rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Continent"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2002/07/owl#equivalentClass"/>
+    </owl:Axiom>
+    
+
+
+    <!-- http://dbpedia.org/ontology/Country -->
+
+    <owl:Class rdf:about="http://dbpedia.org/ontology/Country">
+        <owl:equivalentClass rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Pays"/>
+    </owl:Class>
+    <owl:Axiom>
+        <measure rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.605</measure>
+        <relation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</relation>
+        <entity2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://dbpedia.org/ontology/Country</entity2>
+        <entity1 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Pays</entity1>
+        <owl:annotatedSource rdf:resource="http://dbpedia.org/ontology/Country"/>
+        <owl:annotatedTarget rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Pays"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2002/07/owl#equivalentClass"/>
+    </owl:Axiom>
+    
+
+
+    <!-- http://dbpedia.org/ontology/Film -->
+
+    <owl:Class rdf:about="http://dbpedia.org/ontology/Film">
+        <owl:equivalentClass rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Film"/>
+    </owl:Class>
+    <owl:Axiom>
+        <measure rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.505</measure>
+        <relation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</relation>
+        <entity2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://dbpedia.org/ontology/Film</entity2>
+        <entity1 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Film</entity1>
+        <owl:annotatedSource rdf:resource="http://dbpedia.org/ontology/Film"/>
+        <owl:annotatedTarget rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Film"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2002/07/owl#equivalentClass"/>
+    </owl:Axiom>
+    
+
+
+    <!-- http://dbpedia.org/ontology/Genre -->
+
+    <owl:Class rdf:about="http://dbpedia.org/ontology/Genre">
+        <owl:equivalentClass rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Genre"/>
+        <owl:equivalentClass rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#GenreCinematographique"/>
+    </owl:Class>
+    <owl:Axiom>
+        <measure rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.79</measure>
+        <relation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</relation>
+        <entity2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://dbpedia.org/ontology/Genre</entity2>
+        <entity1 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Genre</entity1>
+        <owl:annotatedSource rdf:resource="http://dbpedia.org/ontology/Genre"/>
+        <owl:annotatedTarget rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Genre"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2002/07/owl#equivalentClass"/>
+    </owl:Axiom>
+    <owl:Axiom>
+        <measure rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.581</measure>
+        <relation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</relation>
+        <entity2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://dbpedia.org/ontology/Genre</entity2>
+        <entity1 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#GenreCinematographique</entity1>
+        <owl:annotatedSource rdf:resource="http://dbpedia.org/ontology/Genre"/>
+        <owl:annotatedTarget rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#GenreCinematographique"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2002/07/owl#equivalentClass"/>
+    </owl:Axiom>
+    
+
+
+    <!-- http://dbpedia.org/ontology/GrandPrix -->
+
+    <owl:Class rdf:about="http://dbpedia.org/ontology/GrandPrix">
+        <owl:equivalentClass rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#GrandPrix"/>
+    </owl:Class>
+    <owl:Axiom>
+        <measure rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.5</measure>
+        <relation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</relation>
+        <entity2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://dbpedia.org/ontology/GrandPrix</entity2>
+        <entity1 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#GrandPrix</entity1>
+        <owl:annotatedSource rdf:resource="http://dbpedia.org/ontology/GrandPrix"/>
+        <owl:annotatedTarget rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#GrandPrix"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2002/07/owl#equivalentClass"/>
+    </owl:Axiom>
+    
+
+
+    <!-- http://dbpedia.org/ontology/Media -->
+
+    <owl:Class rdf:about="http://dbpedia.org/ontology/Media">
+        <owl:equivalentClass rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#CompetitionMedia"/>
+    </owl:Class>
+    <owl:Axiom>
+        <measure rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.516764705882353</measure>
+        <relation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</relation>
+        <entity2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://dbpedia.org/ontology/Media</entity2>
+        <entity1 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#CompetitionMedia</entity1>
+        <owl:annotatedSource rdf:resource="http://dbpedia.org/ontology/Media"/>
+        <owl:annotatedTarget rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#CompetitionMedia"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2002/07/owl#equivalentClass"/>
+    </owl:Axiom>
+    
+
+
+    <!-- http://dbpedia.org/ontology/Painter -->
+
+    <owl:Class rdf:about="http://dbpedia.org/ontology/Painter">
+        <owl:equivalentClass rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Homme"/>
+    </owl:Class>
+    <owl:Axiom>
+        <measure rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.7166666666666667</measure>
+        <relation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</relation>
+        <entity2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://dbpedia.org/ontology/Painter</entity2>
+        <entity1 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Homme</entity1>
+        <owl:annotatedSource rdf:resource="http://dbpedia.org/ontology/Painter"/>
+        <owl:annotatedTarget rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Homme"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2002/07/owl#equivalentClass"/>
+    </owl:Axiom>
+    
+
+
+    <!-- http://dbpedia.org/ontology/Place -->
+
+    <owl:Class rdf:about="http://dbpedia.org/ontology/Place">
+        <owl:equivalentClass rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Lieu"/>
+    </owl:Class>
+    <owl:Axiom>
+        <measure rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.505</measure>
+        <relation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</relation>
+        <entity2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://dbpedia.org/ontology/Place</entity2>
+        <entity1 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Lieu</entity1>
+        <owl:annotatedSource rdf:resource="http://dbpedia.org/ontology/Place"/>
+        <owl:annotatedTarget rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Lieu"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2002/07/owl#equivalentClass"/>
+    </owl:Axiom>
+    
+
+
+    <!-- http://dbpedia.org/ontology/Town -->
+
+    <owl:Class rdf:about="http://dbpedia.org/ontology/Town">
+        <owl:equivalentClass rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Ville"/>
+    </owl:Class>
+    <owl:Axiom>
+        <measure rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.632</measure>
+        <relation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</relation>
+        <entity2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://dbpedia.org/ontology/Town</entity2>
+        <entity1 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Ville</entity1>
+        <owl:annotatedSource rdf:resource="http://dbpedia.org/ontology/Town"/>
+        <owl:annotatedTarget rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Ville"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2002/07/owl#equivalentClass"/>
+    </owl:Axiom>
+    
+
+
+    <!-- http://purl.org/NET/c4dm/event.owl#Event -->
+
+    <owl:Class rdf:about="http://purl.org/NET/c4dm/event.owl#Event">
+        <owl:equivalentClass rdf:resource="http://schema.org/Event"/>
+    </owl:Class>
+    <owl:Axiom>
+        <measure rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.7030000000000001</measure>
+        <relation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</relation>
+        <entity1 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://purl.org/NET/c4dm/event.owl#Event</entity1>
+        <entity2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://schema.org/Event</entity2>
+        <owl:annotatedSource rdf:resource="http://purl.org/NET/c4dm/event.owl#Event"/>
+        <owl:annotatedTarget rdf:resource="http://schema.org/Event"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2002/07/owl#equivalentClass"/>
+    </owl:Axiom>
+    
+
+
+    <!-- http://schema.org/AdministrativeArea -->
+
+    <owl:Class rdf:about="http://schema.org/AdministrativeArea">
+        <owl:equivalentClass rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#LieuAdministratif"/>
+    </owl:Class>
+    <owl:Axiom>
+        <measure rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.724</measure>
+        <relation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</relation>
+        <entity2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://schema.org/AdministrativeArea</entity2>
+        <entity1 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#LieuAdministratif</entity1>
+        <owl:annotatedSource rdf:resource="http://schema.org/AdministrativeArea"/>
+        <owl:annotatedTarget rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#LieuAdministratif"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2002/07/owl#equivalentClass"/>
+    </owl:Axiom>
+    
+
+
+    <!-- http://schema.org/City -->
+
+    <owl:Class rdf:about="http://schema.org/City">
+        <owl:equivalentClass rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Ville"/>
+    </owl:Class>
+    <owl:Axiom>
+        <measure rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.7869999999999999</measure>
+        <relation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</relation>
+        <entity2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://schema.org/City</entity2>
+        <entity1 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Ville</entity1>
+        <owl:annotatedSource rdf:resource="http://schema.org/City"/>
+        <owl:annotatedTarget rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Ville"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2002/07/owl#equivalentClass"/>
+    </owl:Axiom>
+    
+
+
+    <!-- http://schema.org/Country -->
+
+    <owl:Class rdf:about="http://schema.org/Country">
+        <owl:equivalentClass rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Pays"/>
+    </owl:Class>
+    <owl:Axiom>
+        <measure rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.7030000000000001</measure>
+        <relation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</relation>
+        <entity2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://schema.org/Country</entity2>
+        <entity1 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Pays</entity1>
+        <owl:annotatedSource rdf:resource="http://schema.org/Country"/>
+        <owl:annotatedTarget rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Pays"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2002/07/owl#equivalentClass"/>
+    </owl:Axiom>
+    
+
+
+    <!-- http://schema.org/Event -->
+
+    <owl:Class rdf:about="http://schema.org/Event"/>
+    <owl:Axiom>
+        <measure rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.7030000000000001</measure>
+        <relation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</relation>
+        <entity1 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://purl.org/NET/c4dm/event.owl#Event</entity1>
+        <entity2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://schema.org/Event</entity2>
+        <owl:annotatedSource rdf:resource="http://purl.org/NET/c4dm/event.owl#Event"/>
+        <owl:annotatedTarget rdf:resource="http://schema.org/Event"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2002/07/owl#equivalentClass"/>
+    </owl:Axiom>
+    
+
+
+    <!-- http://schema.org/Festival -->
+
+    <owl:Class rdf:about="http://schema.org/Festival">
+        <owl:equivalentClass rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#FestivalDeCinema"/>
+    </owl:Class>
+    <owl:Axiom>
+        <measure rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.7510000000000001</measure>
+        <relation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</relation>
+        <entity2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://schema.org/Festival</entity2>
+        <entity1 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#FestivalDeCinema</entity1>
+        <owl:annotatedSource rdf:resource="http://schema.org/Festival"/>
+        <owl:annotatedTarget rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#FestivalDeCinema"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2002/07/owl#equivalentClass"/>
+    </owl:Axiom>
+    
+
+
+    <!-- http://schema.org/Movie -->
+
+    <owl:Class rdf:about="http://schema.org/Movie">
+        <owl:equivalentClass rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Film"/>
+    </owl:Class>
+    <owl:Axiom>
+        <measure rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.7030000000000001</measure>
+        <relation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</relation>
+        <entity2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://schema.org/Movie</entity2>
+        <entity1 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Film</entity1>
+        <owl:annotatedSource rdf:resource="http://schema.org/Movie"/>
+        <owl:annotatedTarget rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Film"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2002/07/owl#equivalentClass"/>
+    </owl:Axiom>
+    
+
+
+    <!-- http://schema.org/Person -->
+
+    <owl:Class rdf:about="http://schema.org/Person">
+        <owl:equivalentClass rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Personne"/>
+    </owl:Class>
+    <owl:Axiom>
+        <measure rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.712</measure>
+        <relation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</relation>
+        <entity2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://schema.org/Person</entity2>
+        <entity1 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Personne</entity1>
+        <owl:annotatedSource rdf:resource="http://schema.org/Person"/>
+        <owl:annotatedTarget rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Personne"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2002/07/owl#equivalentClass"/>
+    </owl:Axiom>
+    
+
+
+    <!-- http://schema.org/Place -->
+
+    <owl:Class rdf:about="http://schema.org/Place">
+        <owl:equivalentClass rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Lieu"/>
+    </owl:Class>
+    <owl:Axiom>
+        <measure rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.505</measure>
+        <relation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</relation>
+        <entity2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://schema.org/Place</entity2>
+        <entity1 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Lieu</entity1>
+        <owl:annotatedSource rdf:resource="http://schema.org/Place"/>
+        <owl:annotatedTarget rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Lieu"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2002/07/owl#equivalentClass"/>
+    </owl:Axiom>
+    
+
+
+    <!-- http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Artiste -->
+
+    <owl:Class rdf:about="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Artiste"/>
+    <owl:Axiom>
+        <measure rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.7210000000000001</measure>
+        <relation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</relation>
+        <entity2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://dbpedia.org/ontology/Artist</entity2>
+        <entity1 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Artiste</entity1>
+        <owl:annotatedSource rdf:resource="http://dbpedia.org/ontology/Artist"/>
+        <owl:annotatedTarget rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Artiste"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2002/07/owl#equivalentClass"/>
+    </owl:Axiom>
+    
+
+
+    <!-- http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#CameraOr -->
+
+    <owl:Class rdf:about="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#CameraOr"/>
+    <owl:Axiom>
+        <measure rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.45714285714285713</measure>
+        <relation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</relation>
+        <entity2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://dbpedia.org/ontology/Camera</entity2>
+        <entity1 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#CameraOr</entity1>
+        <owl:annotatedSource rdf:resource="http://dbpedia.org/ontology/Camera"/>
+        <owl:annotatedTarget rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#CameraOr"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2002/07/owl#equivalentClass"/>
+    </owl:Axiom>
+    
+
+
+    <!-- http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Competition -->
+
+    <owl:Class rdf:about="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Competition"/>
+    <owl:Axiom>
+        <measure rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.5</measure>
+        <relation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</relation>
+        <entity2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://dbpedia.org/ontology/Competition</entity2>
+        <entity1 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Competition</entity1>
+        <owl:annotatedSource rdf:resource="http://dbpedia.org/ontology/Competition"/>
+        <owl:annotatedTarget rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Competition"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2002/07/owl#equivalentClass"/>
+    </owl:Axiom>
+    
+
+
+    <!-- http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#CompetitionMedia -->
+
+    <owl:Class rdf:about="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#CompetitionMedia"/>
+    <owl:Axiom>
+        <measure rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.516764705882353</measure>
+        <relation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</relation>
+        <entity2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://dbpedia.org/ontology/Media</entity2>
+        <entity1 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#CompetitionMedia</entity1>
+        <owl:annotatedSource rdf:resource="http://dbpedia.org/ontology/Media"/>
+        <owl:annotatedTarget rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#CompetitionMedia"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2002/07/owl#equivalentClass"/>
+    </owl:Axiom>
+    
+
+
+    <!-- http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Continent -->
+
+    <owl:Class rdf:about="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Continent"/>
+    <owl:Axiom>
+        <measure rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.8320000000000001</measure>
+        <relation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</relation>
+        <entity2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://dbpedia.org/ontology/Continent</entity2>
+        <entity1 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Continent</entity1>
+        <owl:annotatedSource rdf:resource="http://dbpedia.org/ontology/Continent"/>
+        <owl:annotatedTarget rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Continent"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2002/07/owl#equivalentClass"/>
+    </owl:Axiom>
+    
+
+
+    <!-- http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#DessinAnime -->
+
+    <owl:Class rdf:about="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#DessinAnime"/>
+    <owl:Axiom>
+        <measure rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.53</measure>
+        <relation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</relation>
+        <entity2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://dbpedia.org/ontology/Cartoon</entity2>
+        <entity1 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#DessinAnime</entity1>
+        <owl:annotatedSource rdf:resource="http://dbpedia.org/ontology/Cartoon"/>
+        <owl:annotatedTarget rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#DessinAnime"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2002/07/owl#equivalentClass"/>
+    </owl:Axiom>
+    
+
+
+    <!-- http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Evenement -->
+
+    <owl:Class rdf:about="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Evenement">
+        <owl:equivalentClass rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+    </owl:Class>
+    <owl:Axiom>
+        <measure rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.7030000000000001</measure>
+        <relation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</relation>
+        <entity1 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Evenement</entity1>
+        <entity2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event</entity2>
+        <owl:annotatedSource rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Evenement"/>
+        <owl:annotatedTarget rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2002/07/owl#equivalentClass"/>
+    </owl:Axiom>
+    
+
+
+    <!-- http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#FestivalDeCinema -->
+
+    <owl:Class rdf:about="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#FestivalDeCinema"/>
+    <owl:Axiom>
+        <measure rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.7510000000000001</measure>
+        <relation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</relation>
+        <entity2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://schema.org/Festival</entity2>
+        <entity1 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#FestivalDeCinema</entity1>
+        <owl:annotatedSource rdf:resource="http://schema.org/Festival"/>
+        <owl:annotatedTarget rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#FestivalDeCinema"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2002/07/owl#equivalentClass"/>
+    </owl:Axiom>
+    
+
+
+    <!-- http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Film -->
+
+    <owl:Class rdf:about="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Film"/>
+    <owl:Axiom>
+        <measure rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.505</measure>
+        <relation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</relation>
+        <entity2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://dbpedia.org/ontology/Film</entity2>
+        <entity1 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Film</entity1>
+        <owl:annotatedSource rdf:resource="http://dbpedia.org/ontology/Film"/>
+        <owl:annotatedTarget rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Film"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2002/07/owl#equivalentClass"/>
+    </owl:Axiom>
+    <owl:Axiom>
+        <measure rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.7030000000000001</measure>
+        <relation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</relation>
+        <entity2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://schema.org/Movie</entity2>
+        <entity1 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Film</entity1>
+        <owl:annotatedSource rdf:resource="http://schema.org/Movie"/>
+        <owl:annotatedTarget rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Film"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2002/07/owl#equivalentClass"/>
+    </owl:Axiom>
+    
+
+
+    <!-- http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Genre -->
+
+    <owl:Class rdf:about="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Genre"/>
+    <owl:Axiom>
+        <measure rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.79</measure>
+        <relation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</relation>
+        <entity2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://dbpedia.org/ontology/Genre</entity2>
+        <entity1 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Genre</entity1>
+        <owl:annotatedSource rdf:resource="http://dbpedia.org/ontology/Genre"/>
+        <owl:annotatedTarget rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Genre"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2002/07/owl#equivalentClass"/>
+    </owl:Axiom>
+    
+
+
+    <!-- http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#GenreCinematographique -->
+
+    <owl:Class rdf:about="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#GenreCinematographique"/>
+    <owl:Axiom>
+        <measure rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.581</measure>
+        <relation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</relation>
+        <entity2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://dbpedia.org/ontology/Genre</entity2>
+        <entity1 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#GenreCinematographique</entity1>
+        <owl:annotatedSource rdf:resource="http://dbpedia.org/ontology/Genre"/>
+        <owl:annotatedTarget rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#GenreCinematographique"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2002/07/owl#equivalentClass"/>
+    </owl:Axiom>
+    
+
+
+    <!-- http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#GrandPrix -->
+
+    <owl:Class rdf:about="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#GrandPrix"/>
+    <owl:Axiom>
+        <measure rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.5</measure>
+        <relation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</relation>
+        <entity2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://dbpedia.org/ontology/GrandPrix</entity2>
+        <entity1 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#GrandPrix</entity1>
+        <owl:annotatedSource rdf:resource="http://dbpedia.org/ontology/GrandPrix"/>
+        <owl:annotatedTarget rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#GrandPrix"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2002/07/owl#equivalentClass"/>
+    </owl:Axiom>
+    
+
+
+    <!-- http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Homme -->
+
+    <owl:Class rdf:about="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Homme"/>
+    <owl:Axiom>
+        <measure rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.7166666666666667</measure>
+        <relation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</relation>
+        <entity2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://dbpedia.org/ontology/Painter</entity2>
+        <entity1 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Homme</entity1>
+        <owl:annotatedSource rdf:resource="http://dbpedia.org/ontology/Painter"/>
+        <owl:annotatedTarget rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Homme"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2002/07/owl#equivalentClass"/>
+    </owl:Axiom>
+    
+
+
+    <!-- http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Lieu -->
+
+    <owl:Class rdf:about="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Lieu">
+        <owl:equivalentClass rdf:resource="http://www.ontologydesignpatterns.org/ont/d0.owl#Location"/>
+    </owl:Class>
+    <owl:Axiom>
+        <measure rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.505</measure>
+        <relation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</relation>
+        <entity2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://dbpedia.org/ontology/Place</entity2>
+        <entity1 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Lieu</entity1>
+        <owl:annotatedSource rdf:resource="http://dbpedia.org/ontology/Place"/>
+        <owl:annotatedTarget rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Lieu"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2002/07/owl#equivalentClass"/>
+    </owl:Axiom>
+    <owl:Axiom>
+        <measure rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.505</measure>
+        <relation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</relation>
+        <entity2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://schema.org/Place</entity2>
+        <entity1 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Lieu</entity1>
+        <owl:annotatedSource rdf:resource="http://schema.org/Place"/>
+        <owl:annotatedTarget rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Lieu"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2002/07/owl#equivalentClass"/>
+    </owl:Axiom>
+    <owl:Axiom>
+        <measure rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.49</measure>
+        <relation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</relation>
+        <entity1 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Lieu</entity1>
+        <entity2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.ontologydesignpatterns.org/ont/d0.owl#Location</entity2>
+        <owl:annotatedSource rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Lieu"/>
+        <owl:annotatedTarget rdf:resource="http://www.ontologydesignpatterns.org/ont/d0.owl#Location"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2002/07/owl#equivalentClass"/>
+    </owl:Axiom>
+    
+
+
+    <!-- http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#LieuAdministratif -->
+
+    <owl:Class rdf:about="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#LieuAdministratif"/>
+    <owl:Axiom>
+        <measure rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.724</measure>
+        <relation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</relation>
+        <entity2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://schema.org/AdministrativeArea</entity2>
+        <entity1 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#LieuAdministratif</entity1>
+        <owl:annotatedSource rdf:resource="http://schema.org/AdministrativeArea"/>
+        <owl:annotatedTarget rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#LieuAdministratif"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2002/07/owl#equivalentClass"/>
+    </owl:Axiom>
+    
+
+
+    <!-- http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Pays -->
+
+    <owl:Class rdf:about="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Pays"/>
+    <owl:Axiom>
+        <measure rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.605</measure>
+        <relation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</relation>
+        <entity2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://dbpedia.org/ontology/Country</entity2>
+        <entity1 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Pays</entity1>
+        <owl:annotatedSource rdf:resource="http://dbpedia.org/ontology/Country"/>
+        <owl:annotatedTarget rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Pays"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2002/07/owl#equivalentClass"/>
+    </owl:Axiom>
+    <owl:Axiom>
+        <measure rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.7030000000000001</measure>
+        <relation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</relation>
+        <entity2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://schema.org/Country</entity2>
+        <entity1 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Pays</entity1>
+        <owl:annotatedSource rdf:resource="http://schema.org/Country"/>
+        <owl:annotatedTarget rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Pays"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2002/07/owl#equivalentClass"/>
+    </owl:Axiom>
+    
+
+
+    <!-- http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Personne -->
+
+    <owl:Class rdf:about="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Personne"/>
+    <owl:Axiom>
+        <measure rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.712</measure>
+        <relation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</relation>
+        <entity2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://schema.org/Person</entity2>
+        <entity1 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Personne</entity1>
+        <owl:annotatedSource rdf:resource="http://schema.org/Person"/>
+        <owl:annotatedTarget rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Personne"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2002/07/owl#equivalentClass"/>
+    </owl:Axiom>
+    
+
+
+    <!-- http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#PrixDecerne -->
+
+    <owl:Class rdf:about="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#PrixDecerne"/>
+    <owl:Axiom>
+        <measure rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.509</measure>
+        <relation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</relation>
+        <entity2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://dbpedia.org/ontology/Award</entity2>
+        <entity1 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#PrixDecerne</entity1>
+        <owl:annotatedSource rdf:resource="http://dbpedia.org/ontology/Award"/>
+        <owl:annotatedTarget rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#PrixDecerne"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2002/07/owl#equivalentClass"/>
+    </owl:Axiom>
+    
+
+
+    <!-- http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Role -->
+
+    <owl:Class rdf:about="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Role">
+        <owl:equivalentClass rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+    </owl:Class>
+    <owl:Axiom>
+        <measure rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.5</measure>
+        <relation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</relation>
+        <entity1 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Role</entity1>
+        <entity2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role</entity2>
+        <owl:annotatedSource rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Role"/>
+        <owl:annotatedTarget rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2002/07/owl#equivalentClass"/>
+    </owl:Axiom>
+    
+
+
+    <!-- http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Ville -->
+
+    <owl:Class rdf:about="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Ville"/>
+    <owl:Axiom>
+        <measure rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.632</measure>
+        <relation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</relation>
+        <entity2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://dbpedia.org/ontology/Town</entity2>
+        <entity1 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Ville</entity1>
+        <owl:annotatedSource rdf:resource="http://dbpedia.org/ontology/Town"/>
+        <owl:annotatedTarget rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Ville"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2002/07/owl#equivalentClass"/>
+    </owl:Axiom>
+    <owl:Axiom>
+        <measure rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.7869999999999999</measure>
+        <relation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</relation>
+        <entity2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://schema.org/City</entity2>
+        <entity1 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Ville</entity1>
+        <owl:annotatedSource rdf:resource="http://schema.org/City"/>
+        <owl:annotatedTarget rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Ville"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2002/07/owl#equivalentClass"/>
+    </owl:Axiom>
+    
+
+
+    <!-- http://www.ontologydesignpatterns.org/ont/d0.owl#Location -->
+
+    <owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/d0.owl#Location"/>
+    <owl:Axiom>
+        <measure rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.49</measure>
+        <relation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</relation>
+        <entity1 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Lieu</entity1>
+        <entity2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.ontologydesignpatterns.org/ont/d0.owl#Location</entity2>
+        <owl:annotatedSource rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Lieu"/>
+        <owl:annotatedTarget rdf:resource="http://www.ontologydesignpatterns.org/ont/d0.owl#Location"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2002/07/owl#equivalentClass"/>
+    </owl:Axiom>
+    
+
+
+    <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event -->
+
+    <owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+    <owl:Axiom>
+        <measure rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.7030000000000001</measure>
+        <relation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</relation>
+        <entity1 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Evenement</entity1>
+        <entity2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event</entity2>
+        <owl:annotatedSource rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Evenement"/>
+        <owl:annotatedTarget rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2002/07/owl#equivalentClass"/>
+    </owl:Axiom>
+    
+
+
+    <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role -->
+
+    <owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+    <owl:Axiom>
+        <measure rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.5</measure>
+        <relation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</relation>
+        <entity1 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Role</entity1>
+        <entity2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role</entity2>
+        <owl:annotatedSource rdf:resource="http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#Role"/>
+        <owl:annotatedTarget rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2002/07/owl#equivalentClass"/>
+    </owl:Axiom>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/Person -->
+
+    <rdf:Description rdf:about="http://xmlns.com/foaf/0.1/Person"/>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 1.3.8.1099) http://owlapi.sourceforge.net -->
+

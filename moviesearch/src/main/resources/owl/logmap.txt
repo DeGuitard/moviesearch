@@ -1,0 +1,1 @@
+java -jar logmap2_standalone.jar MATCHER file:/Users/Guillaume/Developpement/fuseki/FilmographieV1Inf.owl file:/Users/Guillaume/Developpement/fuseki/dbpedia_2014.owl /Users/Guillaume/Desktop/ true 
