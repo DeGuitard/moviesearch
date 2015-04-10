@@ -83,7 +83,32 @@ public class SimpleMatcher extends URIAlignment {
 				}
 			}
 		}
-
+		// For the classes : no optmisation cartesian product !
+		for ( OWLEntity cl1 : ontology1.getObjectPropertiesInSignature() ){
+			for ( OWLEntity cl2: ontology2.getObjectPropertiesInSignature() ){
+				double confidence = match(cl1,cl2);
+				if (confidence > 0) {
+					try {
+						addAlignCell(cl1.getIRI().toURI(),cl2.getIRI().toURI(),"=", confidence);
+					} catch (Exception e) {
+						System.out.println(e.toString());
+					}
+				}
+			}
+		}
+		// For the classes : no optmisation cartesian product !
+		for ( OWLEntity cl1 : ontology1.getDataPropertiesInSignature() ){
+			for ( OWLEntity cl2: ontology2.getDataPropertiesInSignature() ){
+				double confidence = match(cl1,cl2);
+				if (confidence > 0) {
+					try {
+						addAlignCell(cl1.getIRI().toURI(),cl2.getIRI().toURI(),"=", confidence);
+					} catch (Exception e) {
+						System.out.println(e.toString());
+					}
+				}
+			}
+		}
 	}
 
 	/**
@@ -126,7 +151,7 @@ public class SimpleMatcher extends URIAlignment {
 				String str2 = lit2.getLiteral().toLowerCase();
 				if (str1.equals(str2)) { 
 					return 1d;
-				} else if (computeLevenshteinDistance(str1, str2) > 0.5) {
+				} else if (computeLevenshteinDistance(str1, str2) > 0.55) {
 					return 0.5d;
 				}
 			}
@@ -138,14 +163,14 @@ public class SimpleMatcher extends URIAlignment {
 	}
 
 	private float computeLevenshteinDistance(String str1,String str2) { int[][] distance = new int[str1.length() + 1][str2.length() + 1];
-		for (int i = 0; i <= str1.length(); i++) distance[i][0] = i;
-		for (int j = 1; j <= str2.length(); j++) distance[0][j] = j;
-		for (int i = 1; i <= str1.length(); i++) for (int j = 1; j <= str2.length(); j++)
-			distance[i][j] = minimum(
-					distance[i - 1][j] + 1,
-					distance[i][j - 1] + 1,
-					distance[i - 1][j - 1]+ ((str1.charAt(i - 1) == str2.charAt(j -
-							1)) ? 0 : 1));
-		return (float) (1.0-((float)(distance[str1.length()][str2.length()])/ Math.max(str1.length(), str2.length())));
+	for (int i = 0; i <= str1.length(); i++) distance[i][0] = i;
+	for (int j = 1; j <= str2.length(); j++) distance[0][j] = j;
+	for (int i = 1; i <= str1.length(); i++) for (int j = 1; j <= str2.length(); j++)
+		distance[i][j] = minimum(
+				distance[i - 1][j] + 1,
+				distance[i][j - 1] + 1,
+				distance[i - 1][j - 1]+ ((str1.charAt(i - 1) == str2.charAt(j -
+						1)) ? 0 : 1));
+	return (float) (1.0-((float)(distance[str1.length()][str2.length()])/ Math.max(str1.length(), str2.length())));
 	}
 }
