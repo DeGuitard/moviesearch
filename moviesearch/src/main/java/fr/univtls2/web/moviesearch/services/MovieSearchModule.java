@@ -33,7 +33,6 @@ import fr.univtls2.web.moviesearch.services.persistence.serialization.ObjectIdTy
 import fr.univtls2.web.moviesearch.services.properties.PropertyService;
 import fr.univtls2.web.moviesearch.services.properties.PropertyServiceImpl;
 import fr.univtls2.web.moviesearch.services.query.QueryExecutor;
-import fr.univtls2.web.moviesearch.services.query.SimpleQueryExecutor;
 import fr.univtls2.web.moviesearch.services.query.SparqlQueryExecutor;
 
 /**
