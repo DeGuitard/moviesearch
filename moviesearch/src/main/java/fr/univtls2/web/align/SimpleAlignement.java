@@ -63,7 +63,7 @@ public class SimpleAlignement {
 					}
 				}
 			}
-			
+
 			System.out.println("Alignments count: " + count);
 
 			render(fusion, "fusion.rdf");
@@ -72,7 +72,7 @@ public class SimpleAlignement {
 			// We don't care :).
 		}
 	}
-	
+
 	public static Alignment logMapAlign() throws AlignmentException {
 		URI onto = new File("src/main/resources/owl/logmap2_mappings.rdf").toURI();
 		AlignmentParser parser = new AlignmentParser();
