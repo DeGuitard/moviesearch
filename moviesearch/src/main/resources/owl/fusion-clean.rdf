@@ -637,14 +637,6 @@
   </map>
   <map>
     <Cell>
-      <entity1 rdf:resource='http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#estActeurDans'/>
-      <entity2 rdf:resource='http://dbpedia.org/ontology/playerInTeam'/>
-      <relation>=</relation>
-      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
-    </Cell>
-  </map>
-  <map>
-    <Cell>
       <entity1 rdf:resource='http://www.irit.fr/recherches/MELODI/ontologies/FilmographieV1.owl#concourtPourPrix'/>
       <entity2 rdf:resource='http://dbpedia.org/ontology/competition'/>
       <relation>=</relation>
